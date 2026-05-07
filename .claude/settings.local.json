@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:annestasiia.github.io)",
+      "WebFetch(domain:github.com)",
+      "Bash(npx create-vite@latest . --template react --force)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(npm audit *)",
+      "Bash(npm uninstall *)",
+      "Bash(node *)",
+      "PowerShell(Get-Content *)",
+      "Read(//d/000 2nd Sem/Wolfsburg Urban Vision/wolfsburg-activity-map-master/**)",
+      "Bash(Get-ChildItem -Recurse -Exclude node_modules -File)",
+      "Bash(Select-Object FullName)",
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
