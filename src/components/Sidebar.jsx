@@ -13,6 +13,27 @@ const LAYERS = [
     dot: '#34d399',
     description: 'Pedestrian & cycling paths',
   },
+  {
+    id: 'publicSpaces',
+    label: 'Public Spaces',
+    dot: '#22c55e',
+    description: '12 typologies · 23 spaces identified',
+  },
+]
+
+const SPACE_TYPOLOGIES = [
+  { id: 1,  label: 'Civic Plaza',                  color: '#f59e0b' },
+  { id: 2,  label: 'Neighborhood Park',             color: '#22c55e' },
+  { id: 3,  label: 'Pocket Park',                   color: '#86efac' },
+  { id: 4,  label: 'Linear Park / Greenway',        color: '#16a34a' },
+  { id: 5,  label: 'Waterfront Promenade',          color: '#06b6d4' },
+  { id: 6,  label: 'Playground',                    color: '#ec4899' },
+  { id: 7,  label: 'Community Garden',              color: '#84cc16' },
+  { id: 8,  label: 'Streetscape / Green Street',    color: '#f97316' },
+  { id: 9,  label: 'Urban Beach / Seasonal',        color: '#eab308' },
+  { id: 10, label: 'Civic / Cultural Forecourt',    color: '#8b5cf6' },
+  { id: 11, label: 'Urban Plaza / Transit Plaza',   color: '#3b82f6' },
+  { id: 12, label: 'Rooftop / Elevated Space',      color: '#e11d48' },
 ]
 
 const AMENITY_CATEGORIES = [
@@ -84,6 +105,31 @@ export default function Sidebar({ onFetchAmenities }) {
             ))}
           </div>
         </section>
+
+        {/* Public space typology legend */}
+        {activeLayers.publicSpaces && (
+          <section>
+            <h2 className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-3">
+              Space Typologies
+            </h2>
+            <div className="space-y-1">
+              {SPACE_TYPOLOGIES.map((t) => (
+                <div key={t.id} className="flex items-center gap-2 px-1 py-0.5">
+                  <div
+                    className="w-2 h-2 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: t.color }}
+                  />
+                  <span className="text-[10px] text-white/50 leading-none">
+                    {t.id}. {t.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p className="text-[9px] text-white/20 mt-3 leading-relaxed">
+              Click any dot on the map to see details.
+            </p>
+          </section>
+        )}
 
         {/* Amenity category filter */}
         {activeLayers.amenities && (

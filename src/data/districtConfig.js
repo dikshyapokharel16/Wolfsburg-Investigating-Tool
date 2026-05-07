@@ -1,3 +1,59 @@
+// Groups of districts that share one administrative boundary and are displayed merged
+export const DISTRICT_GROUPS = {
+  'Nord Stadt': {
+    members: ['Alt-Wolfsburg', 'Teichbreite', 'Tiergartenbreite', 'Kreuzheide'],
+    color: '#b53e2a',
+  },
+  'Kästorf-Sandkamp': {
+    members: ['Kästorf', 'Sandkamp'],
+    color: '#2a3eb5',
+    labelPerPart: true,
+  },
+  'Stadt-Mitte': {
+    members: ['Heßlingen', 'Rothenfelde', 'Stadtmitte', 'Schillerteich', 'Hellwinkel', 'Steimker Gärten', 'Steimker Berg', 'Köhlerberg'],
+    color: '#4838a8',
+  },
+  'Mitte-West': {
+    members: ['Rabenberg', 'Klieversberg', 'Hohenstein', 'Wohltberg', 'Hageberg', 'Laagberg', 'Eichelkamp'],
+    color: '#309130',
+  },
+  'Fallersleben-Sülfeld': {
+    members: ['Fallersleben', 'Sülfeld'],
+    color: '#b5b52a',
+  },
+  'Ehmen-Mörse': {
+    members: ['Ehmen', 'Mörse'],
+    color: '#a88838',
+  },
+  'Hattorf-Heiligendorf': {
+    members: ['Hattorf', 'Heiligendorf'],
+    color: '#68a838',
+  },
+  'Almke-Neindorf': {
+    members: ['Almke', 'Neindorf'],
+    color: '#9c2424',
+  },
+  'Barnstorf-Nordsteimke': {
+    members: ['Barnstorf', 'Nordsteimke'],
+    color: '#914c30',
+  },
+  'Neuhaus-Reislingen': {
+    members: ['Neuhaus', 'Reislingen'],
+    color: '#2a66b5',
+  },
+  'Brackstedt-Velstove-Warmenau': {
+    members: ['Brackstedt', 'Velstove', 'Warmenau'],
+    color: '#b5662a',
+  },
+}
+
+// Reverse lookup: district name → group name
+export const DISTRICT_TO_GROUP = Object.fromEntries(
+  Object.entries(DISTRICT_GROUPS).flatMap(([group, { members }]) =>
+    members.map(m => [m, group])
+  )
+)
+
 export const DISTRICTS = [
   { name: 'Almke',             color: '#9c2424' },
   { name: 'Alt-Wolfsburg',     color: '#b53e2a' },
