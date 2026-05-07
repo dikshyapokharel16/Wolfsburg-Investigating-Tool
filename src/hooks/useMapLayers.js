@@ -1,7 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import maplibregl from 'maplibre-gl'
 import { useMapStore } from '../store/mapStore'
 import districtBoundaries from '../data/districtBoundaries.json'
 import { DISTRICT_COLORS } from '../data/districtConfig.js'
+import PUBLIC_SPACES_GEOJSON from '../data/publicSpaces.json'
 
 // Build one combined GeoJSON once — each feature carries name + color as properties
 const DISTRICT_GEOJSON = (() => {
@@ -22,6 +24,7 @@ const DISTRICT_GEOJSON = (() => {
 
 export function useMapLayers(map) {
   const { activeLayers, amenityData } = useMapStore()
+  const psPopup = useRef(null)
 
   // ── District boundaries ──────────────────────────────────────────────────
   useEffect(() => {
@@ -133,4 +136,69 @@ export function useMapLayers(map) {
       if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
     }
   }, [map, activeLayers.amenities, amenityData])
+
+  // ── Public Spaces ─────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+
+    const SRC = 'public-spaces'
+    const LYR = 'public-spaces-circles'
+
+    if (activeLayers.publicSpaces) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: PUBLIC_SPACES_GEOJSON })
+
+        // Radius = sqrt(areaHa) * k, interpolated across zoom levels
+        map.addLayer({
+          id: LYR,
+          type: 'circle',
+          source: SRC,
+          paint: {
+            'circle-radius': [
+              'interpolate', ['linear'], ['zoom'],
+              10, ['max', 3, ['*', 0.8, ['sqrt', ['get', 'areaHa']]]],
+              14, ['max', 5, ['*', 3.5, ['sqrt', ['get', 'areaHa']]]],
+            ],
+            'circle-color': ['get', 'color'],
+            'circle-opacity': 0.75,
+            'circle-stroke-width': 1.5,
+            'circle-stroke-color': 'rgba(255,255,255,0.9)',
+          },
+        })
+
+        const popup = new maplibregl.Popup({
+          closeButton: true,
+          closeOnClick: false,
+          maxWidth: '240px',
+        })
+        psPopup.current = popup
+
+        map.on('click', LYR, (e) => {
+          const p = e.features[0].properties
+          popup
+            .setLngLat(e.lngLat)
+            .setHTML(
+              `<div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:8px;height:8px;border-radius:50%;background:${p.color};flex-shrink:0"></div>
+                  <span style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600">${p.typology}</span>
+                </div>
+                <div style="font-size:14px;font-weight:700;color:#111827;margin-bottom:5px;line-height:1.3">${p.name}</div>
+                <div style="font-size:11px;color:#374151;margin-bottom:6px;line-height:1.5">${p.description}</div>
+                <div style="font-size:10px;color:#9ca3af">${p.area} · ${p.status}</div>
+              </div>`
+            )
+            .addTo(map)
+        })
+
+        map.on('mouseenter', LYR, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', LYR, () => { map.getCanvas().style.cursor = '' })
+      } else {
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+      if (psPopup.current) psPopup.current.remove()
+    }
+  }, [map, activeLayers.publicSpaces])
 }

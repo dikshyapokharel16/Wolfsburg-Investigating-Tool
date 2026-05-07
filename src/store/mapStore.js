@@ -5,6 +5,7 @@ export const useMapStore = create((set) => ({
     amenities: false,
     districts: true,
     movement: false,
+    publicSpaces: false,
   },
   selectedDistrict: null,
   selectedCategory: 'all',
