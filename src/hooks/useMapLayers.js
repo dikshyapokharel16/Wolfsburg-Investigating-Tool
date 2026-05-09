@@ -1,10 +1,22 @@
 import { useEffect, useRef } from 'react'
 import maplibregl from 'maplibre-gl'
 import { union } from '@turf/union'
+import { area as turfArea } from '@turf/area'
 import { useMapStore } from '../store/mapStore'
 import districtBoundaries from '../data/districtBoundaries.json'
-import { DISTRICT_COLORS, DISTRICT_GROUPS, DISTRICT_TO_GROUP } from '../data/districtConfig.js'
+import { DISTRICT_COLORS, DISTRICT_GROUPS, DISTRICT_TO_GROUP, STANDALONE_POPULATIONS } from '../data/districtConfig.js'
 import PUBLIC_SPACES_GEOJSON from '../data/publicSpaces.json'
+
+const POPULATION_LOOKUP = {
+  ...Object.fromEntries(
+    Object.entries(DISTRICT_GROUPS).map(([name, { population2020, population2023 }]) => [
+      name, { population2020, population2023 },
+    ])
+  ),
+  ...Object.fromEntries(
+    Object.entries(STANDALONE_POPULATIONS).map(([name, vals]) => [name, vals])
+  ),
+}
 
 // Returns the bounding-box centre of any Polygon or MultiPolygon geometry
 function bboxCenter(geometry) {
@@ -87,15 +99,25 @@ const { DISTRICT_GEOJSON, DISTRICT_LABELS_GEOJSON, DISTRICT_SUBS_GEOJSON } = (()
     }
   }
 
+  // Compute area (km²) per district from the merged features
+  const AREA_KM2 = {}
+  for (const f of mainFeatures) {
+    const name = f.properties?.name
+    if (!name) continue
+    const sqMeters = turfArea(f)
+    AREA_KM2[name] = (AREA_KM2[name] || 0) + sqMeters / 1_000_000
+  }
+
   return {
     DISTRICT_GEOJSON:        { type: 'FeatureCollection', features: mainFeatures },
     DISTRICT_LABELS_GEOJSON: { type: 'FeatureCollection', features: labelFeatures },
     DISTRICT_SUBS_GEOJSON:   { type: 'FeatureCollection', features: subFeatures },
+    AREA_KM2,
   }
 })()
 
 export function useMapLayers(map) {
-  const { activeLayers, amenityData } = useMapStore()
+  const { activeLayers, amenityData, setSelectedDistrict } = useMapStore()
   const psPopup = useRef(null)
 
   // ── District boundaries ──────────────────────────────────────────────────
@@ -189,6 +211,7 @@ export function useMapLayers(map) {
             'text-halo-width': 1.5,
           },
         })
+
       } else {
         map.setLayoutProperty(FILL,      'visibility', 'visible')
         map.setLayoutProperty(LINE,      'visibility', 'visible')
