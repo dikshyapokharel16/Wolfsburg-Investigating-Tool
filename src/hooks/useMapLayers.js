@@ -153,14 +153,14 @@ const { DISTRICT_GEOJSON, DISTRICT_LABELS_GEOJSON, DISTRICT_SUBS_GEOJSON } = (()
   }
 })()
 
-const CHOROPLETH_PARAMS = {
-  density:    { key: 'densityNorm', color: '#818cf8' },
-  avgAge:     { key: 'avgAgeNorm',  color: '#f59e0b' },
-  rentPerSqm: { key: 'rentNorm',    color: '#14b8a6' },
-}
+const CHOROPLETH_CONFIG = [
+  { id: 'choropleth-density', param: 'density',    key: 'densityNorm', color: '#818cf8' },
+  { id: 'choropleth-avgAge',  param: 'avgAge',     key: 'avgAgeNorm',  color: '#f59e0b' },
+  { id: 'choropleth-rent',    param: 'rentPerSqm', key: 'rentNorm',    color: '#14b8a6' },
+]
 
 export function useMapLayers(map) {
-  const { activeLayers, amenityData, setSelectedDistrict, choroplethParam } = useMapStore()
+  const { activeLayers, amenityData, setSelectedDistrict, choroplethLayers, toggleChoropleth } = useMapStore()
   const psPopup = useRef(null)
 
   // ── District boundaries ──────────────────────────────────────────────────
@@ -271,24 +271,34 @@ export function useMapLayers(map) {
     }
   }, [map, activeLayers.districts])
 
-  // ── Choropleth overlay ────────────────────────────────────────────────────
+  // ── Choropleth overlays (one fill layer per param, stackable) ────────────
   useEffect(() => {
-    if (!map) return
-    const FILL = 'districts-fill'
-    if (!map.getLayer(FILL)) return
-    const p = CHOROPLETH_PARAMS[choroplethParam]
-    if (p) {
-      map.setPaintProperty(FILL, 'fill-color', p.color)
-      map.setPaintProperty(FILL, 'fill-opacity', [
-        'interpolate', ['linear'], ['get', p.key],
-        0, 0.04,
-        1, 0.82,
-      ])
-    } else {
-      map.setPaintProperty(FILL, 'fill-color', '#818cf8')
-      map.setPaintProperty(FILL, 'fill-opacity', 0.08)
+    if (!map || !map.getSource('districts')) return
+
+    for (const { id, param, key, color } of CHOROPLETH_CONFIG) {
+      const visible = activeLayers.districts && choroplethLayers[param]
+      if (!map.getLayer(id)) {
+        // Insert below the border lines so outlines stay on top
+        const beforeId = map.getLayer('district-subs-line') ? 'district-subs-line' : undefined
+        map.addLayer({
+          id,
+          type: 'fill',
+          source: 'districts',
+          paint: {
+            'fill-color': color,
+            'fill-opacity': [
+              'interpolate', ['linear'], ['get', key],
+              0, 0.0,
+              1, 0.55,
+            ],
+          },
+          layout: { visibility: visible ? 'visible' : 'none' },
+        }, beforeId)
+      } else {
+        map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none')
+      }
     }
-  }, [map, choroplethParam, activeLayers.districts])
+  }, [map, choroplethLayers, activeLayers.districts])
 
   // ── Amenities ─────────────────────────────────────────────────────────────
   useEffect(() => {

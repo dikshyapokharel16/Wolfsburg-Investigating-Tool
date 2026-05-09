@@ -24,7 +24,7 @@ const OVERLAY_OPTIONS = [
 export default function TopNav() {
   const [openPanel, setOpenPanel] = useState(null)
   const [closureYear, setClosureYear] = useState(2022)
-  const { choroplethParam, setChoroplethParam } = useMapStore()
+  const { choroplethLayers, toggleChoropleth } = useMapStore()
 
   function handleClick(id) {
     setOpenPanel(prev => (prev === id ? null : id))
@@ -131,11 +131,11 @@ export default function TopNav() {
                 <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-2">Map Overlay</p>
                 <div className="space-y-1">
                   {OVERLAY_OPTIONS.map(({ id, label, color }) => {
-                    const active = choroplethParam === id
+                    const active = choroplethLayers[id]
                     return (
                       <button
                         key={id}
-                        onClick={() => setChoroplethParam(active ? null : id)}
+                        onClick={() => toggleChoropleth(id)}
                         className={`w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg text-xs transition-all ${
                           active ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70 hover:bg-white/5'
                         }`}
