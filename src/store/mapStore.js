@@ -16,6 +16,7 @@ export const useMapStore = create((set) => ({
     avgAge: false,
     rentPerSqm: false,
   },
+  monochromeMode: false,
 
   toggleLayer: (layer) =>
     set((state) => ({
@@ -32,6 +33,9 @@ export const useMapStore = create((set) => ({
         [param]: !state.choroplethLayers[param],
       },
     })),
+
+  toggleMonochrome: () =>
+    set((state) => ({ monochromeMode: !state.monochromeMode })),
 
   setSelectedDistrict: (district) => set({ selectedDistrict: district }),
   setSelectedCategory: (category) => set({ selectedCategory: category }),

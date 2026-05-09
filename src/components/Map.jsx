@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
+import { useMapStore } from '../store/mapStore'
 
 // Wolfsburg city center
 const WOLFSBURG_CENTER = [10.7865, 52.4227]
@@ -12,6 +13,7 @@ const GREY_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.jso
 export default function Map({ onMapReady, onCanvasClick }) {
   const mapContainer = useRef(null)
   const mapRef = useRef(null)
+  const { monochromeMode } = useMapStore()
 
   useEffect(() => {
     if (mapRef.current) return
@@ -46,5 +48,12 @@ export default function Map({ onMapReady, onCanvasClick }) {
     onCanvasClick(map, e.clientX - rect.left, e.clientY - rect.top)
   }
 
-  return <div ref={mapContainer} className="w-full h-full" onClick={handleClick} />
+  return (
+    <div
+      ref={mapContainer}
+      className="w-full h-full"
+      onClick={handleClick}
+      style={{ filter: monochromeMode ? 'grayscale(1)' : 'none', transition: 'filter 0.4s ease' }}
+    />
+  )
 }

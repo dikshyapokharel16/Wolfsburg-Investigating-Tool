@@ -24,7 +24,7 @@ const OVERLAY_OPTIONS = [
 export default function TopNav() {
   const [openPanel, setOpenPanel] = useState(null)
   const [closureYear, setClosureYear] = useState(2022)
-  const { choroplethLayers, toggleChoropleth } = useMapStore()
+  const { choroplethLayers, toggleChoropleth, monochromeMode, toggleMonochrome } = useMapStore()
 
   function handleClick(id) {
     setOpenPanel(prev => (prev === id ? null : id))
@@ -149,6 +149,18 @@ export default function TopNav() {
                     )
                   })}
                 </div>
+              </div>
+
+              <div className="mt-3 pt-3 border-t border-white/8">
+                <button
+                  onClick={toggleMonochrome}
+                  className={`w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg text-xs transition-all ${
+                    monochromeMode ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70 hover:bg-white/5'
+                  }`}
+                >
+                  <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: monochromeMode ? '#e5e7eb' : '#374151' }} />
+                  Monochrome
+                </button>
               </div>
             </div>
           )}
