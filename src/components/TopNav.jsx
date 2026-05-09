@@ -25,43 +25,43 @@ const BUTTONS = [
 ]
 
 const OVERLAY_OPTIONS = [
-  { id: ‘density’,    label: ‘Population Density’, color: ‘#818cf8’ },
-  { id: ‘avgAge’,     label: ‘Avg Age’,            color: ‘#f59e0b’ },
-  { id: ‘rentPerSqm’, label: ‘Avg Rent’,           color: ‘#14b8a6’ },
+  { id: 'density',    label: 'Population Density', color: '#818cf8' },
+  { id: 'avgAge',     label: 'Avg Age',            color: '#f59e0b' },
+  { id: 'rentPerSqm', label: 'Avg Rent',           color: '#14b8a6' },
 ]
 
 const LAYER_COLORS = {
-  frequencyAnalysis:   ‘#ef4444’,
-  googleActivity:      ‘#6366f1’,
-  dwellInfrastructure: ‘#059669’,
+  frequencyAnalysis:   '#ef4444',
+  googleActivity:      '#6366f1',
+  dwellInfrastructure: '#059669',
 }
 
 const LAYER_INFO = {
   frequencyAnalysis: {
-    title: ‘Neighbourhood Hotspots’,
+    title: 'Neighbourhood Hotspots',
     rows: [
-      { label: ‘Source’, value: ‘OpenStreetMap via Overpass API’ },
-      { label: ‘Features’, value: ‘Parks, plazas, playgrounds, gardens, pedestrian areas, marketplaces’ },
-      { label: ‘Scoring’, value: ‘Base score by typology (14–40) + area score (√ha × 4) + commercial spillover within 250 m + transit proximity to bus stops’ },
-      { label: ‘Scale’, value: ‘0–100 · top 15 spaces per district selected’ },
+      { label: 'Source', value: 'OpenStreetMap via Overpass API' },
+      { label: 'Features', value: 'Parks, plazas, playgrounds, gardens, pedestrian areas, marketplaces' },
+      { label: 'Scoring', value: 'Base score by typology (14–40) + area score (√ha × 4) + commercial spillover within 250 m + transit proximity to bus stops' },
+      { label: 'Scale', value: '0–100 · top 15 spaces per district selected' },
     ],
   },
   googleActivity: {
-    title: ‘Venue Popularity’,
+    title: 'Venue Popularity',
     rows: [
-      { label: ‘Source’, value: ‘Google Places API — Nearby Search’ },
-      { label: ‘Coverage’, value: ‘103 venues across 5 overlapping search areas covering Wolfsburg’ },
-      { label: ‘Weighting’, value: ‘log(review count + 1) — logarithmic scale normalises the wide spread between popular and lesser-known venues’ },
-      { label: ‘Represents’, value: ‘How well-known a place is, not a direct count of visits’ },
+      { label: 'Source', value: 'Google Places API — Nearby Search' },
+      { label: 'Coverage', value: '103 venues across 5 overlapping search areas covering Wolfsburg' },
+      { label: 'Weighting', value: 'log(review count + 1) — logarithmic scale normalises the wide spread between popular and lesser-known venues' },
+      { label: 'Represents', value: 'How well-known a place is, not a direct count of visits' },
     ],
   },
   dwellInfrastructure: {
-    title: ‘Dwell Infrastructure’,
+    title: 'Dwell Infrastructure',
     rows: [
-      { label: ‘Source’, value: ‘OpenStreetMap via Overpass API’ },
-      { label: ‘Features’, value: ‘1,258 elements — benches (1,093), outdoor seating (58), picnic tables (49), public toilets (44), shelters (14)’ },
-      { label: ‘Weights’, value: ‘Outdoor seating 5 · Shelters 3 · Toilets 3 · Picnic tables 2 · Benches 1’ },
-      { label: ‘Methodology’, value: "Based on Jan Gehl’s comfort criteria — infrastructure that enables and invites people to stay" },
+      { label: 'Source', value: 'OpenStreetMap via Overpass API' },
+      { label: 'Features', value: '1,258 elements — benches (1,093), outdoor seating (58), picnic tables (49), public toilets (44), shelters (14)' },
+      { label: 'Weights', value: 'Outdoor seating 5 · Shelters 3 · Toilets 3 · Picnic tables 2 · Benches 1' },
+      { label: 'Methodology', value: "Based on Jan Gehl's comfort criteria — infrastructure that enables and invites people to stay" },
     ],
   },
 }
@@ -89,7 +89,7 @@ function InfoButton({ id, openInfo, setOpenInfo }) {
     <button
       onClick={(e) => { e.stopPropagation(); setOpenInfo(prev => prev === id ? null : id) }}
       className={`ml-1 w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold flex-shrink-0 transition-colors ${
-        openInfo === id ? ‘bg-white/20 text-white’ : ‘bg-white/8 text-white/30 hover:bg-white/15 hover:text-white/60’
+        openInfo === id ? 'bg-white/20 text-white' : 'bg-white/8 text-white/30 hover:bg-white/15 hover:text-white/60'
       }`}
       title="Methodology"
     >
@@ -107,17 +107,17 @@ function LayerRow({ layerId, title, subtitle, openInfo, setOpenInfo, isActive, o
           onClick={onToggle}
           className="flex-1 flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all"
           style={isActive
-            ? { backgroundColor: `${color}1a`, color: ‘white’ }
-            : { color: ‘rgba(255,255,255,0.5)’ }
+            ? { backgroundColor: `${color}1a`, color: 'white' }
+            : { color: 'rgba(255,255,255,0.5)' }
           }
         >
-          <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: isActive ? color : ‘#374151’ }} />
+          <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: isActive ? color : '#374151' }} />
           <div className="flex-1 min-w-0">
             <div className="text-sm font-medium leading-none">{title}</div>
             <div className="text-[10px] text-white/30 mt-1">{subtitle}</div>
           </div>
-          <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${isActive ? ‘bg-[#818cf8]’ : ‘bg-white/10’}`}>
-            <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${isActive ? ‘left-[14px]’ : ‘left-0.5’}`} />
+          <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${isActive ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+            <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${isActive ? 'left-[14px]' : 'left-0.5'}`} />
           </div>
         </button>
         <InfoButton id={layerId} openInfo={openInfo} setOpenInfo={setOpenInfo} />
