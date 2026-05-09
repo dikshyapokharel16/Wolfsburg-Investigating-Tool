@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { DISTRICT_GROUPS, STANDALONE_POPULATIONS } from '../data/districtConfig'
+import { useMapStore } from '../store/mapStore'
 
 const POPULATION_BARS = [
   ...Object.entries(DISTRICT_GROUPS).map(([name, { population2023, color }]) => ({ name, population: population2023, color })),
@@ -14,9 +15,16 @@ const BUTTONS = [
   { id: 'social',    label: 'Social'    },
 ]
 
+const OVERLAY_OPTIONS = [
+  { id: 'density',    label: 'Population Density', color: '#818cf8' },
+  { id: 'avgAge',     label: 'Avg Age',            color: '#f59e0b' },
+  { id: 'rentPerSqm', label: 'Avg Rent',           color: '#14b8a6' },
+]
+
 export default function TopNav() {
   const [openPanel, setOpenPanel] = useState(null)
   const [closureYear, setClosureYear] = useState(2022)
+  const { choroplethParam, setChoroplethParam } = useMapStore()
 
   function handleClick(id) {
     setOpenPanel(prev => (prev === id ? null : id))
@@ -117,7 +125,31 @@ export default function TopNav() {
                   </div>
                 ))}
               </div>
-              <p className="text-[9px] text-white/20 mt-3 italic">Click a district on the map for density info</p>
+              <p className="text-[9px] text-white/20 mt-3 italic">Click a district on the map for details</p>
+
+              <div className="mt-4 pt-3 border-t border-white/8">
+                <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-2">Map Overlay</p>
+                <div className="space-y-1">
+                  {OVERLAY_OPTIONS.map(({ id, label, color }) => {
+                    const active = choroplethParam === id
+                    return (
+                      <button
+                        key={id}
+                        onClick={() => setChoroplethParam(active ? null : id)}
+                        className={`w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg text-xs transition-all ${
+                          active ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70 hover:bg-white/5'
+                        }`}
+                      >
+                        <div
+                          className="w-2 h-2 rounded-full flex-shrink-0"
+                          style={{ backgroundColor: active ? color : '#374151' }}
+                        />
+                        {label}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
           )}
 

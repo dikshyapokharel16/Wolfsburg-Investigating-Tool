@@ -11,6 +11,7 @@ export const useMapStore = create((set) => ({
   selectedCategory: 'all',
   amenityData: [],
   isLoadingAmenities: false,
+  choroplethParam: null,
 
   toggleLayer: (layer) =>
     set((state) => ({
@@ -24,4 +25,5 @@ export const useMapStore = create((set) => ({
   setSelectedCategory: (category) => set({ selectedCategory: category }),
   setAmenityData: (data) => set({ amenityData: data }),
   setLoadingAmenities: (val) => set({ isLoadingAmenities: val }),
+  setChoroplethParam: (param) => set({ choroplethParam: param }),
 }))

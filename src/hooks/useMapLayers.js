@@ -18,6 +18,20 @@ const POPULATION_LOOKUP = {
   ),
 }
 
+// Stats used for choropleth normalisation (density computed later from GeoJSON area)
+const STAT_LOOKUP = {
+  ...Object.fromEntries(
+    Object.entries(DISTRICT_GROUPS).map(([name, { population2023, avgAge, rentPerSqm }]) => [
+      name, { population2023, avgAge, rentPerSqm },
+    ])
+  ),
+  ...Object.fromEntries(
+    Object.entries(STANDALONE_POPULATIONS).map(([name, { population2023, avgAge, rentPerSqm }]) => [
+      name, { population2023, avgAge, rentPerSqm },
+    ])
+  ),
+}
+
 // Returns the bounding-box centre of any Polygon or MultiPolygon geometry
 function bboxCenter(geometry) {
   const rings = geometry.type === 'Polygon'
@@ -108,6 +122,29 @@ const { DISTRICT_GEOJSON, DISTRICT_LABELS_GEOJSON, DISTRICT_SUBS_GEOJSON } = (()
     AREA_KM2[name] = (AREA_KM2[name] || 0) + sqMeters / 1_000_000
   }
 
+  // Compute density and normalise all choropleth params 0→1
+  for (const [name, area] of Object.entries(AREA_KM2)) {
+    if (STAT_LOOKUP[name]) STAT_LOOKUP[name].density = STAT_LOOKUP[name].population2023 / area
+  }
+
+  const makeNorm = (values) => {
+    const valid = values.filter(v => v != null && !isNaN(v))
+    const min = Math.min(...valid), max = Math.max(...valid)
+    return (v) => v == null ? 0 : max === min ? 0.5 : (v - min) / (max - min)
+  }
+  const normDensity = makeNorm(Object.values(STAT_LOOKUP).map(s => s.density))
+  const normAge     = makeNorm(Object.values(STAT_LOOKUP).map(s => s.avgAge))
+  const normRent    = makeNorm(Object.values(STAT_LOOKUP).map(s => s.rentPerSqm))
+
+  for (const f of mainFeatures) {
+    const s = STAT_LOOKUP[f.properties?.name]
+    if (s) {
+      f.properties.densityNorm = normDensity(s.density)
+      f.properties.avgAgeNorm  = normAge(s.avgAge)
+      f.properties.rentNorm    = normRent(s.rentPerSqm)
+    }
+  }
+
   return {
     DISTRICT_GEOJSON:        { type: 'FeatureCollection', features: mainFeatures },
     DISTRICT_LABELS_GEOJSON: { type: 'FeatureCollection', features: labelFeatures },
@@ -116,8 +153,14 @@ const { DISTRICT_GEOJSON, DISTRICT_LABELS_GEOJSON, DISTRICT_SUBS_GEOJSON } = (()
   }
 })()
 
+const CHOROPLETH_PARAMS = {
+  density:    { key: 'densityNorm', color: '#818cf8' },
+  avgAge:     { key: 'avgAgeNorm',  color: '#f59e0b' },
+  rentPerSqm: { key: 'rentNorm',    color: '#14b8a6' },
+}
+
 export function useMapLayers(map) {
-  const { activeLayers, amenityData, setSelectedDistrict } = useMapStore()
+  const { activeLayers, amenityData, setSelectedDistrict, choroplethParam } = useMapStore()
   const psPopup = useRef(null)
 
   // ── District boundaries ──────────────────────────────────────────────────
@@ -227,6 +270,25 @@ export function useMapLayers(map) {
       if (map.getLayer(LABEL))     map.setLayoutProperty(LABEL,     'visibility', 'none')
     }
   }, [map, activeLayers.districts])
+
+  // ── Choropleth overlay ────────────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+    const FILL = 'districts-fill'
+    if (!map.getLayer(FILL)) return
+    const p = CHOROPLETH_PARAMS[choroplethParam]
+    if (p) {
+      map.setPaintProperty(FILL, 'fill-color', p.color)
+      map.setPaintProperty(FILL, 'fill-opacity', [
+        'interpolate', ['linear'], ['get', p.key],
+        0, 0.04,
+        1, 0.82,
+      ])
+    } else {
+      map.setPaintProperty(FILL, 'fill-color', '#818cf8')
+      map.setPaintProperty(FILL, 'fill-opacity', 0.08)
+    }
+  }, [map, choroplethParam, activeLayers.districts])
 
   // ── Amenities ─────────────────────────────────────────────────────────────
   useEffect(() => {
