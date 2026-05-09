@@ -16,9 +16,23 @@ import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
 
-const FOURSQUARE_KEY      = 'fsq3u7GxfeICN6hOqx0ENnV+4+yYivE+NJ87n+BYodInXPA='
-const GOOGLE_KEY          = 'AIzaSyCdiOGnlZxp5tH9wJ7YQOv6w2DT4A4b7rE'
+// Load keys from .env file (never commit .env to git)
+const envPath = resolve(ROOT, '.env')
+if (existsSync(envPath)) {
+  for (const line of readFileSync(envPath, 'utf8').split('\n')) {
+    const [k, ...rest] = line.split('=')
+    if (k && rest.length) process.env[k.trim()] ??= rest.join('=').trim()
+  }
+}
+
+const FOURSQUARE_KEY      = process.env.FOURSQUARE_KEY_MJS ?? ''
+const GOOGLE_KEY          = process.env.GOOGLE_KEY ?? ''
 const GOOGLE_MAX_REQUESTS = 15
+
+if (!FOURSQUARE_KEY || !GOOGLE_KEY) {
+  console.error('Missing FOURSQUARE_KEY_MJS or GOOGLE_KEY in .env — aborting.')
+  process.exit(1)
+}
 
 const BBOX = { swLat: 52.28, swLon: 10.75, neLat: 52.47, neLon: 10.98 }
 const CENTER = [52.423, 10.787]

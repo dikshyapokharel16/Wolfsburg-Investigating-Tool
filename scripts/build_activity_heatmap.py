@@ -13,6 +13,7 @@ Run from the project root:
 import json
 import math
 import os
+import sys
 import time
 import urllib.request
 import urllib.parse
@@ -21,11 +22,25 @@ from collections import defaultdict
 import folium
 from folium.plugins import HeatMap
 
+# ── Load keys from .env (never commit .env to git) ────────────────────────────
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_env_path = os.path.join(ROOT, '.env')
+if os.path.exists(_env_path):
+    with open(_env_path) as _f:
+        for _line in _f:
+            _line = _line.strip()
+            if '=' in _line and not _line.startswith('#'):
+                _k, _, _v = _line.partition('=')
+                os.environ.setdefault(_k.strip(), _v.strip())
+
 # ── Config ─────────────────────────────────────────────────────────────────────
-FOURSQUARE_KEY      = "JWESM55MPZYO41LQDUKEEFPDME0LOIN2YLVQ5VH0F01EOJQN"
-GOOGLE_KEY          = "AIzaSyCdiOGnlZxp5tH9wJ7YQOv6w2DT4A4b7rE"
+FOURSQUARE_KEY      = os.environ.get('FOURSQUARE_KEY_PY', '')
+GOOGLE_KEY          = os.environ.get('GOOGLE_KEY', '')
 GOOGLE_MAX_REQUESTS = 15        # hard cap — ~$0.032 each → max ~$0.48
 GOOGLE_COST_PER_REQ = 0.032
+
+if not FOURSQUARE_KEY or not GOOGLE_KEY:
+    sys.exit('Missing FOURSQUARE_KEY_PY or GOOGLE_KEY in .env — aborting.')
 
 BBOX = {
     'sw_lat': 52.28, 'sw_lon': 10.75,
@@ -33,8 +48,6 @@ BBOX = {
 }
 WOLFSBURG_CENTER = (52.423, 10.787)
 GRID_CELL_M = 250
-
-ROOT               = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_DIR         = os.path.join(ROOT, 'outputs')
 OUTPUT_HTML        = os.path.join(OUTPUT_DIR, 'wolfsburg_activity_heatmap.html')
 PUBLIC_SPACES_FILE = os.path.join(ROOT, 'src', 'data', 'publicSpaces.json')
