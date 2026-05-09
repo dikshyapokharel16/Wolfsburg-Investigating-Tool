@@ -5,6 +5,9 @@ import { useMapStore } from '../store/mapStore'
 import districtBoundaries from '../data/districtBoundaries.json'
 import { DISTRICT_COLORS, DISTRICT_GROUPS, DISTRICT_TO_GROUP } from '../data/districtConfig.js'
 import PUBLIC_SPACES_GEOJSON from '../data/publicSpaces.json'
+import GOOGLE_PLACES_GEOJSON from '../data/googlePlaces.json'
+import DWELL_GEOJSON   from '../data/dwellInfrastructure.json'
+import CLOSURES_DATA   from '../data/closures.json'
 
 // Returns the bounding-box centre of any Polygon or MultiPolygon geometry
 function bboxCenter(geometry) {
@@ -95,8 +98,12 @@ const { DISTRICT_GEOJSON, DISTRICT_LABELS_GEOJSON, DISTRICT_SUBS_GEOJSON } = (()
 })()
 
 export function useMapLayers(map) {
-  const { activeLayers, amenityData } = useMapStore()
-  const psPopup = useRef(null)
+  const { activeLayers, amenityData, closureYear } = useMapStore()
+  const googlePopup   = useRef(null)
+  const dwellPopup    = useRef(null)
+  const closurePopup  = useRef(null)
+  const psPopup   = useRef(null)
+  const freqPopup = useRef(null)
 
   // ── District boundaries ──────────────────────────────────────────────────
   useEffect(() => {
@@ -309,6 +316,10 @@ export function useMapLayers(map) {
 
         map.on('mouseenter', LYR, () => { map.getCanvas().style.cursor = 'pointer' })
         map.on('mouseleave', LYR, () => { map.getCanvas().style.cursor = '' })
+        map.on('click', (e) => {
+          if (!map.queryRenderedFeatures(e.point, { layers: [LYR] }).length && psPopup.current?.isOpen())
+            psPopup.current.remove()
+        })
       } else {
         map.setLayoutProperty(LYR, 'visibility', 'visible')
       }
@@ -317,4 +328,337 @@ export function useMapLayers(map) {
       if (psPopup.current) psPopup.current.remove()
     }
   }, [map, activeLayers.publicSpaces])
+
+  // ── Neighbourhood Hotspots (frequency analysis) ───────────────────────────
+  useEffect(() => {
+    if (!map) return
+
+    const SRC = 'public-spaces-freq'
+    const LYR = 'freq-circles'
+
+    if (activeLayers.frequencyAnalysis) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: PUBLIC_SPACES_GEOJSON })
+
+        map.addLayer({
+          id: LYR,
+          type: 'circle',
+          source: SRC,
+          paint: {
+            'circle-radius': [
+              'interpolate', ['linear'], ['zoom'],
+              10, ['max', 4, ['*', 0.8, ['sqrt', ['get', 'areaHa']]]],
+              14, ['max', 6, ['*', 3.5, ['sqrt', ['get', 'areaHa']]]],
+            ],
+            'circle-color': [
+              'interpolate', ['linear'], ['get', 'frequencyScore'],
+              0,  '#fef9c3',
+              25, '#fbbf24',
+              50, '#f97316',
+              75, '#dc2626',
+            ],
+            'circle-opacity': 0.85,
+            'circle-stroke-width': 2,
+            'circle-stroke-color': 'rgba(255,255,255,0.9)',
+          },
+        })
+
+        const popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: '260px' })
+        freqPopup.current = popup
+
+        map.on('click', LYR, (e) => {
+          const p = e.features[0].properties
+          const tierColors = { 'very-high': '#ef4444', high: '#f97316', medium: '#f59e0b', low: '#22c55e', 'very-low': '#3b82f6' }
+          const tierColor  = tierColors[p.frequencyTier] ?? '#6b7280'
+          const tierLabel  = (p.frequencyTier ?? '').replace('-', ' ').replace(/\b\w/g, c => c.toUpperCase())
+          popup
+            .setLngLat(e.lngLat)
+            .setHTML(
+              `<div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:8px;height:8px;border-radius:50%;background:${tierColor};flex-shrink:0"></div>
+                  <span style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600">${p.typology}</span>
+                </div>
+                <div style="font-size:14px;font-weight:700;color:#111827;margin-bottom:4px;line-height:1.3">${p.name}</div>
+                <div style="font-size:11px;color:#6b7280;margin-bottom:6px">${p.district ?? ''}</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                  <span style="font-size:11px;font-weight:700;color:${tierColor}">${tierLabel}</span>
+                  <span style="font-size:11px;color:#9ca3af">${p.frequencyScore}/100</span>
+                </div>
+                <div style="font-size:10px;color:#9ca3af;border-top:1px solid #f3f4f6;padding-top:5px">Source: OpenStreetMap</div>
+              </div>`
+            )
+            .addTo(map)
+        })
+
+        map.on('mouseenter', LYR, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', LYR, () => { map.getCanvas().style.cursor = '' })
+        map.on('click', (e) => {
+          if (!map.queryRenderedFeatures(e.point, { layers: [LYR] }).length && freqPopup.current?.isOpen())
+            freqPopup.current.remove()
+        })
+      } else {
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+      if (freqPopup.current) freqPopup.current.remove()
+    }
+  }, [map, activeLayers.frequencyAnalysis])
+
+  // ── Google Activity Heatmap ───────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+
+    const SRC  = 'google-activity'
+    const HEAT = 'google-activity-heat'
+    const DOT  = 'google-activity-dots'
+
+    if (activeLayers.googleActivity) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: GOOGLE_PLACES_GEOJSON })
+
+        map.addLayer({
+          id: HEAT,
+          type: 'heatmap',
+          source: SRC,
+          paint: {
+            'heatmap-weight': ['interpolate', ['linear'], ['get', 'weight'], 0, 0, 8, 1],
+            'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 10, 0.6, 15, 1.5],
+            'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 10, 20, 15, 50],
+            'heatmap-opacity': ['interpolate', ['linear'], ['zoom'], 12, 0.85, 15, 0.4],
+            'heatmap-color': [
+              'interpolate', ['linear'], ['heatmap-density'],
+              0,    'rgba(191,219,254,0)',
+              0.2,  '#bfdbfe',
+              0.5,  '#818cf8',
+              0.8,  '#4338ca',
+              1.0,  '#312e81',
+            ],
+          },
+        })
+
+        map.addLayer({
+          id: DOT,
+          type: 'circle',
+          source: SRC,
+          minzoom: 13,
+          paint: {
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 13, 3, 16, 7],
+            'circle-color': '#6366f1',
+            'circle-opacity': 0.85,
+            'circle-stroke-width': 1.5,
+            'circle-stroke-color': 'rgba(255,255,255,0.9)',
+          },
+        })
+
+        const popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: '240px' })
+        googlePopup.current = popup
+
+        map.on('click', DOT, (e) => {
+          const p = e.features[0].properties
+          popup
+            .setLngLat(e.lngLat)
+            .setHTML(
+              `<div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="font-size:14px;font-weight:700;color:#111827;margin-bottom:4px">${p.name}</div>
+                <div style="font-size:11px;color:#6b7280;margin-bottom:5px">${p.types || ''}</div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:13px;font-weight:700;color:#f97316">★ ${p.rating || '—'}</span>
+                  <span style="font-size:11px;color:#9ca3af">${(p.reviewCount || 0).toLocaleString()} reviews</span>
+                </div>
+              </div>`
+            )
+            .addTo(map)
+        })
+
+        map.on('mouseenter', DOT, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', DOT, () => { map.getCanvas().style.cursor = '' })
+        map.on('click', (e) => {
+          if (!map.queryRenderedFeatures(e.point, { layers: [DOT] }).length && googlePopup.current?.isOpen())
+            googlePopup.current.remove()
+        })
+      } else {
+        map.setLayoutProperty(HEAT, 'visibility', 'visible')
+        map.setLayoutProperty(DOT,  'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(HEAT)) map.setLayoutProperty(HEAT, 'visibility', 'none')
+      if (map.getLayer(DOT))  map.setLayoutProperty(DOT,  'visibility', 'none')
+      if (googlePopup.current) googlePopup.current.remove()
+    }
+  }, [map, activeLayers.googleActivity])
+
+  // ── Dwell Infrastructure ──────────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+
+    const SRC  = 'dwell-infra'
+    const HEAT = 'dwell-heat'
+    const DOT  = 'dwell-dots'
+
+    if (activeLayers.dwellInfrastructure) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: DWELL_GEOJSON })
+
+        map.addLayer({
+          id: HEAT,
+          type: 'heatmap',
+          source: SRC,
+          maxzoom: 15,
+          paint: {
+            'heatmap-weight': ['interpolate', ['linear'], ['get', 'weight'], 1, 0.2, 5, 1],
+            'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 10, 0.4, 15, 1.2],
+            'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 10, 12, 15, 30],
+            'heatmap-opacity': ['interpolate', ['linear'], ['zoom'], 12, 0.8, 15, 0],
+            'heatmap-color': [
+              'interpolate', ['linear'], ['heatmap-density'],
+              0,   'rgba(167,243,208,0)',
+              0.2, '#a7f3d0',
+              0.5, '#10b981',
+              0.8, '#065f46',
+              1.0, '#022c22',
+            ],
+          },
+        })
+
+        map.addLayer({
+          id: DOT,
+          type: 'circle',
+          source: SRC,
+          minzoom: 13,
+          paint: {
+            'circle-radius': ['interpolate', ['linear'], ['zoom'],
+              13, ['case', ['==', ['get', 'type'], 'outdoor_seating'], 5, 3],
+              16, ['case', ['==', ['get', 'type'], 'outdoor_seating'], 9, 6],
+            ],
+            'circle-color': [
+              'match', ['get', 'type'],
+              'outdoor_seating', '#065f46',
+              'shelter',         '#059669',
+              'toilets',         '#059669',
+              'picnic_table',    '#6ee7b7',
+              '#a7f3d0',
+            ],
+            'circle-opacity': 0.9,
+            'circle-stroke-width': 1,
+            'circle-stroke-color': 'rgba(255,255,255,0.8)',
+          },
+        })
+
+        const popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: '220px' })
+        dwellPopup.current = popup
+
+        map.on('click', DOT, (e) => {
+          const p = e.features[0].properties
+          const stars = '●'.repeat(p.weight) + '○'.repeat(5 - p.weight)
+          const dotColor = { outdoor_seating:'#065f46', shelter:'#059669', toilets:'#059669', picnic_table:'#6ee7b7' }[p.type] ?? '#a7f3d0'
+          popup
+            .setLngLat(e.lngLat)
+            .setHTML(
+              `<div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:8px;height:8px;border-radius:50%;background:${dotColor};flex-shrink:0"></div>
+                  <span style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600">${p.label}</span>
+                </div>
+                ${p.name ? `<div style="font-size:13px;font-weight:600;color:#111827;margin-bottom:4px">${p.name}</div>` : ''}
+                <div style="font-size:11px;color:#f59e0b;letter-spacing:0.05em">${stars}</div>
+                <div style="font-size:10px;color:#9ca3af;margin-top:3px">Dwell weight: ${p.weight}/5</div>
+              </div>`
+            )
+            .addTo(map)
+        })
+
+        map.on('mouseenter', DOT, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', DOT, () => { map.getCanvas().style.cursor = '' })
+        map.on('click', (e) => {
+          if (!map.queryRenderedFeatures(e.point, { layers: [DOT] }).length && dwellPopup.current?.isOpen())
+            dwellPopup.current.remove()
+        })
+      } else {
+        map.setLayoutProperty(HEAT, 'visibility', 'visible')
+        map.setLayoutProperty(DOT,  'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(HEAT)) map.setLayoutProperty(HEAT, 'visibility', 'none')
+      if (map.getLayer(DOT))  map.setLayoutProperty(DOT,  'visibility', 'none')
+      if (dwellPopup.current) dwellPopup.current.remove()
+    }
+  }, [map, activeLayers.dwellInfrastructure])
+
+  // ── Shop & Café Closures ──────────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+
+    const SRC = 'closures'
+    const LYR = 'closures-dots'
+
+    if (activeLayers.closures) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: CLOSURES_DATA.closures })
+
+        map.addLayer({
+          id: LYR,
+          type: 'circle',
+          source: SRC,
+          filter: ['<=', ['get', 'year'], closureYear],
+          paint: {
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 4, 15, 9],
+            'circle-color': [
+              'match', ['get', 'year'],
+              2019, '#94a3b8',
+              2020, '#64748b',
+              2021, '#ef4444',
+              2022, '#f97316',
+              2023, '#eab308',
+              2024, '#22c55e',
+              '#94a3b8',
+            ],
+            'circle-opacity': 0.9,
+            'circle-stroke-width': 1.5,
+            'circle-stroke-color': 'rgba(255,255,255,0.85)',
+          },
+        })
+
+        const popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: '240px' })
+        closurePopup.current = popup
+
+        map.on('click', LYR, (e) => {
+          const p = e.features[0].properties
+          popup
+            .setLngLat(e.lngLat)
+            .setHTML(
+              `<div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:8px;height:8px;border-radius:50%;background:#475569;flex-shrink:0"></div>
+                  <span style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600">Closed · ${p.venueType}</span>
+                </div>
+                <div style="font-size:14px;font-weight:700;color:#111827;margin-bottom:4px">${p.name || 'Unnamed venue'}</div>
+                <div style="font-size:11px;color:#6b7280;margin-bottom:3px">Closed: ${p.year ?? 'unknown'}</div>
+                <div style="font-size:10px;color:#9ca3af">Source: OpenStreetMap history</div>
+              </div>`
+            )
+            .addTo(map)
+        })
+
+        map.on('mouseenter', LYR, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', LYR, () => { map.getCanvas().style.cursor = '' })
+        map.on('click', (e) => {
+          if (!map.queryRenderedFeatures(e.point, { layers: [LYR] }).length && closurePopup.current?.isOpen())
+            closurePopup.current.remove()
+        })
+      } else {
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+      if (closurePopup.current) closurePopup.current.remove()
+    }
+  }, [map, activeLayers.closures])
+
+  // Update closure filter when slider year changes
+  useEffect(() => {
+    if (!map || !map.getLayer('closures-dots')) return
+    map.setFilter('closures-dots', ['<=', ['get', 'year'], closureYear])
+  }, [map, closureYear])
 }

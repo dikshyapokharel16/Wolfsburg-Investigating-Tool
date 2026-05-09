@@ -1,0 +1,1756 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.789827,
+          52.433234
+        ]
+      },
+      "properties": {
+        "name": "The Ritz-Carlton, Wolfsburg",
+        "rating": 4.7,
+        "reviewCount": 1564,
+        "weight": 7.355641102974253,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.787134,
+          52.423442
+        ]
+      },
+      "properties": {
+        "name": "City Hotel Journal",
+        "rating": 4.1,
+        "reviewCount": 411,
+        "weight": 6.021023349349527,
+        "types": "bar, lodging, restaurant, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.777583,
+          52.425356
+        ]
+      },
+      "properties": {
+        "name": "Hotel Global Inn",
+        "rating": 4.4,
+        "reviewCount": 937,
+        "weight": 6.843749949006225,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.78876,
+          52.42855
+        ]
+      },
+      "properties": {
+        "name": "Hotel Wolfsburg Centrum affiliated by Meliá",
+        "rating": 4,
+        "reviewCount": 491,
+        "weight": 6.198478716492308,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.805541,
+          52.414566
+        ]
+      },
+      "properties": {
+        "name": "City Partner Parkhotel Wolfsburg",
+        "rating": 4.5,
+        "reviewCount": 804,
+        "weight": 6.690842277418564,
+        "types": "lodging, restaurant, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.784808,
+          52.41785
+        ]
+      },
+      "properties": {
+        "name": "Leonardo Hotel Wolfsburg City Center",
+        "rating": 4.3,
+        "reviewCount": 3695,
+        "weight": 8.215006432761575,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.788237,
+          52.428364
+        ]
+      },
+      "properties": {
+        "name": "INNSiDE by Meliá Wolfsburg",
+        "rating": 4.3,
+        "reviewCount": 1484,
+        "weight": 7.3031700512368,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.794205,
+          52.432667
+        ]
+      },
+      "properties": {
+        "name": "Autostadt",
+        "rating": 4.5,
+        "reviewCount": 29737,
+        "weight": 10.300180968257168,
+        "types": "museum, tourist_attraction"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.803885,
+          52.432669
+        ]
+      },
+      "properties": {
+        "name": "Volkswagen Arena",
+        "rating": 4.2,
+        "reviewCount": 7205,
+        "weight": 8.882669291308039,
+        "types": "stadium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.793038,
+          52.428594
+        ]
+      },
+      "properties": {
+        "name": "Designer Outlets Wolfsburg",
+        "rating": 4.2,
+        "reviewCount": 13828,
+        "weight": 9.534523115464658,
+        "types": "shopping_mall, clothing_store, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.796014,
+          52.426561
+        ]
+      },
+      "properties": {
+        "name": "einschlaf",
+        "rating": 4.8,
+        "reviewCount": 33,
+        "weight": 3.5263605246161616,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.788385,
+          52.424523
+        ]
+      },
+      "properties": {
+        "name": "Deutsche Bank Filiale",
+        "rating": 4.4,
+        "reviewCount": 125,
+        "weight": 4.836281906951478,
+        "types": "bank, atm, finance"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.80181,
+          52.441027
+        ]
+      },
+      "properties": {
+        "name": "Hotel Alter Wolf",
+        "rating": 3.5,
+        "reviewCount": 398,
+        "weight": 5.988961416889864,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.787333,
+          52.428602
+        ]
+      },
+      "properties": {
+        "name": "CinemaxX Wolfsburg",
+        "rating": 4,
+        "reviewCount": 2860,
+        "weight": 7.95892649305011,
+        "types": "movie_theater"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.783871,
+          52.426331
+        ]
+      },
+      "properties": {
+        "name": "CL Appartments Wolfsburg",
+        "rating": 4.3,
+        "reviewCount": 3,
+        "weight": 1.3862943611198906,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.790475,
+          52.428853
+        ]
+      },
+      "properties": {
+        "name": "Phaeno Science Center",
+        "rating": 4.7,
+        "reviewCount": 7043,
+        "weight": 8.859931469616097,
+        "types": "tourist_attraction, museum"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.784795,
+          52.42113
+        ]
+      },
+      "properties": {
+        "name": "Hautarztpraxis, Keshavarz, Mehran",
+        "rating": 3,
+        "reviewCount": 530,
+        "weight": 6.274762021241939,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.813913,
+          52.436142
+        ]
+      },
+      "properties": {
+        "name": "BadeLand Wolfsburg",
+        "rating": 4.2,
+        "reviewCount": 7138,
+        "weight": 8.87332798950246,
+        "types": "tourist_attraction, amusement_park, spa, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.786579,
+          52.423324
+        ]
+      },
+      "properties": {
+        "name": "Dr. med. Oliver Tomsing / Dr. med. Elisabeth Schepers",
+        "rating": 3.1,
+        "reviewCount": 108,
+        "weight": 4.6913478822291435,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.760822,
+          52.420066
+        ]
+      },
+      "properties": {
+        "name": "Wolf-Apotheke",
+        "rating": 4.4,
+        "reviewCount": 27,
+        "weight": 3.332204510175204,
+        "types": "pharmacy, health, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.755,
+          52.4275
+        ]
+      },
+      "properties": {
+        "name": "Alter Dorfkrug am Kanal",
+        "rating": 4.4,
+        "reviewCount": 631,
+        "weight": 6.448889394146858,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.789377,
+          52.425776
+        ]
+      },
+      "properties": {
+        "name": "TEDi GmbH & Co. KG",
+        "rating": 4,
+        "reviewCount": 338,
+        "weight": 5.82600010738045,
+        "types": "home_goods_store, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.801518,
+          52.429351
+        ]
+      },
+      "properties": {
+        "name": "AUTOPLUS AG Werkstatt & Gebrauchtwagen + E-Bikes",
+        "rating": 4.4,
+        "reviewCount": 680,
+        "weight": 6.523562306149512,
+        "types": "car_repair, car_dealer, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.788553,
+          52.425263
+        ]
+      },
+      "properties": {
+        "name": "Cafe & Bar Celona Wolfsburg",
+        "rating": 4,
+        "reviewCount": 2645,
+        "weight": 7.880804344674901,
+        "types": "cafe, bar, restaurant, food, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.787988,
+          52.424168
+        ]
+      },
+      "properties": {
+        "name": "Bode Eyes",
+        "rating": 5,
+        "reviewCount": 175,
+        "weight": 5.170483995038152,
+        "types": "health, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.781735,
+          52.426293
+        ]
+      },
+      "properties": {
+        "name": "Restaurant Thission - Wolfsburg",
+        "rating": 4.5,
+        "reviewCount": 968,
+        "weight": 6.876264611890766,
+        "types": "restaurant, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.77105,
+          52.413977
+        ]
+      },
+      "properties": {
+        "name": "Dr. med. Jens Behrendt",
+        "rating": 3.4,
+        "reviewCount": 182,
+        "weight": 5.209486152841421,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.762515,
+          52.425326
+        ]
+      },
+      "properties": {
+        "name": "Audi Zentrum Wolfsburg",
+        "rating": 4.3,
+        "reviewCount": 495,
+        "weight": 6.206575926724928,
+        "types": "car_dealer, car_repair, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.788826,
+          52.422148
+        ]
+      },
+      "properties": {
+        "name": "MediaMarkt Wolfsburg-City",
+        "rating": 4,
+        "reviewCount": 2434,
+        "weight": 7.79770203551669,
+        "types": "electronics_store, home_goods_store, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.805367,
+          52.433705
+        ]
+      },
+      "properties": {
+        "name": "VfL Fanshop",
+        "rating": 4.5,
+        "reviewCount": 157,
+        "weight": 5.062595033026967,
+        "types": "store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.788827,
+          52.424763
+        ]
+      },
+      "properties": {
+        "name": "ltur Reisebüro Wolfsburg",
+        "rating": 4.3,
+        "reviewCount": 50,
+        "weight": 3.9318256327243257,
+        "types": "travel_agency"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.787157,
+          52.421863
+        ]
+      },
+      "properties": {
+        "name": "Urologische Praxisgemeinschaft Wolfsburg",
+        "rating": 3.7,
+        "reviewCount": 71,
+        "weight": 4.276666119016055,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.78534,
+          52.422879
+        ]
+      },
+      "properties": {
+        "name": "Sushi Berlin | Wolfsburg",
+        "rating": 4.2,
+        "reviewCount": 956,
+        "weight": 6.863803391452954,
+        "types": "restaurant, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.78853,
+          52.423665
+        ]
+      },
+      "properties": {
+        "name": "Telekom Shop",
+        "rating": 4.2,
+        "reviewCount": 402,
+        "weight": 5.998936561946683,
+        "types": "store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.779895,
+          52.418508
+        ]
+      },
+      "properties": {
+        "name": "INJOY Wolfsburg",
+        "rating": 4.7,
+        "reviewCount": 462,
+        "weight": 6.137727054086234,
+        "types": "gym, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.768602,
+          52.420673
+        ]
+      },
+      "properties": {
+        "name": "Pension Schindler",
+        "rating": 2.6,
+        "reviewCount": 5,
+        "weight": 1.791759469228055,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.794568,
+          52.42801
+        ]
+      },
+      "properties": {
+        "name": "𝗗𝗶𝗮𝗴𝗻𝗼𝘀𝘁𝗶𝗸𝘇𝗲𝗻𝘁𝗿𝘂𝗺 𝗥𝗮𝗱𝗶𝗼𝗹𝗼𝗴𝗶𝗲 𝗪𝗼𝗹𝗳𝘀𝗯𝘂𝗿𝗴 - 𝗗𝗿. 𝗺𝗲𝗱. 𝗠𝗶𝗰𝗵𝗮𝗲𝗹 𝗔𝘂",
+        "rating": 4.8,
+        "reviewCount": 340,
+        "weight": 5.831882477283517,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.753062,
+          52.401121
+        ]
+      },
+      "properties": {
+        "name": "Simonshof",
+        "rating": 3.9,
+        "reviewCount": 208,
+        "weight": 5.342334251964811,
+        "types": "lodging, restaurant, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.784015,
+          52.422382
+        ]
+      },
+      "properties": {
+        "name": "Trattoria Incontri - Wolfsburg",
+        "rating": 4.5,
+        "reviewCount": 1074,
+        "weight": 6.980075940561763,
+        "types": "restaurant, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.814456,
+          52.428037
+        ]
+      },
+      "properties": {
+        "name": "KFZ Werkstatt & Autoverwertung Grützmacher",
+        "rating": 4.5,
+        "reviewCount": 143,
+        "weight": 4.969813299576001,
+        "types": "car_repair, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.783693,
+          52.425015
+        ]
+      },
+      "properties": {
+        "name": "Boutique Hotel Goldene Henne",
+        "rating": 4.5,
+        "reviewCount": 518,
+        "weight": 6.251903883165888,
+        "types": "meal_takeaway, lodging, bar, restaurant, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.796888,
+          52.423879
+        ]
+      },
+      "properties": {
+        "name": "Volksbank BRAWO, Hauptstelle Am Mühlengraben",
+        "rating": 3.7,
+        "reviewCount": 30,
+        "weight": 3.4339872044851463,
+        "types": "bank, atm, finance, real_estate_agency"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.78441,
+          52.41929
+        ]
+      },
+      "properties": {
+        "name": "Dr. med. Jürgen Flimm / Dr. Alexander Szymkowiak",
+        "rating": 3.5,
+        "reviewCount": 99,
+        "weight": 4.605170185988092,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.79234,
+          52.424442
+        ]
+      },
+      "properties": {
+        "name": "Mr. Lee",
+        "rating": 3.7,
+        "reviewCount": 528,
+        "weight": 6.270988431858299,
+        "types": "restaurant, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.78594,
+          52.421474
+        ]
+      },
+      "properties": {
+        "name": "Sparkasse Gifhorn-Wolfsburg - Real Estate Center",
+        "rating": 4,
+        "reviewCount": 39,
+        "weight": 3.6888794541139363,
+        "types": "finance, real_estate_agency"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.781522,
+          52.425045
+        ]
+      },
+      "properties": {
+        "name": "Friseur Haarmanufaktur Wolfsburg",
+        "rating": 4.4,
+        "reviewCount": 445,
+        "weight": 6.100318952020064,
+        "types": "hair_care"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.785412,
+          52.426282
+        ]
+      },
+      "properties": {
+        "name": "Budgethotel Stadtbett GmbH & Co KG",
+        "rating": 4.2,
+        "reviewCount": 54,
+        "weight": 4.007333185232471,
+        "types": "lodging, restaurant, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.787833,
+          52.423899
+        ]
+      },
+      "properties": {
+        "name": "Internist Dr. med. Rolf Fritz Otto",
+        "rating": 4.5,
+        "reviewCount": 35,
+        "weight": 3.58351893845611,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.814344,
+          52.428767
+        ]
+      },
+      "properties": {
+        "name": "IDENTICA Hamann OHG",
+        "rating": 4.6,
+        "reviewCount": 77,
+        "weight": 4.356708826689592,
+        "types": "car_repair, lawyer"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.802801,
+          52.432707
+        ]
+      },
+      "properties": {
+        "name": "VfL Wolfsburg",
+        "rating": 4.3,
+        "reviewCount": 186,
+        "weight": 5.231108616854587,
+        "types": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.787402,
+          52.423437
+        ]
+      },
+      "properties": {
+        "name": "Buck Reinhard",
+        "rating": 3.7,
+        "reviewCount": 6,
+        "weight": 1.9459101490553132,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.763454,
+          52.425802
+        ]
+      },
+      "properties": {
+        "name": "SEAT Hotz and Heitmann Wolfsburg",
+        "rating": 4,
+        "reviewCount": 114,
+        "weight": 4.74493212836325,
+        "types": "car_dealer, car_repair, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.784738,
+          52.423771
+        ]
+      },
+      "properties": {
+        "name": "China Service Snacks & Drinks",
+        "rating": 3.7,
+        "reviewCount": 107,
+        "weight": 4.68213122712422,
+        "types": "meal_takeaway, restaurant, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.787813,
+          52.422603
+        ]
+      },
+      "properties": {
+        "name": "City-Galerie Wolfsburg",
+        "rating": 4.2,
+        "reviewCount": 8147,
+        "weight": 9.005527777346696,
+        "types": "shopping_mall"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.781691,
+          52.426484
+        ]
+      },
+      "properties": {
+        "name": "Sparkasse Gifhorn-Wolfsburg - Branch",
+        "rating": 2.4,
+        "reviewCount": 10,
+        "weight": 2.3978952727983707,
+        "types": "atm, bank, finance"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.857502,
+          52.41509
+        ]
+      },
+      "properties": {
+        "name": "Hotel An der Wasserburg",
+        "rating": 4.5,
+        "reviewCount": 825,
+        "weight": 6.716594773520978,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.856527,
+          52.414773
+        ]
+      },
+      "properties": {
+        "name": "Engels Hof",
+        "rating": 4.8,
+        "reviewCount": 22,
+        "weight": 3.1354942159291497,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.830787,
+          52.40163
+        ]
+      },
+      "properties": {
+        "name": "Lindenhof Nordsteimke GmbH",
+        "rating": 4.5,
+        "reviewCount": 383,
+        "weight": 5.950642552587727,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.802652,
+          52.422032
+        ]
+      },
+      "properties": {
+        "name": "Sparkasse Gifhorn-Wolfsburg - Branch",
+        "rating": 2.7,
+        "reviewCount": 9,
+        "weight": 2.302585092994046,
+        "types": "atm, bank, finance"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.788971,
+          52.422468
+        ]
+      },
+      "properties": {
+        "name": "Wurst-Basar",
+        "rating": 3.2,
+        "reviewCount": 54,
+        "weight": 4.007333185232471,
+        "types": "food, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.789174,
+          52.42561
+        ]
+      },
+      "properties": {
+        "name": "WMG Wolfsburg Wirtschaft und Marketing GmbH",
+        "rating": 4,
+        "reviewCount": 25,
+        "weight": 3.258096538021482,
+        "types": "travel_agency"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.789322,
+          52.425787
+        ]
+      },
+      "properties": {
+        "name": "Postbank Filiale",
+        "rating": 3.7,
+        "reviewCount": 499,
+        "weight": 6.214608098422191,
+        "types": "bank, atm, finance"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.788375,
+          52.422835
+        ]
+      },
+      "properties": {
+        "name": "engbers / emilio adani",
+        "rating": 4.6,
+        "reviewCount": 54,
+        "weight": 4.007333185232471,
+        "types": "clothing_store, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.810002,
+          52.429276
+        ]
+      },
+      "properties": {
+        "name": "Volke Kommunikations-Design GmbH",
+        "rating": 4.6,
+        "reviewCount": 25,
+        "weight": 3.258096538021482,
+        "types": "car_repair"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.788628,
+          52.424176
+        ]
+      },
+      "properties": {
+        "name": "dm-drogerie markt",
+        "rating": 4.2,
+        "reviewCount": 152,
+        "weight": 5.030437921392435,
+        "types": "drugstore, grocery_or_supermarket, clothing_store, food, health, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.785039,
+          52.420076
+        ]
+      },
+      "properties": {
+        "name": "Anwaltskanzlei Waschke Kuba Zimmermann Rechtsanwaltsges. mbH",
+        "rating": 4.8,
+        "reviewCount": 63,
+        "weight": 4.1588830833596715,
+        "types": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.788826,
+          52.422148
+        ]
+      },
+      "properties": {
+        "name": "JACK & JONES",
+        "rating": 4.5,
+        "reviewCount": 40,
+        "weight": 3.713572066704308,
+        "types": "clothing_store, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.782174,
+          52.412011
+        ]
+      },
+      "properties": {
+        "name": "Shell",
+        "rating": 3.5,
+        "reviewCount": 51,
+        "weight": 3.9512437185814275,
+        "types": "gas_station"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.787745,
+          52.417857
+        ]
+      },
+      "properties": {
+        "name": "Documaxx - Wolfsburg",
+        "rating": 4.4,
+        "reviewCount": 65,
+        "weight": 4.189654742026425,
+        "types": "store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.84663,
+          52.39097
+        ]
+      },
+      "properties": {
+        "name": "Gardening Schliebener GbR",
+        "rating": 4.7,
+        "reviewCount": 703,
+        "weight": 6.556778356158042,
+        "types": "general_contractor"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.836005,
+          52.440796
+        ]
+      },
+      "properties": {
+        "name": "ipartment Wolfsburg",
+        "rating": 4.3,
+        "reviewCount": 70,
+        "weight": 4.2626798770413155,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.832009,
+          52.438459
+        ]
+      },
+      "properties": {
+        "name": "Autohaus Koller",
+        "rating": 4.3,
+        "reviewCount": 418,
+        "weight": 6.037870919922137,
+        "types": "car_rental, car_repair, car_dealer, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.839525,
+          52.437322
+        ]
+      },
+      "properties": {
+        "name": "Vorsfelder Hof",
+        "rating": 4.5,
+        "reviewCount": 810,
+        "weight": 6.698268054115413,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.83888,
+          52.438007
+        ]
+      },
+      "properties": {
+        "name": "Bike & Niess",
+        "rating": 4,
+        "reviewCount": 98,
+        "weight": 4.59511985013459,
+        "types": "bicycle_store, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.83698,
+          52.43991
+        ]
+      },
+      "properties": {
+        "name": "Hotel-Galeria",
+        "rating": 4.6,
+        "reviewCount": 42,
+        "weight": 3.7612001156935624,
+        "types": "lodging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.798591,
+          52.439574
+        ]
+      },
+      "properties": {
+        "name": "Restaurant Schlossremise",
+        "rating": 4.7,
+        "reviewCount": 855,
+        "weight": 6.752270376141742,
+        "types": "restaurant, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.839873,
+          52.437923
+        ]
+      },
+      "properties": {
+        "name": "Helios MVZ Helmstedt Gynäkologie Nelli Müller",
+        "rating": 4,
+        "reviewCount": 34,
+        "weight": 3.5553480614894135,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.837933,
+          52.440688
+        ]
+      },
+      "properties": {
+        "name": "Volksbank BRAWO, Geschäftsstelle Lange Straße",
+        "rating": 2.6,
+        "reviewCount": 22,
+        "weight": 3.1354942159291497,
+        "types": "bank, atm, real_estate_agency, finance"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.839055,
+          52.438629
+        ]
+      },
+      "properties": {
+        "name": "Wurst-Basar Konrad Hinsemann GmbH",
+        "rating": 4.5,
+        "reviewCount": 12,
+        "weight": 2.5649493574615367,
+        "types": "store, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.792716,
+          52.428064
+        ]
+      },
+      "properties": {
+        "name": "Augenklinik Dr. Hoffmann Augenzentrum Wolfsburg",
+        "rating": 4.8,
+        "reviewCount": 67,
+        "weight": 4.219507705176107,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.839092,
+          52.439064
+        ]
+      },
+      "properties": {
+        "name": "Karl Hohls KG",
+        "rating": 4.5,
+        "reviewCount": 241,
+        "weight": 5.488937726156687,
+        "types": "department_store, furniture_store, home_goods_store, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.813835,
+          52.443177
+        ]
+      },
+      "properties": {
+        "name": "Bäckerei Leifert GmbH",
+        "rating": 3.9,
+        "reviewCount": 97,
+        "weight": 4.584967478670572,
+        "types": "bakery, store, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.80621,
+          52.45262
+        ]
+      },
+      "properties": {
+        "name": "Kiosk Schulenburgallee",
+        "rating": 4.4,
+        "reviewCount": 47,
+        "weight": 3.8712010109078907,
+        "types": "store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.801915,
+          52.448631
+        ]
+      },
+      "properties": {
+        "name": "Sparkasse Gifhorn-Wolfsburg - Branch",
+        "rating": 3.7,
+        "reviewCount": 14,
+        "weight": 2.70805020110221,
+        "types": "bank, finance"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.802018,
+          52.448183
+        ]
+      },
+      "properties": {
+        "name": "Herr Dr. Djamal Taassob",
+        "rating": 4.6,
+        "reviewCount": 11,
+        "weight": 2.4849066497880004,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.805844,
+          52.443216
+        ]
+      },
+      "properties": {
+        "name": "Katholische Kindertagesstätte St. Bernward",
+        "rating": 5,
+        "reviewCount": 1,
+        "weight": 0.6931471805599453,
+        "types": "school"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.802503,
+          52.447819
+        ]
+      },
+      "properties": {
+        "name": "Aktuell Lohnsteuerhilfeverein e.V. - Wolfsburg Nordstadt",
+        "rating": 4.5,
+        "reviewCount": 15,
+        "weight": 2.772588722239781,
+        "types": "finance"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.77286,
+          52.4495
+        ]
+      },
+      "properties": {
+        "name": "ammicon GmbH",
+        "rating": 5,
+        "reviewCount": 2,
+        "weight": 1.0986122886681096,
+        "types": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.800174,
+          52.44809
+        ]
+      },
+      "properties": {
+        "name": "Aulich Schubert KG Steuerberatungsgesellschaft",
+        "rating": 3.4,
+        "reviewCount": 5,
+        "weight": 1.791759469228055,
+        "types": "finance"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.781075,
+          52.446637
+        ]
+      },
+      "properties": {
+        "name": "Bäckerei Leifert Kästorf",
+        "rating": 3.8,
+        "reviewCount": 58,
+        "weight": 4.07753744390572,
+        "types": "bakery, food, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.784814,
+          52.450765
+        ]
+      },
+      "properties": {
+        "name": "Kosmetikstudio SKIN",
+        "rating": 5,
+        "reviewCount": 1,
+        "weight": 0.6931471805599453,
+        "types": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.798756,
+          52.449817
+        ]
+      },
+      "properties": {
+        "name": "Naturkosmetik",
+        "rating": 5,
+        "reviewCount": 2,
+        "weight": 1.0986122886681096,
+        "types": "beauty_salon"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.798119,
+          52.443097
+        ]
+      },
+      "properties": {
+        "name": "Subud Deutschland e. V.",
+        "rating": 5,
+        "reviewCount": 2,
+        "weight": 1.0986122886681096,
+        "types": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.782642,
+          52.444946
+        ]
+      },
+      "properties": {
+        "name": "F. Poppe GmbH Meisterbetrieb für Raum- und Fassadengestaltung",
+        "rating": 4.1,
+        "reviewCount": 7,
+        "weight": 2.0794415416798357,
+        "types": "painter"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.801887,
+          52.448164
+        ]
+      },
+      "properties": {
+        "name": "Cadera Hansaplatz",
+        "rating": 4.1,
+        "reviewCount": 138,
+        "weight": 4.9344739331306915,
+        "types": "bakery, cafe, restaurant, food, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.82036,
+          52.45343
+        ]
+      },
+      "properties": {
+        "name": "Boxer-Klub e.V., Gruppe Wolfsburg",
+        "rating": 4.3,
+        "reviewCount": 9,
+        "weight": 2.302585092994046,
+        "types": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.803666,
+          52.454346
+        ]
+      },
+      "properties": {
+        "name": "UM Service Garten & Objektpflege",
+        "rating": 3.5,
+        "reviewCount": 22,
+        "weight": 3.1354942159291497,
+        "types": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.811459,
+          52.43883
+        ]
+      },
+      "properties": {
+        "name": "Wolfsburger Schützen- und Volksfestplatz",
+        "rating": 4.3,
+        "reviewCount": 501,
+        "weight": 6.218600119691729,
+        "types": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.75419,
+          52.39383
+        ]
+      },
+      "properties": {
+        "name": "Dr. med. Dirk Colla",
+        "rating": 3.5,
+        "reviewCount": 42,
+        "weight": 3.7612001156935624,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.770782,
+          52.414255
+        ]
+      },
+      "properties": {
+        "name": "HNO im Gesundheitszentrum • Wolfsburg",
+        "rating": 4.5,
+        "reviewCount": 222,
+        "weight": 5.407171771460119,
+        "types": "doctor, health"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.76573,
+          52.410083
+        ]
+      },
+      "properties": {
+        "name": "LUPARTY Luftballons + Partyartikel",
+        "rating": 4.6,
+        "reviewCount": 17,
+        "weight": 2.8903717578961645,
+        "types": "home_goods_store, store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.753907,
+          52.393289
+        ]
+      },
+      "properties": {
+        "name": "EDEKA Klamka",
+        "rating": 3.9,
+        "reviewCount": 511,
+        "weight": 6.238324625039508,
+        "types": "supermarket, grocery_or_supermarket, store, food"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.770778,
+          52.420772
+        ]
+      },
+      "properties": {
+        "name": "Psychiatrische Institutsambulanz (PIA) Wolfsburg",
+        "rating": 3.4,
+        "reviewCount": 20,
+        "weight": 3.044522437723423,
+        "types": "hospital, health"
+      }
+    }
+  ]
+}
