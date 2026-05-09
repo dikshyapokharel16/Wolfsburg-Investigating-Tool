@@ -6,7 +6,12 @@ export const useMapStore = create((set) => ({
     districts: true,
     movement: false,
     publicSpaces: false,
+    frequencyAnalysis: false,
+    googleActivity: false,
+    dwellInfrastructure: false,
+    closures: false,
   },
+  closureYear: 2021,
   selectedDistrict: null,
   selectedCategory: 'all',
   amenityData: [],
@@ -36,6 +41,8 @@ export const useMapStore = create((set) => ({
 
   toggleMonochrome: () =>
     set((state) => ({ monochromeMode: !state.monochromeMode })),
+
+  setClosureYear: (year) => set({ closureYear: year }),
 
   setSelectedDistrict: (district) => set({ selectedDistrict: district }),
   setSelectedCategory: (category) => set({ selectedCategory: category }),
