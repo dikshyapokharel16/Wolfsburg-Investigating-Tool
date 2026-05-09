@@ -95,8 +95,10 @@ const { DISTRICT_GEOJSON, DISTRICT_LABELS_GEOJSON, DISTRICT_SUBS_GEOJSON } = (()
 })()
 
 export function useMapLayers(map) {
-  const { activeLayers, amenityData } = useMapStore()
+  const { activeLayers, amenityData, pedestrianData, cyclingData, cycleParkingData, busStopsData } = useMapStore()
   const psPopup = useRef(null)
+  const cpPopup = useRef(null)
+  const bsPopup = useRef(null)
 
   // ── District boundaries ──────────────────────────────────────────────────
   useEffect(() => {
@@ -252,6 +254,219 @@ export function useMapLayers(map) {
       if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
     }
   }, [map, activeLayers.amenities, amenityData])
+
+  // ── Pedestrian Network ────────────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+    const SRC      = 'pedestrian-network'
+    const LYR_SHR  = 'pedestrian-shared'
+    const LYR_DED  = 'pedestrian-dedicated'
+
+    if (activeLayers.pedestrianNetwork && pedestrianData?.features?.length) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: pedestrianData })
+
+        map.addLayer({
+          id: LYR_SHR,
+          type: 'line',
+          source: SRC,
+          filter: ['==', ['get', 'dedicated'], 0],
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: {
+            'line-color': '#8aa5b5',
+            'line-width': ['interpolate', ['linear'], ['zoom'], 12, 0.8, 16, 2],
+            'line-opacity': 0.55,
+          },
+        })
+
+        map.addLayer({
+          id: LYR_DED,
+          type: 'line',
+          source: SRC,
+          filter: ['==', ['get', 'dedicated'], 1],
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: {
+            'line-color': '#1e3040',
+            'line-width': ['interpolate', ['linear'], ['zoom'], 12, 1.2, 16, 2.8],
+            'line-opacity': 0.9,
+          },
+        })
+      } else {
+        map.getSource(SRC).setData(pedestrianData)
+        map.setLayoutProperty(LYR_SHR, 'visibility', 'visible')
+        map.setLayoutProperty(LYR_DED, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(LYR_SHR)) map.setLayoutProperty(LYR_SHR, 'visibility', 'none')
+      if (map.getLayer(LYR_DED)) map.setLayoutProperty(LYR_DED, 'visibility', 'none')
+    }
+  }, [map, activeLayers.pedestrianNetwork, pedestrianData])
+
+  // ── Cycling Network ───────────────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+    const SRC      = 'cycling-network'
+    const LYR_SHR  = 'cycling-shared'
+    const LYR_DED  = 'cycling-dedicated'
+
+    if (activeLayers.cyclingNetwork && cyclingData?.features?.length) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: cyclingData })
+
+        map.addLayer({
+          id: LYR_SHR,
+          type: 'line',
+          source: SRC,
+          filter: ['==', ['get', 'dedicated'], 0],
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: {
+            'line-color': '#8aa5b5',
+            'line-width': ['interpolate', ['linear'], ['zoom'], 12, 0.8, 16, 2],
+            'line-opacity': 0.55,
+          },
+        })
+
+        map.addLayer({
+          id: LYR_DED,
+          type: 'line',
+          source: SRC,
+          filter: ['==', ['get', 'dedicated'], 1],
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: {
+            'line-color': '#1a6aaa',
+            'line-width': ['interpolate', ['linear'], ['zoom'], 12, 1.2, 16, 2.8],
+            'line-opacity': 0.9,
+          },
+        })
+      } else {
+        map.getSource(SRC).setData(cyclingData)
+        map.setLayoutProperty(LYR_SHR, 'visibility', 'visible')
+        map.setLayoutProperty(LYR_DED, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(LYR_SHR)) map.setLayoutProperty(LYR_SHR, 'visibility', 'none')
+      if (map.getLayer(LYR_DED)) map.setLayoutProperty(LYR_DED, 'visibility', 'none')
+    }
+  }, [map, activeLayers.cyclingNetwork, cyclingData])
+
+  // ── Cycle Parking ─────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+    const SRC = 'cycle-parking'
+    const LYR = 'cycle-parking-circles'
+
+    if (activeLayers.cycleParking && cycleParkingData?.features?.length) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: cycleParkingData })
+        map.addLayer({
+          id: LYR,
+          type: 'circle',
+          source: SRC,
+          paint: {
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 12, 4, 16, 9],
+            'circle-color': '#2d9da8',
+            'circle-opacity': 0.85,
+            'circle-stroke-width': 1.5,
+            'circle-stroke-color': 'rgba(255,255,255,0.9)',
+          },
+        })
+
+        map.on('click', LYR, (e) => {
+          const p = e.features[0].properties
+          const type     = p.bicycle_parking ? p.bicycle_parking.replace(/_/g, ' ') : '—'
+          const capacity = p.capacity ?? '—'
+          const covered  = p.covered === 'yes' ? 'Yes' : p.covered === 'no' ? 'No' : '—'
+          const access   = p.access ?? 'public'
+          if (cpPopup.current) cpPopup.current.remove()
+          cpPopup.current = new maplibregl.Popup({ closeButton: true, closeOnClick: true, maxWidth: '220px' })
+            .setLngLat(e.lngLat)
+            .setHTML(`
+              <div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;margin-bottom:8px">Cycle Parking</div>
+                <div style="display:grid;grid-template-columns:auto 1fr;gap:5px 12px;font-size:12px">
+                  <span style="color:#9ca3af">Type</span>
+                  <span style="color:#111827;text-transform:capitalize">${type}</span>
+                  <span style="color:#9ca3af">Capacity</span>
+                  <span style="color:#111827">${capacity}</span>
+                  <span style="color:#9ca3af">Covered</span>
+                  <span style="color:#111827">${covered}</span>
+                  <span style="color:#9ca3af">Access</span>
+                  <span style="color:#111827;text-transform:capitalize">${access}</span>
+                </div>
+              </div>`)
+            .addTo(map)
+        })
+        map.on('mouseenter', LYR, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', LYR, () => { map.getCanvas().style.cursor = '' })
+      } else {
+        map.getSource(SRC).setData(cycleParkingData)
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+    }
+  }, [map, activeLayers.cycleParking, cycleParkingData])
+
+  // ── Bus Stops ─────────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+    const SRC = 'bus-stops'
+    const LYR = 'bus-stops-circles'
+
+    if (activeLayers.busStops && busStopsData?.features?.length) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: busStopsData })
+        map.addLayer({
+          id: LYR,
+          type: 'circle',
+          source: SRC,
+          paint: {
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 12, 4, 16, 9],
+            'circle-color': '#d4924a',
+            'circle-opacity': 0.85,
+            'circle-stroke-width': 1.5,
+            'circle-stroke-color': 'rgba(255,255,255,0.9)',
+          },
+        })
+
+        map.on('click', LYR, (e) => {
+          const p = e.features[0].properties
+          const name     = p.name ?? '—'
+          const ref      = p.ref ?? '—'
+          const operator = p.operator ?? '—'
+          const shelter  = p.shelter === 'yes' ? 'Yes' : p.shelter === 'no' ? 'No' : '—'
+          const bench    = p.bench === 'yes' ? 'Yes' : p.bench === 'no' ? 'No' : '—'
+          if (bsPopup.current) bsPopup.current.remove()
+          bsPopup.current = new maplibregl.Popup({ closeButton: true, closeOnClick: true, maxWidth: '220px' })
+            .setLngLat(e.lngLat)
+            .setHTML(`
+              <div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;margin-bottom:8px">Bus Stop</div>
+                <div style="display:grid;grid-template-columns:auto 1fr;gap:5px 12px;font-size:12px">
+                  <span style="color:#9ca3af">Name</span>
+                  <span style="color:#111827">${name}</span>
+                  <span style="color:#9ca3af">Lines</span>
+                  <span style="color:#111827">${ref}</span>
+                  <span style="color:#9ca3af">Operator</span>
+                  <span style="color:#111827">${operator}</span>
+                  <span style="color:#9ca3af">Shelter</span>
+                  <span style="color:#111827">${shelter}</span>
+                  <span style="color:#9ca3af">Bench</span>
+                  <span style="color:#111827">${bench}</span>
+                </div>
+              </div>`)
+            .addTo(map)
+        })
+        map.on('mouseenter', LYR, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', LYR, () => { map.getCanvas().style.cursor = '' })
+      } else {
+        map.getSource(SRC).setData(busStopsData)
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+    }
+  }, [map, activeLayers.busStops, busStopsData])
 
   // ── Public Spaces ─────────────────────────────────────────────────────────
   useEffect(() => {

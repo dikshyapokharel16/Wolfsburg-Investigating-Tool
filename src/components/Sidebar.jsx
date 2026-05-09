@@ -1,4 +1,5 @@
 import { useMapStore } from '../store/mapStore'
+import { useMovement } from '../hooks/useMovement'
 
 const LAYERS = [
   {
@@ -11,7 +12,7 @@ const LAYERS = [
     id: 'movement',
     label: 'Movement',
     dot: '#34d399',
-    description: 'Pedestrian & cycling paths',
+    description: 'Pedestrian & cycling networks',
   },
   {
     id: 'publicSpaces',
@@ -19,6 +20,11 @@ const LAYERS = [
     dot: '#22c55e',
     description: '12 typologies · 23 spaces identified',
   },
+]
+
+const MOVEMENT_SUBLAYERS = [
+  { id: 'pedestrianNetwork', label: 'Pedestrian Network', color: '#93b5c6' },
+  { id: 'cyclingNetwork',    label: 'Cycling Network',    color: '#4e7fa5' },
 ]
 
 const SPACE_TYPOLOGIES = [
@@ -47,8 +53,21 @@ const AMENITY_CATEGORIES = [
 ]
 
 export default function Sidebar({ onFetchAmenities }) {
-  const { activeLayers, toggleLayer, selectedCategory, setSelectedCategory, isLoadingAmenities } =
-    useMapStore()
+  const {
+    activeLayers, toggleLayer,
+    selectedCategory, setSelectedCategory, isLoadingAmenities,
+    pedestrianData, cyclingData, isLoadingPedestrian, isLoadingCycling,
+  } = useMapStore()
+  const { fetchPedestrian, fetchCycling } = useMovement()
+
+  function handleMovementSubToggle(id) {
+    const wasOff = !activeLayers[id]
+    toggleLayer(id)
+    if (wasOff) {
+      if (id === 'pedestrianNetwork' && !pedestrianData) fetchPedestrian()
+      if (id === 'cyclingNetwork'    && !cyclingData)    fetchCycling()
+    }
+  }
 
   return (
     <div className="absolute left-0 top-0 h-full w-60 bg-[#16213e] shadow-2xl z-10 flex flex-col select-none">
@@ -105,6 +124,51 @@ export default function Sidebar({ onFetchAmenities }) {
             ))}
           </div>
         </section>
+
+        {/* Movement sub-layers */}
+        {activeLayers.movement && (
+          <section>
+            <h2 className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-3">
+              Networks
+            </h2>
+            <div className="space-y-1.5">
+              {MOVEMENT_SUBLAYERS.map((sub) => {
+                const isLoading = sub.id === 'pedestrianNetwork' ? isLoadingPedestrian : isLoadingCycling
+                const isActive  = activeLayers[sub.id]
+                return (
+                  <button
+                    key={sub.id}
+                    onClick={() => handleMovementSubToggle(sub.id)}
+                    disabled={isLoading}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
+                      isActive
+                        ? 'bg-white/10 text-white'
+                        : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+                    }`}
+                  >
+                    <div
+                      className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: isActive ? sub.color : '#374151' }}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-medium leading-none">{sub.label}</div>
+                    </div>
+                    {isLoading ? (
+                      <svg className="animate-spin w-3 h-3 text-white/40 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                      </svg>
+                    ) : (
+                      <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${isActive ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+                        <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${isActive ? 'left-[14px]' : 'left-0.5'}`} />
+                      </div>
+                    )}
+                  </button>
+                )
+              })}
+            </div>
+          </section>
+        )}
 
         {/* Public space typology legend */}
         {activeLayers.publicSpaces && (
