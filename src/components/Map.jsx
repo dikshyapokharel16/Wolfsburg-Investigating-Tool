@@ -9,7 +9,7 @@ const WOLFSBURG_ZOOM = 12
 // CARTO Positron GL — clean grey vector style, no API key needed
 const GREY_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json'
 
-export default function Map({ onMapReady }) {
+export default function Map({ onMapReady, onCanvasClick }) {
   const mapContainer = useRef(null)
   const mapRef = useRef(null)
 
@@ -39,5 +39,12 @@ export default function Map({ onMapReady }) {
     }
   }, [])
 
-  return <div ref={mapContainer} className="w-full h-full" />
+  const handleClick = (e) => {
+    const map = mapRef.current
+    if (!map || !onCanvasClick) return
+    const rect = mapContainer.current.getBoundingClientRect()
+    onCanvasClick(map, e.clientX - rect.left, e.clientY - rect.top)
+  }
+
+  return <div ref={mapContainer} className="w-full h-full" onClick={handleClick} />
 }

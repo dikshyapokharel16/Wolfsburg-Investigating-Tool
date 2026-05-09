@@ -1,4 +1,12 @@
 import { useMapStore } from '../store/mapStore'
+import { DISTRICT_GROUPS, STANDALONE_POPULATIONS } from '../data/districtConfig'
+
+const POPULATION_DATA = [
+  ...Object.entries(DISTRICT_GROUPS).map(([name, { population2023, color }]) => ({ name, population: population2023, color })),
+  ...Object.entries(STANDALONE_POPULATIONS).map(([name, { population2023 }]) => ({ name, population: population2023, color: '#64748b' })),
+].sort((a, b) => b.population - a.population)
+
+const MAX_POP = Math.max(...POPULATION_DATA.map(d => d.population))
 
 const LAYERS = [
   {
@@ -177,6 +185,37 @@ export default function Sidebar({ onFetchAmenities }) {
             </button>
           </section>
         )}
+        {/* Social — Population per district */}
+        <section>
+          <h2 className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-3">
+            Social · Population by District
+          </h2>
+          <p className="text-[9px] text-white/20 mb-3 leading-relaxed">
+            Source: Stadt Wolfsburg, 2023
+          </p>
+          <div className="space-y-2">
+            {POPULATION_DATA.map(({ name, population, color }) => (
+              <div key={name}>
+                <div className="flex justify-between items-baseline mb-0.5">
+                  <span className="text-[9px] text-white/50 truncate pr-2 leading-none">{name}</span>
+                  <span className="text-[9px] text-white/40 flex-shrink-0 leading-none">
+                    {population.toLocaleString()}
+                  </span>
+                </div>
+                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                  <div
+                    className="h-full rounded-full"
+                    style={{
+                      width: `${(population / MAX_POP) * 100}%`,
+                      backgroundColor: color,
+                      opacity: 0.8,
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
 
       {/* Footer */}

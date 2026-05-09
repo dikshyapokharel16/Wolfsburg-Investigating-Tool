@@ -1,13 +1,25 @@
 import { useEffect, useRef } from 'react'
 import maplibregl from 'maplibre-gl'
 import { union } from '@turf/union'
+import { area as turfArea } from '@turf/area'
 import { useMapStore } from '../store/mapStore'
 import districtBoundaries from '../data/districtBoundaries.json'
-import { DISTRICT_COLORS, DISTRICT_GROUPS, DISTRICT_TO_GROUP } from '../data/districtConfig.js'
+import { DISTRICT_COLORS, DISTRICT_GROUPS, DISTRICT_TO_GROUP, STANDALONE_POPULATIONS } from '../data/districtConfig.js'
 import PUBLIC_SPACES_GEOJSON from '../data/publicSpaces.json'
 import GOOGLE_PLACES_GEOJSON from '../data/googlePlaces.json'
 import DWELL_GEOJSON   from '../data/dwellInfrastructure.json'
 import CLOSURES_DATA   from '../data/closures.json'
+
+const POPULATION_LOOKUP = {
+  ...Object.fromEntries(
+    Object.entries(DISTRICT_GROUPS).map(([name, { population2020, population2023 }]) => [
+      name, { population2020, population2023 },
+    ])
+  ),
+  ...Object.fromEntries(
+    Object.entries(STANDALONE_POPULATIONS).map(([name, vals]) => [name, vals])
+  ),
+}
 
 // Returns the bounding-box centre of any Polygon or MultiPolygon geometry
 function bboxCenter(geometry) {
@@ -90,20 +102,30 @@ const { DISTRICT_GEOJSON, DISTRICT_LABELS_GEOJSON, DISTRICT_SUBS_GEOJSON } = (()
     }
   }
 
+  // Compute area (km²) per district from the merged features
+  const AREA_KM2 = {}
+  for (const f of mainFeatures) {
+    const name = f.properties?.name
+    if (!name) continue
+    const sqMeters = turfArea(f)
+    AREA_KM2[name] = (AREA_KM2[name] || 0) + sqMeters / 1_000_000
+  }
+
   return {
     DISTRICT_GEOJSON:        { type: 'FeatureCollection', features: mainFeatures },
     DISTRICT_LABELS_GEOJSON: { type: 'FeatureCollection', features: labelFeatures },
     DISTRICT_SUBS_GEOJSON:   { type: 'FeatureCollection', features: subFeatures },
+    AREA_KM2,
   }
 })()
 
 export function useMapLayers(map) {
-  const { activeLayers, amenityData, closureYear } = useMapStore()
+  const { activeLayers, amenityData, setSelectedDistrict, closureYear } = useMapStore()
   const googlePopup   = useRef(null)
   const dwellPopup    = useRef(null)
   const closurePopup  = useRef(null)
-  const psPopup   = useRef(null)
-  const freqPopup = useRef(null)
+  const psPopup       = useRef(null)
+  const freqPopup     = useRef(null)
 
   // ── District boundaries ──────────────────────────────────────────────────
   useEffect(() => {
@@ -196,6 +218,7 @@ export function useMapLayers(map) {
             'text-halo-width': 1.5,
           },
         })
+
       } else {
         map.setLayoutProperty(FILL,      'visibility', 'visible')
         map.setLayoutProperty(LINE,      'visibility', 'visible')
