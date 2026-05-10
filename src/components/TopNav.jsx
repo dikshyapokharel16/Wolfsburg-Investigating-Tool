@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { useMapStore } from '../store/mapStore'
 import CLOSURES_DATA from '../data/closures.json'
+import VACANT_DATA from '../data/vacantPlaces.json'
+
+const VACANT_COUNT = VACANT_DATA.features.length
 
 const FREQ_TIERS = [
   { label: 'V.High',  color: '#dc2626' },
@@ -143,6 +146,7 @@ export default function TopNav() {
               {btn.label}
             </button>
           ))}
+
         </div>
       </div>
 
@@ -242,6 +246,33 @@ export default function TopNav() {
                 )}
               </LayerRow>
 
+              {/* ── Vacant Storefronts ── */}
+              <div className="pt-4 border-t border-white/8 mb-4">
+                <button
+                  onClick={() => toggleLayer('vacantPlaces')}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all"
+                  style={activeLayers.vacantPlaces
+                    ? { backgroundColor: 'rgba(249,115,22,0.15)', color: 'white' }
+                    : { color: 'rgba(255,255,255,0.5)' }
+                  }
+                >
+                  <div className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: activeLayers.vacantPlaces ? '#f97316' : '#374151' }} />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium leading-none">Vacant Storefronts</div>
+                    <div className="text-[10px] text-white/30 mt-1">OSM shop=vacant · {VACANT_COUNT} locations</div>
+                  </div>
+                  <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.vacantPlaces ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+                    <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.vacantPlaces ? 'left-[14px]' : 'left-0.5'}`} />
+                  </div>
+                </button>
+                {activeLayers.vacantPlaces && (
+                  <p className="text-[9px] text-white/20 mt-2 px-1 leading-relaxed">
+                    Currently empty storefronts tagged in OSM · click a dot for details
+                  </p>
+                )}
+              </div>
+
               {/* ── Shop & Café Closures ── */}
               <div className="pt-4 border-t border-white/8">
                 <div className="flex items-center gap-1 mb-3">
@@ -257,7 +288,7 @@ export default function TopNav() {
                       style={{ backgroundColor: activeLayers.closures ? '#94a3b8' : '#374151' }} />
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-medium leading-none">Shop &amp; Café Closures</div>
-                      <div className="text-[10px] text-white/30 mt-1">OSM history · 694 events · 2019–2024</div>
+                      <div className="text-[10px] text-white/30 mt-1">OSM history · 661 events · 2019–2024</div>
                     </div>
                     <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.closures ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
                       <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.closures ? 'left-[14px]' : 'left-0.5'}`} />
@@ -266,14 +297,9 @@ export default function TopNav() {
                 </div>
 
                 {activeLayers.closures && (() => {
-                  const stats    = CLOSURES_DATA.yearStats[String(closureYear)] ?? {}
-                  const fd       = stats.foodDelta ?? 0
-                  const sd       = stats.shopDelta ?? 0
-                  const fmt      = n => (n >= 0 ? `+${n}` : String(n))
-                  const deltaCol = n => n < 0 ? '#f87171' : n > 0 ? '#86efac' : '#94a3b8'
                   const allFeatures = CLOSURES_DATA.closures.features
-                  const cumulative  = allFeatures.filter(f => f.properties.year <= closureYear).length
-                  const yearColors  = { 2019:'#94a3b8', 2020:'#64748b', 2021:'#ef4444', 2022:'#f97316', 2023:'#eab308', 2024:'#22c55e' }
+                  const thisYear   = allFeatures.filter(f => f.properties.year === closureYear).length
+                  const cumulative = allFeatures.filter(f => f.properties.year <= closureYear).length
                   return (
                     <div>
                       <div className="flex items-center justify-between mb-2 px-1">
@@ -291,36 +317,20 @@ export default function TopNav() {
                         <span className="text-[9px] text-white/25">2024</span>
                       </div>
 
-                      {/* Year dot legend */}
-                      <div className="flex items-center justify-between mb-3 px-1">
-                        {[2019,2020,2021,2022,2023,2024].map(y => (
-                          <div key={y} className="flex flex-col items-center gap-1">
-                            <div className="w-2.5 h-2.5 rounded-full transition-opacity"
-                              style={{ backgroundColor: yearColors[y], opacity: y <= closureYear ? 1 : 0.2 }} />
-                            <span className="text-[7px] text-white/30">{y}</span>
-                          </div>
-                        ))}
-                      </div>
-
                       <div className="flex gap-2 mb-2">
                         <div className="flex-1 bg-white/5 rounded-lg px-3 py-2 text-center">
-                          <div className="text-[9px] text-white/30 uppercase tracking-wide mb-1">Food &amp; Drink</div>
-                          <div className="text-sm font-bold" style={{ color: deltaCol(fd) }}>{fmt(fd)}</div>
-                          <div className="text-[9px] text-white/25 mt-0.5">{stats.foodCount} mapped</div>
+                          <div className="text-[9px] text-white/30 uppercase tracking-wide mb-1">Closed in {closureYear}</div>
+                          <div className="text-sm font-bold text-white">{thisYear}</div>
+                          <div className="text-[9px] text-white/25 mt-0.5">venues</div>
                         </div>
                         <div className="flex-1 bg-white/5 rounded-lg px-3 py-2 text-center">
-                          <div className="text-[9px] text-white/30 uppercase tracking-wide mb-1">Shops</div>
-                          <div className="text-sm font-bold" style={{ color: deltaCol(sd) }}>{fmt(sd)}</div>
-                          <div className="text-[9px] text-white/25 mt-0.5">{stats.shopCount} mapped</div>
+                          <div className="text-[9px] text-white/30 uppercase tracking-wide mb-1">Total 2019–{closureYear}</div>
+                          <div className="text-sm font-bold text-white">{cumulative}</div>
+                          <div className="text-[9px] text-white/25 mt-0.5">cumulative</div>
                         </div>
                       </div>
-                      <div className="bg-white/5 rounded-lg px-3 py-2 text-center">
-                        <div className="text-[9px] text-white/30 uppercase tracking-wide mb-1">Cumulative closures</div>
-                        <div className="text-sm font-bold text-white">{cumulative}</div>
-                        <div className="text-[9px] text-white/25 mt-0.5">2019 → {closureYear}</div>
-                      </div>
                       <p className="text-[9px] text-white/20 mt-2 leading-relaxed px-1">
-                        Dots coloured by year · source: OSM history
+                        Each ✕ = a venue removed from OSM · drag slider to reveal by year
                       </p>
                     </div>
                   )

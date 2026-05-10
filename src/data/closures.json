@@ -930,51 +930,6 @@
         "geometry": {
           "type": "Point",
           "coordinates": [
-            10.930686,
-            52.4239558
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2021
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9772409,
-            52.4550043
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2022
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9360593,
-            52.4083317
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
             10.7826313,
             52.4243862
           ]
@@ -998,21 +953,6 @@
           "name": "",
           "venueType": "unknown",
           "year": 2022
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9226018,
-            52.3578263
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2024
         }
       },
       {
@@ -1050,21 +990,6 @@
         "geometry": {
           "type": "Point",
           "coordinates": [
-            10.9211248,
-            52.3624381
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2023
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
             10.7916173,
             52.4275966
           ]
@@ -1073,36 +998,6 @@
           "name": "",
           "venueType": "unknown",
           "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.7660073,
-            52.301502
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2024
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9115327,
-            52.2960659
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2019
         }
       },
       {
@@ -1185,21 +1080,6 @@
         "geometry": {
           "type": "Point",
           "coordinates": [
-            10.8332858,
-            52.2924143
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
             10.7567964,
             52.4059255
           ]
@@ -1208,21 +1088,6 @@
           "name": "",
           "venueType": "unknown",
           "year": 2019
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.930648,
-            52.4239464
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2023
         }
       },
       {
@@ -1262,36 +1127,6 @@
           "coordinates": [
             10.7855451,
             52.4194823
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2024
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.934312,
-            52.4056982
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2021
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9771758,
-            52.4556399
           ]
         },
         "properties": {
@@ -2805,36 +2640,6 @@
         "geometry": {
           "type": "Point",
           "coordinates": [
-            10.961011,
-            52.3373571
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.8148384,
-            52.3067518
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2022
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
             10.8523082,
             52.3425829
           ]
@@ -2850,81 +2655,6 @@
         "geometry": {
           "type": "Point",
           "coordinates": [
-            10.9428152,
-            52.4088756
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2022
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9429857,
-            52.4093473
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2022
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9314485,
-            52.4063048
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9309361,
-            52.40649
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.931221,
-            52.4073451
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2019
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
             10.8344283,
             52.3331124
           ]
@@ -2933,51 +2663,6 @@
           "name": "",
           "venueType": "unknown",
           "year": 2022
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9303236,
-            52.4075362
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9107326,
-            52.425112
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2022
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.93403,
-            52.4086775
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2023
         }
       },
       {
@@ -3150,21 +2835,6 @@
         "geometry": {
           "type": "Point",
           "coordinates": [
-            10.9222795,
-            52.3599772
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2023
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
             10.7571478,
             52.4198252
           ]
@@ -3182,36 +2852,6 @@
           "coordinates": [
             10.7530558,
             52.4218011
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2024
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9398815,
-            52.4078435
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2019
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9226018,
-            52.3578263
           ]
         },
         "properties": {
@@ -3272,21 +2912,6 @@
           "coordinates": [
             10.847359,
             52.4483501
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2021
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9374989,
-            52.4092422
           ]
         },
         "properties": {
@@ -3735,51 +3360,6 @@
         "geometry": {
           "type": "Point",
           "coordinates": [
-            10.928937,
-            52.4063028
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9293386,
-            52.4063114
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9297263,
-            52.4063085
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
             10.840828,
             52.421464
           ]
@@ -3872,36 +3452,6 @@
           "coordinates": [
             10.7893673,
             52.4268772
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2023
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9301232,
-            52.4063114
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9102949,
-            52.4251753
           ]
         },
         "properties": {
@@ -4095,21 +3645,6 @@
         "geometry": {
           "type": "Point",
           "coordinates": [
-            10.9179559,
-            52.3853229
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2021
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
             10.7893702,
             52.4246451
           ]
@@ -4118,21 +3653,6 @@
           "name": "",
           "venueType": "unknown",
           "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.9315011,
-            52.4097235
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2024
         }
       },
       {
@@ -4193,21 +3713,6 @@
           "name": "",
           "venueType": "unknown",
           "year": 2020
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            10.826278,
-            52.3112763
-          ]
-        },
-        "properties": {
-          "name": "",
-          "venueType": "unknown",
-          "year": 2023
         }
       },
       {

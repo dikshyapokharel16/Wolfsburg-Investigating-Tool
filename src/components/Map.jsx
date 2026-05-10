@@ -3,8 +3,8 @@ import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 // Wolfsburg city center
-const WOLFSBURG_CENTER = [10.7865, 52.4227]
-const WOLFSBURG_ZOOM = 12
+const WOLFSBURG_CENTER = [10.788907, 52.409202]
+const WOLFSBURG_ZOOM = 11
 
 // CARTO Positron GL — clean grey vector style, no API key needed
 const GREY_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json'
@@ -24,7 +24,6 @@ export default function Map({ onMapReady }) {
       attributionControl: false,
     })
 
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right')
 
     map.on('load', () => {
       mapRef.current = map

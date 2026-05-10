@@ -1,0 +1,1195 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7770611,
+          52.4279661
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Heinrich-Nordhoff-Straße 111",
+        "checkDate": "2025-12-22",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7977405,
+          52.4505436
+        ]
+      },
+      "properties": {
+        "name": "Hoffis Laden",
+        "formerType": "convenience",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8402324,
+          52.4145601
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7903135,
+          52.4261104
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "bookmaker",
+        "address": "Porschestraße 15",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7907745,
+          52.4244339
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8014671,
+          52.4474592
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "2026-03-03",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7828587,
+          52.4264229
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7828312,
+          52.4186068
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "2026-02-10",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7850587,
+          52.419907
+        ]
+      },
+      "properties": {
+        "name": "Lina Kosmetik",
+        "formerType": "",
+        "address": "Porschestraße 90",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7898176,
+          52.4245822
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7890433,
+          52.4248351
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Porschestraße 34 b",
+        "checkDate": "2025-09-15",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7214556,
+          52.4199919
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Sandkämper Straße 6",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7118526,
+          52.3920824
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "florist",
+        "address": "Zum Alten Bahnhof 6",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7325067,
+          52.3934198
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "florist",
+        "address": "Hattorfer Straße 19",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7885896,
+          52.4245623
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "2024-07-27",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8482243,
+          52.4328561
+        ]
+      },
+      "properties": {
+        "name": "KiK",
+        "formerType": "clothes",
+        "address": "Neuhäuser Straße 9",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7634829,
+          52.4206024
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7635843,
+          52.4206256
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8373637,
+          52.4412244
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7212665,
+          52.4200231
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8374936,
+          52.4393973
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7771771,
+          52.4270298
+        ]
+      },
+      "properties": {
+        "name": "Weisse Rose",
+        "formerType": "boutique",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7823829,
+          52.4271698
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Schachtweg 5",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7539972,
+          52.3927822
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7864697,
+          52.4268698
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "2025-09-15",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7866924,
+          52.4223058
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Porschestraße 64 b",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8400158,
+          52.4375809
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "medical_supply",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.847483,
+          52.4326109
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "hairdresser",
+        "address": "Neuhäuser Straße 20a",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7898122,
+          52.4253472
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Porschestraße 25",
+        "checkDate": "2025-09-15",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7910679,
+          52.427303
+        ]
+      },
+      "properties": {
+        "name": "Reno",
+        "formerType": "",
+        "address": "Porschestraße 3",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7910388,
+          52.4272586
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Porschestraße 3",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7908933,
+          52.4269235
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Porschestraße 5",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7909333,
+          52.4270167
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Porschestraße 5",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7886714,
+          52.4246728
+        ]
+      },
+      "properties": {
+        "name": "Neon Nails",
+        "formerType": "",
+        "address": "Porschestraße 34 f",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7853205,
+          52.4220945
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "clothes",
+        "address": "Goethestraße 61",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7872462,
+          52.4215349
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Porschestraße 47 a",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7875283,
+          52.4230444
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Porschestraße 56 b",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7869495,
+          52.4225339
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Porschestraße 64",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7868191,
+          52.4223655
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Porschestraße 64 b",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7866137,
+          52.4219169
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Porschestraße 68",
+        "checkDate": "2024-07-27",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7897383,
+          52.4210524
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "books",
+        "address": "Antonius-Holling-Weg 10",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7840359,
+          52.420035
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "supermarket",
+        "address": "Schillerstraße 12",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7853726,
+          52.4220065
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "baby_goods",
+        "address": "Goethestraße 61",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7894007,
+          52.4223042
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7883481,
+          52.4228095
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7880885,
+          52.422038
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7882825,
+          52.4220546
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7883812,
+          52.4220593
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.787818,
+          52.421965
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7880769,
+          52.4219819
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7878138,
+          52.4220218
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7885726,
+          52.4220143
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8374872,
+          52.4410709
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Lange Straße 52",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7870507,
+          52.4226636
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Porschestraße 62",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8376556,
+          52.4404293
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "supermarket",
+        "address": "",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8376713,
+          52.4409508
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7855758,
+          52.4233364
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Schillerstraße 43",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7326521,
+          52.3934193
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "florist",
+        "address": "Hattorfer Straße 19b",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.781268,
+          52.4456465
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "Zu dem Balken 9",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7968372,
+          52.4253398
+        ]
+      },
+      "properties": {
+        "name": "Staples Büro-Megamarkt",
+        "formerType": "stationery",
+        "address": "Berliner Ring 12-14",
+        "checkDate": "",
+        "tag": "disused"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.794055,
+          52.428633
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "An der Vorburg 1",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7939976,
+          52.4284466
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7984322,
+          52.42962
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7952036,
+          52.4285796
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.797498,
+          52.4296387
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7978431,
+          52.429561
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7979532,
+          52.4295568
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7938056,
+          52.4289595
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7939444,
+          52.4289312
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7932559,
+          52.4287911
+        ]
+      },
+      "properties": {
+        "name": "",
+        "formerType": "",
+        "address": "",
+        "checkDate": "",
+        "tag": "vacant"
+      }
+    }
+  ]
+}

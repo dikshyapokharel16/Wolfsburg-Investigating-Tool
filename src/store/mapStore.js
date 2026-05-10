@@ -10,6 +10,8 @@ export const useMapStore = create((set) => ({
     googleActivity: false,
     dwellInfrastructure: false,
     closures: false,
+    vacantPlaces: false,
+    aerialView: false,
   },
   closureYear: 2021,
   selectedDistrict: null,

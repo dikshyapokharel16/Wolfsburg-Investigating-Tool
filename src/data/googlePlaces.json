@@ -6,16 +6,33 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.789827,
-          52.433234
+          10.7865461,
+          52.4226503
+        ]
+      },
+      "properties": {
+        "name": "Wolfsburg",
+        "rating": 0,
+        "reviewCount": 0,
+        "weight": 0,
+        "types": "locality, political"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7898268,
+          52.4332339
         ]
       },
       "properties": {
         "name": "The Ritz-Carlton, Wolfsburg",
         "rating": 4.7,
-        "reviewCount": 1564,
-        "weight": 7.355641102974253,
-        "types": "lodging"
+        "reviewCount": 1565,
+        "weight": 7.356279876550748,
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -24,7 +41,7 @@
         "type": "Point",
         "coordinates": [
           10.787134,
-          52.423442
+          52.42344199999999
         ]
       },
       "properties": {
@@ -32,7 +49,7 @@
         "rating": 4.1,
         "reviewCount": 411,
         "weight": 6.021023349349527,
-        "types": "bar, lodging, restaurant, food"
+        "types": "bar, lodging, restaurant, food, point_of_interest, establishment"
       }
     },
     {
@@ -49,7 +66,7 @@
         "rating": 4.4,
         "reviewCount": 937,
         "weight": 6.843749949006225,
-        "types": "lodging"
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -58,7 +75,7 @@
         "type": "Point",
         "coordinates": [
           10.78876,
-          52.42855
+          52.42854999999999
         ]
       },
       "properties": {
@@ -66,7 +83,7 @@
         "rating": 4,
         "reviewCount": 491,
         "weight": 6.198478716492308,
-        "types": "lodging"
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -74,8 +91,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.805541,
-          52.414566
+          10.8055414,
+          52.4145659
         ]
       },
       "properties": {
@@ -83,7 +100,7 @@
         "rating": 4.5,
         "reviewCount": 804,
         "weight": 6.690842277418564,
-        "types": "lodging, restaurant, food"
+        "types": "lodging, restaurant, food, point_of_interest, establishment"
       }
     },
     {
@@ -91,16 +108,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.784808,
-          52.41785
+          10.7848083,
+          52.4178502
         ]
       },
       "properties": {
         "name": "Leonardo Hotel Wolfsburg City Center",
         "rating": 4.3,
-        "reviewCount": 3695,
-        "weight": 8.215006432761575,
-        "types": "lodging"
+        "reviewCount": 3694,
+        "weight": 8.214735833382303,
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -115,9 +132,9 @@
       "properties": {
         "name": "INNSiDE by Meliá Wolfsburg",
         "rating": 4.3,
-        "reviewCount": 1484,
-        "weight": 7.3031700512368,
-        "types": "lodging"
+        "reviewCount": 1485,
+        "weight": 7.303843225277705,
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -125,16 +142,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.794205,
-          52.432667
+          10.7942053,
+          52.4326674
         ]
       },
       "properties": {
         "name": "Autostadt",
         "rating": 4.5,
-        "reviewCount": 29737,
-        "weight": 10.300180968257168,
-        "types": "museum, tourist_attraction"
+        "reviewCount": 29750,
+        "weight": 10.300618023854234,
+        "types": "museum, tourist_attraction, point_of_interest, establishment"
       }
     },
     {
@@ -142,16 +159,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.803885,
-          52.432669
+          10.8038854,
+          52.4326693
         ]
       },
       "properties": {
         "name": "Volkswagen Arena",
         "rating": 4.2,
-        "reviewCount": 7205,
-        "weight": 8.882669291308039,
-        "types": "stadium"
+        "reviewCount": 7210,
+        "weight": 8.88336291691676,
+        "types": "stadium, point_of_interest, establishment"
       }
     },
     {
@@ -159,16 +176,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.793038,
-          52.428594
+          10.7930383,
+          52.4285943
         ]
       },
       "properties": {
         "name": "Designer Outlets Wolfsburg",
         "rating": 4.2,
-        "reviewCount": 13828,
-        "weight": 9.534523115464658,
-        "types": "shopping_mall, clothing_store, store"
+        "reviewCount": 13832,
+        "weight": 9.534812320874815,
+        "types": "shopping_mall, clothing_store, point_of_interest, store, establishment"
       }
     },
     {
@@ -176,8 +193,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.796014,
-          52.426561
+          10.7960142,
+          52.4265607
         ]
       },
       "properties": {
@@ -185,7 +202,7 @@
         "rating": 4.8,
         "reviewCount": 33,
         "weight": 3.5263605246161616,
-        "types": "lodging"
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -193,8 +210,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.788385,
-          52.424523
+          10.7883847,
+          52.4245233
         ]
       },
       "properties": {
@@ -202,7 +219,7 @@
         "rating": 4.4,
         "reviewCount": 125,
         "weight": 4.836281906951478,
-        "types": "bank, atm, finance"
+        "types": "bank, atm, finance, point_of_interest, establishment"
       }
     },
     {
@@ -210,16 +227,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.80181,
-          52.441027
+          10.8018099,
+          52.4410274
         ]
       },
       "properties": {
         "name": "Hotel Alter Wolf",
         "rating": 3.5,
-        "reviewCount": 398,
-        "weight": 5.988961416889864,
-        "types": "lodging"
+        "reviewCount": 399,
+        "weight": 5.991464547107982,
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -227,16 +244,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.787333,
-          52.428602
+          10.7873327,
+          52.4286018
         ]
       },
       "properties": {
         "name": "CinemaxX Wolfsburg",
         "rating": 4,
-        "reviewCount": 2860,
-        "weight": 7.95892649305011,
-        "types": "movie_theater"
+        "reviewCount": 2862,
+        "weight": 7.959625305098115,
+        "types": "movie_theater, point_of_interest, establishment"
       }
     },
     {
@@ -244,8 +261,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.783871,
-          52.426331
+          10.7838709,
+          52.42633099999999
         ]
       },
       "properties": {
@@ -253,7 +270,7 @@
         "rating": 4.3,
         "reviewCount": 3,
         "weight": 1.3862943611198906,
-        "types": "lodging"
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -261,16 +278,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.790475,
-          52.428853
+          10.7904745,
+          52.4288531
         ]
       },
       "properties": {
         "name": "Phaeno Science Center",
         "rating": 4.7,
-        "reviewCount": 7043,
-        "weight": 8.859931469616097,
-        "types": "tourist_attraction, museum"
+        "reviewCount": 7044,
+        "weight": 8.86007342433278,
+        "types": "tourist_attraction, museum, point_of_interest, establishment"
       }
     },
     {
@@ -278,16 +295,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.784795,
-          52.42113
+          10.7847945,
+          52.42112979999999
         ]
       },
       "properties": {
         "name": "Hautarztpraxis, Keshavarz, Mehran",
         "rating": 3,
-        "reviewCount": 530,
-        "weight": 6.274762021241939,
-        "types": "doctor, health"
+        "reviewCount": 528,
+        "weight": 6.270988431858299,
+        "types": "doctor, point_of_interest, health, establishment"
       }
     },
     {
@@ -295,16 +312,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.813913,
-          52.436142
+          10.8139125,
+          52.4361421
         ]
       },
       "properties": {
         "name": "BadeLand Wolfsburg",
         "rating": 4.2,
-        "reviewCount": 7138,
-        "weight": 8.87332798950246,
-        "types": "tourist_attraction, amusement_park, spa, health"
+        "reviewCount": 7139,
+        "weight": 8.87346805533363,
+        "types": "amusement_park, tourist_attraction, spa, point_of_interest, health, establishment"
       }
     },
     {
@@ -312,8 +329,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.786579,
-          52.423324
+          10.7865786,
+          52.4233238
         ]
       },
       "properties": {
@@ -321,7 +338,7 @@
         "rating": 3.1,
         "reviewCount": 108,
         "weight": 4.6913478822291435,
-        "types": "doctor, health"
+        "types": "doctor, point_of_interest, health, establishment"
       }
     },
     {
@@ -329,8 +346,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.760822,
-          52.420066
+          10.7608218,
+          52.42006620000001
         ]
       },
       "properties": {
@@ -338,7 +355,7 @@
         "rating": 4.4,
         "reviewCount": 27,
         "weight": 3.332204510175204,
-        "types": "pharmacy, health, store"
+        "types": "pharmacy, point_of_interest, health, store, establishment"
       }
     },
     {
@@ -347,7 +364,7 @@
         "type": "Point",
         "coordinates": [
           10.755,
-          52.4275
+          52.42749999999999
         ]
       },
       "properties": {
@@ -355,7 +372,7 @@
         "rating": 4.4,
         "reviewCount": 631,
         "weight": 6.448889394146858,
-        "types": "lodging"
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -363,8 +380,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.789377,
-          52.425776
+          10.7893769,
+          52.4257759
         ]
       },
       "properties": {
@@ -372,7 +389,7 @@
         "rating": 4,
         "reviewCount": 338,
         "weight": 5.82600010738045,
-        "types": "home_goods_store, store"
+        "types": "home_goods_store, point_of_interest, store, establishment"
       }
     },
     {
@@ -380,8 +397,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.801518,
-          52.429351
+          10.8015179,
+          52.4293506
         ]
       },
       "properties": {
@@ -389,7 +406,7 @@
         "rating": 4.4,
         "reviewCount": 680,
         "weight": 6.523562306149512,
-        "types": "car_repair, car_dealer, store"
+        "types": "car_repair, car_dealer, point_of_interest, store, establishment"
       }
     },
     {
@@ -398,15 +415,15 @@
         "type": "Point",
         "coordinates": [
           10.788553,
-          52.425263
+          52.42526300000001
         ]
       },
       "properties": {
         "name": "Cafe & Bar Celona Wolfsburg",
         "rating": 4,
-        "reviewCount": 2645,
-        "weight": 7.880804344674901,
-        "types": "cafe, bar, restaurant, food, store"
+        "reviewCount": 2647,
+        "weight": 7.881559917056899,
+        "types": "cafe, bar, restaurant, point_of_interest, store, food, establishment"
       }
     },
     {
@@ -414,16 +431,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.787988,
-          52.424168
+          10.7879879,
+          52.4241675
         ]
       },
       "properties": {
         "name": "Bode Eyes",
         "rating": 5,
-        "reviewCount": 175,
-        "weight": 5.170483995038152,
-        "types": "health, store"
+        "reviewCount": 176,
+        "weight": 5.176149732573829,
+        "types": "point_of_interest, health, store, establishment"
       }
     },
     {
@@ -431,8 +448,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.781735,
-          52.426293
+          10.7817349,
+          52.4262925
         ]
       },
       "properties": {
@@ -440,7 +457,7 @@
         "rating": 4.5,
         "reviewCount": 968,
         "weight": 6.876264611890766,
-        "types": "restaurant, food"
+        "types": "restaurant, point_of_interest, food, establishment"
       }
     },
     {
@@ -448,8 +465,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.77105,
-          52.413977
+          10.7710501,
+          52.41397670000001
         ]
       },
       "properties": {
@@ -457,7 +474,7 @@
         "rating": 3.4,
         "reviewCount": 182,
         "weight": 5.209486152841421,
-        "types": "doctor, health"
+        "types": "doctor, point_of_interest, health, establishment"
       }
     },
     {
@@ -465,16 +482,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.762515,
-          52.425326
+          10.7625149,
+          52.4253265
         ]
       },
       "properties": {
         "name": "Audi Zentrum Wolfsburg",
-        "rating": 4.3,
-        "reviewCount": 495,
-        "weight": 6.206575926724928,
-        "types": "car_dealer, car_repair, store"
+        "rating": 4.4,
+        "reviewCount": 496,
+        "weight": 6.208590026096629,
+        "types": "car_dealer, car_repair, point_of_interest, store, establishment"
       }
     },
     {
@@ -482,8 +499,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.788826,
-          52.422148
+          10.7888258,
+          52.42214849999999
         ]
       },
       "properties": {
@@ -491,7 +508,7 @@
         "rating": 4,
         "reviewCount": 2434,
         "weight": 7.79770203551669,
-        "types": "electronics_store, home_goods_store, store"
+        "types": "electronics_store, home_goods_store, point_of_interest, store, establishment"
       }
     },
     {
@@ -499,8 +516,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.805367,
-          52.433705
+          10.8053669,
+          52.4337054
         ]
       },
       "properties": {
@@ -508,7 +525,7 @@
         "rating": 4.5,
         "reviewCount": 157,
         "weight": 5.062595033026967,
-        "types": "store"
+        "types": "point_of_interest, store, establishment"
       }
     },
     {
@@ -516,8 +533,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.788827,
-          52.424763
+          10.7888268,
+          52.4247628
         ]
       },
       "properties": {
@@ -525,7 +542,7 @@
         "rating": 4.3,
         "reviewCount": 50,
         "weight": 3.9318256327243257,
-        "types": "travel_agency"
+        "types": "travel_agency, point_of_interest, establishment"
       }
     },
     {
@@ -534,7 +551,7 @@
         "type": "Point",
         "coordinates": [
           10.787157,
-          52.421863
+          52.4218629
         ]
       },
       "properties": {
@@ -542,7 +559,7 @@
         "rating": 3.7,
         "reviewCount": 71,
         "weight": 4.276666119016055,
-        "types": "doctor, health"
+        "types": "doctor, point_of_interest, health, establishment"
       }
     },
     {
@@ -551,7 +568,7 @@
         "type": "Point",
         "coordinates": [
           10.78534,
-          52.422879
+          52.42287879999999
         ]
       },
       "properties": {
@@ -559,7 +576,7 @@
         "rating": 4.2,
         "reviewCount": 956,
         "weight": 6.863803391452954,
-        "types": "restaurant, food"
+        "types": "restaurant, point_of_interest, food, establishment"
       }
     },
     {
@@ -567,8 +584,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.78853,
-          52.423665
+          10.7885304,
+          52.4236648
         ]
       },
       "properties": {
@@ -576,7 +593,7 @@
         "rating": 4.2,
         "reviewCount": 402,
         "weight": 5.998936561946683,
-        "types": "store"
+        "types": "point_of_interest, store, establishment"
       }
     },
     {
@@ -584,8 +601,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.779895,
-          52.418508
+          10.7798946,
+          52.41850780000001
         ]
       },
       "properties": {
@@ -593,7 +610,7 @@
         "rating": 4.7,
         "reviewCount": 462,
         "weight": 6.137727054086234,
-        "types": "gym, health"
+        "types": "gym, point_of_interest, health, establishment"
       }
     },
     {
@@ -601,8 +618,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.768602,
-          52.420673
+          10.7686016,
+          52.4206728
         ]
       },
       "properties": {
@@ -610,7 +627,7 @@
         "rating": 2.6,
         "reviewCount": 5,
         "weight": 1.791759469228055,
-        "types": "lodging"
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -618,8 +635,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.794568,
-          52.42801
+          10.7945683,
+          52.4280102
         ]
       },
       "properties": {
@@ -627,7 +644,7 @@
         "rating": 4.8,
         "reviewCount": 340,
         "weight": 5.831882477283517,
-        "types": "doctor, health"
+        "types": "doctor, health, point_of_interest, establishment"
       }
     },
     {
@@ -635,16 +652,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.753062,
+          10.7530621,
           52.401121
         ]
       },
       "properties": {
         "name": "Simonshof",
         "rating": 3.9,
-        "reviewCount": 208,
-        "weight": 5.342334251964811,
-        "types": "lodging, restaurant, food"
+        "reviewCount": 207,
+        "weight": 5.337538079701318,
+        "types": "lodging, restaurant, food, point_of_interest, establishment"
       }
     },
     {
@@ -652,16 +669,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.784015,
-          52.422382
+          10.7840147,
+          52.4223823
         ]
       },
       "properties": {
         "name": "Trattoria Incontri - Wolfsburg",
         "rating": 4.5,
-        "reviewCount": 1074,
-        "weight": 6.980075940561763,
-        "types": "restaurant, food"
+        "reviewCount": 1075,
+        "weight": 6.98100574072173,
+        "types": "restaurant, food, point_of_interest, establishment"
       }
     },
     {
@@ -669,8 +686,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.814456,
-          52.428037
+          10.8144559,
+          52.42803729999999
         ]
       },
       "properties": {
@@ -678,7 +695,7 @@
         "rating": 4.5,
         "reviewCount": 143,
         "weight": 4.969813299576001,
-        "types": "car_repair, store"
+        "types": "car_repair, point_of_interest, store, establishment"
       }
     },
     {
@@ -686,16 +703,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.783693,
-          52.425015
+          10.7836925,
+          52.4250147
         ]
       },
       "properties": {
         "name": "Boutique Hotel Goldene Henne",
         "rating": 4.5,
-        "reviewCount": 518,
-        "weight": 6.251903883165888,
-        "types": "meal_takeaway, lodging, bar, restaurant, food"
+        "reviewCount": 519,
+        "weight": 6.253828811575473,
+        "types": "bar, meal_takeaway, lodging, restaurant, food, point_of_interest, establishment"
       }
     },
     {
@@ -703,8 +720,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.796888,
-          52.423879
+          10.7968885,
+          52.42387869999999
         ]
       },
       "properties": {
@@ -712,7 +729,7 @@
         "rating": 3.7,
         "reviewCount": 30,
         "weight": 3.4339872044851463,
-        "types": "bank, atm, finance, real_estate_agency"
+        "types": "bank, atm, real_estate_agency, finance, point_of_interest, establishment"
       }
     },
     {
@@ -729,7 +746,7 @@
         "rating": 3.5,
         "reviewCount": 99,
         "weight": 4.605170185988092,
-        "types": "doctor, health"
+        "types": "doctor, health, point_of_interest, establishment"
       }
     },
     {
@@ -737,8 +754,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.79234,
-          52.424442
+          10.7923404,
+          52.4244419
         ]
       },
       "properties": {
@@ -746,7 +763,7 @@
         "rating": 3.7,
         "reviewCount": 528,
         "weight": 6.270988431858299,
-        "types": "restaurant, food"
+        "types": "restaurant, food, point_of_interest, establishment"
       }
     },
     {
@@ -754,8 +771,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.78594,
-          52.421474
+          10.7859401,
+          52.4214744
         ]
       },
       "properties": {
@@ -763,7 +780,7 @@
         "rating": 4,
         "reviewCount": 39,
         "weight": 3.6888794541139363,
-        "types": "finance, real_estate_agency"
+        "types": "real_estate_agency, finance, point_of_interest, establishment"
       }
     },
     {
@@ -771,8 +788,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.781522,
-          52.425045
+          10.7815218,
+          52.42504530000001
         ]
       },
       "properties": {
@@ -780,7 +797,7 @@
         "rating": 4.4,
         "reviewCount": 445,
         "weight": 6.100318952020064,
-        "types": "hair_care"
+        "types": "hair_care, point_of_interest, establishment"
       }
     },
     {
@@ -788,8 +805,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.785412,
-          52.426282
+          10.7854122,
+          52.4262824
         ]
       },
       "properties": {
@@ -797,7 +814,7 @@
         "rating": 4.2,
         "reviewCount": 54,
         "weight": 4.007333185232471,
-        "types": "lodging, restaurant, food"
+        "types": "lodging, restaurant, food, point_of_interest, establishment"
       }
     },
     {
@@ -805,8 +822,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.787833,
-          52.423899
+          10.7878335,
+          52.4238986
         ]
       },
       "properties": {
@@ -814,7 +831,7 @@
         "rating": 4.5,
         "reviewCount": 35,
         "weight": 3.58351893845611,
-        "types": "doctor, health"
+        "types": "doctor, health, point_of_interest, establishment"
       }
     },
     {
@@ -822,8 +839,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.814344,
-          52.428767
+          10.8143437,
+          52.4287675
         ]
       },
       "properties": {
@@ -831,7 +848,24 @@
         "rating": 4.6,
         "reviewCount": 77,
         "weight": 4.356708826689592,
-        "types": "car_repair, lawyer"
+        "types": "lawyer, car_repair, point_of_interest, establishment"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8387034,
+          52.43912049999999
+        ]
+      },
+      "properties": {
+        "name": "GGAppartements",
+        "rating": 0,
+        "reviewCount": 0,
+        "weight": 0,
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -840,7 +874,7 @@
         "type": "Point",
         "coordinates": [
           10.802801,
-          52.432707
+          52.4327071
         ]
       },
       "properties": {
@@ -848,7 +882,7 @@
         "rating": 4.3,
         "reviewCount": 186,
         "weight": 5.231108616854587,
-        "types": ""
+        "types": "point_of_interest, establishment"
       }
     },
     {
@@ -856,8 +890,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.787402,
-          52.423437
+          10.7874019,
+          52.4234375
         ]
       },
       "properties": {
@@ -865,7 +899,7 @@
         "rating": 3.7,
         "reviewCount": 6,
         "weight": 1.9459101490553132,
-        "types": "doctor, health"
+        "types": "doctor, health, point_of_interest, establishment"
       }
     },
     {
@@ -873,8 +907,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.763454,
-          52.425802
+          10.7634537,
+          52.42580160000001
         ]
       },
       "properties": {
@@ -882,7 +916,7 @@
         "rating": 4,
         "reviewCount": 114,
         "weight": 4.74493212836325,
-        "types": "car_dealer, car_repair, store"
+        "types": "car_dealer, car_repair, point_of_interest, store, establishment"
       }
     },
     {
@@ -891,7 +925,7 @@
         "type": "Point",
         "coordinates": [
           10.784738,
-          52.423771
+          52.4237707
         ]
       },
       "properties": {
@@ -899,7 +933,7 @@
         "rating": 3.7,
         "reviewCount": 107,
         "weight": 4.68213122712422,
-        "types": "meal_takeaway, restaurant, food"
+        "types": "meal_takeaway, restaurant, food, point_of_interest, establishment"
       }
     },
     {
@@ -907,8 +941,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.787813,
-          52.422603
+          10.7878133,
+          52.4226031
         ]
       },
       "properties": {
@@ -916,7 +950,7 @@
         "rating": 4.2,
         "reviewCount": 8147,
         "weight": 9.005527777346696,
-        "types": "shopping_mall"
+        "types": "shopping_mall, point_of_interest, establishment"
       }
     },
     {
@@ -924,8 +958,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.781691,
-          52.426484
+          10.7816907,
+          52.4264841
         ]
       },
       "properties": {
@@ -933,7 +967,7 @@
         "rating": 2.4,
         "reviewCount": 10,
         "weight": 2.3978952727983707,
-        "types": "atm, bank, finance"
+        "types": "atm, bank, finance, point_of_interest, establishment"
       }
     },
     {
@@ -941,8 +975,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.857502,
-          52.41509
+          10.8575023,
+          52.4150901
         ]
       },
       "properties": {
@@ -950,7 +984,7 @@
         "rating": 4.5,
         "reviewCount": 825,
         "weight": 6.716594773520978,
-        "types": "lodging"
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -958,8 +992,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.856527,
-          52.414773
+          10.8565272,
+          52.4147731
         ]
       },
       "properties": {
@@ -967,7 +1001,7 @@
         "rating": 4.8,
         "reviewCount": 22,
         "weight": 3.1354942159291497,
-        "types": "lodging"
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -984,7 +1018,7 @@
         "rating": 4.5,
         "reviewCount": 383,
         "weight": 5.950642552587727,
-        "types": "lodging"
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -992,8 +1026,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.802652,
-          52.422032
+          10.8026516,
+          52.4220322
         ]
       },
       "properties": {
@@ -1001,7 +1035,7 @@
         "rating": 2.7,
         "reviewCount": 9,
         "weight": 2.302585092994046,
-        "types": "atm, bank, finance"
+        "types": "atm, bank, finance, point_of_interest, establishment"
       }
     },
     {
@@ -1009,8 +1043,42 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.788971,
-          52.422468
+          10.7890156,
+          52.41567120000001
+        ]
+      },
+      "properties": {
+        "name": "Eichendorffschule Wolfsburg",
+        "rating": 0,
+        "reviewCount": 0,
+        "weight": 0,
+        "types": "secondary_school, school, point_of_interest, establishment"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7886137,
+          52.42230879999999
+        ]
+      },
+      "properties": {
+        "name": "mods hair Paris",
+        "rating": 0,
+        "reviewCount": 0,
+        "weight": 0,
+        "types": "hair_care, point_of_interest, establishment"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7889711,
+          52.4224677
         ]
       },
       "properties": {
@@ -1018,7 +1086,7 @@
         "rating": 3.2,
         "reviewCount": 54,
         "weight": 4.007333185232471,
-        "types": "food, store"
+        "types": "food, store, point_of_interest, establishment"
       }
     },
     {
@@ -1026,8 +1094,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.789174,
-          52.42561
+          10.7891743,
+          52.42561010000001
         ]
       },
       "properties": {
@@ -1035,7 +1103,7 @@
         "rating": 4,
         "reviewCount": 25,
         "weight": 3.258096538021482,
-        "types": "travel_agency"
+        "types": "travel_agency, point_of_interest, establishment"
       }
     },
     {
@@ -1043,8 +1111,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.789322,
-          52.425787
+          10.7893221,
+          52.4257867
         ]
       },
       "properties": {
@@ -1052,7 +1120,7 @@
         "rating": 3.7,
         "reviewCount": 499,
         "weight": 6.214608098422191,
-        "types": "bank, atm, finance"
+        "types": "bank, atm, finance, point_of_interest, establishment"
       }
     },
     {
@@ -1060,8 +1128,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.788375,
-          52.422835
+          10.7883747,
+          52.4228355
         ]
       },
       "properties": {
@@ -1069,7 +1137,7 @@
         "rating": 4.6,
         "reviewCount": 54,
         "weight": 4.007333185232471,
-        "types": "clothing_store, store"
+        "types": "clothing_store, store, point_of_interest, establishment"
       }
     },
     {
@@ -1077,8 +1145,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.810002,
-          52.429276
+          10.8100019,
+          52.42927590000001
         ]
       },
       "properties": {
@@ -1086,7 +1154,7 @@
         "rating": 4.6,
         "reviewCount": 25,
         "weight": 3.258096538021482,
-        "types": "car_repair"
+        "types": "car_repair, point_of_interest, establishment"
       }
     },
     {
@@ -1103,7 +1171,7 @@
         "rating": 4.2,
         "reviewCount": 152,
         "weight": 5.030437921392435,
-        "types": "drugstore, grocery_or_supermarket, clothing_store, food, health, store"
+        "types": "drugstore, clothing_store, grocery_or_supermarket, health, food, store, point_of_interest, establishment"
       }
     },
     {
@@ -1112,7 +1180,7 @@
         "type": "Point",
         "coordinates": [
           10.785039,
-          52.420076
+          52.4200762
         ]
       },
       "properties": {
@@ -1120,7 +1188,7 @@
         "rating": 4.8,
         "reviewCount": 63,
         "weight": 4.1588830833596715,
-        "types": ""
+        "types": "point_of_interest, establishment"
       }
     },
     {
@@ -1128,8 +1196,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.788826,
-          52.422148
+          10.7888258,
+          52.42214849999999
         ]
       },
       "properties": {
@@ -1137,7 +1205,7 @@
         "rating": 4.5,
         "reviewCount": 40,
         "weight": 3.713572066704308,
-        "types": "clothing_store, store"
+        "types": "clothing_store, store, point_of_interest, establishment"
       }
     },
     {
@@ -1145,8 +1213,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.782174,
-          52.412011
+          10.7821742,
+          52.4120113
         ]
       },
       "properties": {
@@ -1154,7 +1222,7 @@
         "rating": 3.5,
         "reviewCount": 51,
         "weight": 3.9512437185814275,
-        "types": "gas_station"
+        "types": "gas_station, point_of_interest, establishment"
       }
     },
     {
@@ -1162,8 +1230,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.787745,
-          52.417857
+          10.7877451,
+          52.41785749999999
         ]
       },
       "properties": {
@@ -1171,7 +1239,7 @@
         "rating": 4.4,
         "reviewCount": 65,
         "weight": 4.189654742026425,
-        "types": "store"
+        "types": "store, point_of_interest, establishment"
       }
     },
     {
@@ -1188,7 +1256,24 @@
         "rating": 4.7,
         "reviewCount": 703,
         "weight": 6.556778356158042,
-        "types": "general_contractor"
+        "types": "general_contractor, point_of_interest, establishment"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8067181,
+          52.423469
+        ]
+      },
+      "properties": {
+        "name": "Versicherungsmakler",
+        "rating": 0,
+        "reviewCount": 0,
+        "weight": 0,
+        "types": "insurance_agency, hospital, health, point_of_interest, establishment"
       }
     },
     {
@@ -1197,7 +1282,7 @@
         "type": "Point",
         "coordinates": [
           10.836005,
-          52.440796
+          52.4407959
         ]
       },
       "properties": {
@@ -1205,7 +1290,7 @@
         "rating": 4.3,
         "reviewCount": 70,
         "weight": 4.2626798770413155,
-        "types": "lodging"
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -1213,8 +1298,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.832009,
-          52.438459
+          10.8320086,
+          52.43845899999999
         ]
       },
       "properties": {
@@ -1222,7 +1307,7 @@
         "rating": 4.3,
         "reviewCount": 418,
         "weight": 6.037870919922137,
-        "types": "car_rental, car_repair, car_dealer, store"
+        "types": "car_rental, car_dealer, car_repair, store, point_of_interest, establishment"
       }
     },
     {
@@ -1230,8 +1315,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.839525,
-          52.437322
+          10.8395253,
+          52.4373215
         ]
       },
       "properties": {
@@ -1239,7 +1324,7 @@
         "rating": 4.5,
         "reviewCount": 810,
         "weight": 6.698268054115413,
-        "types": "lodging"
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -1247,7 +1332,24 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.83888,
+          10.761719,
+          52.42037209999999
+        ]
+      },
+      "properties": {
+        "name": "Mitte-West",
+        "rating": 0,
+        "reviewCount": 0,
+        "weight": 0,
+        "types": "sublocality_level_1, sublocality, political"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8388801,
           52.438007
         ]
       },
@@ -1256,7 +1358,7 @@
         "rating": 4,
         "reviewCount": 98,
         "weight": 4.59511985013459,
-        "types": "bicycle_store, store"
+        "types": "bicycle_store, point_of_interest, store, establishment"
       }
     },
     {
@@ -1273,7 +1375,7 @@
         "rating": 4.6,
         "reviewCount": 42,
         "weight": 3.7612001156935624,
-        "types": "lodging"
+        "types": "lodging, point_of_interest, establishment"
       }
     },
     {
@@ -1281,16 +1383,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.798591,
-          52.439574
+          10.7985909,
+          52.43957400000001
         ]
       },
       "properties": {
         "name": "Restaurant Schlossremise",
         "rating": 4.7,
-        "reviewCount": 855,
-        "weight": 6.752270376141742,
-        "types": "restaurant, food"
+        "reviewCount": 856,
+        "weight": 6.75343791859778,
+        "types": "restaurant, food, point_of_interest, establishment"
       }
     },
     {
@@ -1298,8 +1400,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.839873,
-          52.437923
+          10.8398735,
+          52.4379229
         ]
       },
       "properties": {
@@ -1307,7 +1409,7 @@
         "rating": 4,
         "reviewCount": 34,
         "weight": 3.5553480614894135,
-        "types": "doctor, health"
+        "types": "doctor, point_of_interest, health, establishment"
       }
     },
     {
@@ -1315,8 +1417,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.837933,
-          52.440688
+          10.8379327,
+          52.4406878
         ]
       },
       "properties": {
@@ -1324,7 +1426,7 @@
         "rating": 2.6,
         "reviewCount": 22,
         "weight": 3.1354942159291497,
-        "types": "bank, atm, real_estate_agency, finance"
+        "types": "bank, atm, real_estate_agency, finance, point_of_interest, establishment"
       }
     },
     {
@@ -1332,7 +1434,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.839055,
+          10.8390554,
           52.438629
         ]
       },
@@ -1341,7 +1443,7 @@
         "rating": 4.5,
         "reviewCount": 12,
         "weight": 2.5649493574615367,
-        "types": "store, food"
+        "types": "food, point_of_interest, store, establishment"
       }
     },
     {
@@ -1349,8 +1451,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.792716,
-          52.428064
+          10.7927159,
+          52.42806390000001
         ]
       },
       "properties": {
@@ -1358,7 +1460,7 @@
         "rating": 4.8,
         "reviewCount": 67,
         "weight": 4.219507705176107,
-        "types": "doctor, health"
+        "types": "doctor, point_of_interest, health, establishment"
       }
     },
     {
@@ -1366,8 +1468,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.839092,
-          52.439064
+          10.8390919,
+          52.43906390000001
         ]
       },
       "properties": {
@@ -1375,7 +1477,7 @@
         "rating": 4.5,
         "reviewCount": 241,
         "weight": 5.488937726156687,
-        "types": "department_store, furniture_store, home_goods_store, store"
+        "types": "department_store, furniture_store, home_goods_store, point_of_interest, store, establishment"
       }
     },
     {
@@ -1383,8 +1485,25 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.813835,
-          52.443177
+          10.7975763,
+          52.4281972
+        ]
+      },
+      "properties": {
+        "name": "Polizeiinspektion Wolfsburg/Helmstedt",
+        "rating": 0,
+        "reviewCount": 0,
+        "weight": 0,
+        "types": "police, point_of_interest, establishment"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8138348,
+          52.4431769
         ]
       },
       "properties": {
@@ -1392,7 +1511,7 @@
         "rating": 3.9,
         "reviewCount": 97,
         "weight": 4.584967478670572,
-        "types": "bakery, store, food"
+        "types": "bakery, food, point_of_interest, store, establishment"
       }
     },
     {
@@ -1409,7 +1528,7 @@
         "rating": 4.4,
         "reviewCount": 47,
         "weight": 3.8712010109078907,
-        "types": "store"
+        "types": "point_of_interest, store, establishment"
       }
     },
     {
@@ -1417,8 +1536,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.801915,
-          52.448631
+          10.8019145,
+          52.44863119999999
         ]
       },
       "properties": {
@@ -1426,7 +1545,7 @@
         "rating": 3.7,
         "reviewCount": 14,
         "weight": 2.70805020110221,
-        "types": "bank, finance"
+        "types": "bank, finance, point_of_interest, establishment"
       }
     },
     {
@@ -1434,8 +1553,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.802018,
-          52.448183
+          10.8020181,
+          52.4481827
         ]
       },
       "properties": {
@@ -1443,7 +1562,7 @@
         "rating": 4.6,
         "reviewCount": 11,
         "weight": 2.4849066497880004,
-        "types": "doctor, health"
+        "types": "doctor, health, point_of_interest, establishment"
       }
     },
     {
@@ -1451,8 +1570,25 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.805844,
-          52.443216
+          10.7861504,
+          52.45247089999999
+        ]
+      },
+      "properties": {
+        "name": "Dipl-Päd. Jutta Hoyer",
+        "rating": 0,
+        "reviewCount": 0,
+        "weight": 0,
+        "types": "health, point_of_interest, establishment"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8058443,
+          52.44321559999999
         ]
       },
       "properties": {
@@ -1460,7 +1596,7 @@
         "rating": 5,
         "reviewCount": 1,
         "weight": 0.6931471805599453,
-        "types": "school"
+        "types": "school, point_of_interest, establishment"
       }
     },
     {
@@ -1468,8 +1604,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.802503,
-          52.447819
+          10.8025034,
+          52.4478189
         ]
       },
       "properties": {
@@ -1477,7 +1613,7 @@
         "rating": 4.5,
         "reviewCount": 15,
         "weight": 2.772588722239781,
-        "types": "finance"
+        "types": "finance, point_of_interest, establishment"
       }
     },
     {
@@ -1494,7 +1630,7 @@
         "rating": 5,
         "reviewCount": 2,
         "weight": 1.0986122886681096,
-        "types": ""
+        "types": "point_of_interest, establishment"
       }
     },
     {
@@ -1503,7 +1639,7 @@
         "type": "Point",
         "coordinates": [
           10.800174,
-          52.44809
+          52.4480902
         ]
       },
       "properties": {
@@ -1511,7 +1647,7 @@
         "rating": 3.4,
         "reviewCount": 5,
         "weight": 1.791759469228055,
-        "types": "finance"
+        "types": "finance, point_of_interest, establishment"
       }
     },
     {
@@ -1528,7 +1664,7 @@
         "rating": 3.8,
         "reviewCount": 58,
         "weight": 4.07753744390572,
-        "types": "bakery, food, store"
+        "types": "bakery, food, store, point_of_interest, establishment"
       }
     },
     {
@@ -1536,8 +1672,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.784814,
-          52.450765
+          10.7848142,
+          52.45076510000001
         ]
       },
       "properties": {
@@ -1545,7 +1681,7 @@
         "rating": 5,
         "reviewCount": 1,
         "weight": 0.6931471805599453,
-        "types": ""
+        "types": "point_of_interest, establishment"
       }
     },
     {
@@ -1553,8 +1689,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.798756,
-          52.449817
+          10.7987555,
+          52.44981699999999
         ]
       },
       "properties": {
@@ -1562,7 +1698,7 @@
         "rating": 5,
         "reviewCount": 2,
         "weight": 1.0986122886681096,
-        "types": "beauty_salon"
+        "types": "beauty_salon, point_of_interest, establishment"
       }
     },
     {
@@ -1570,8 +1706,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.798119,
-          52.443097
+          10.7981194,
+          52.4430966
         ]
       },
       "properties": {
@@ -1579,7 +1715,7 @@
         "rating": 5,
         "reviewCount": 2,
         "weight": 1.0986122886681096,
-        "types": ""
+        "types": "point_of_interest, establishment"
       }
     },
     {
@@ -1587,8 +1723,42 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.782642,
-          52.444946
+          10.8032201,
+          52.4507541
+        ]
+      },
+      "properties": {
+        "name": "Paritätische Sozialstation",
+        "rating": 0,
+        "reviewCount": 0,
+        "weight": 0,
+        "types": "health, point_of_interest, establishment"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7992367,
+          52.44691479999999
+        ]
+      },
+      "properties": {
+        "name": "Data-Kom-Elektrik GmbH",
+        "rating": 0,
+        "reviewCount": 0,
+        "weight": 0,
+        "types": "electrician, point_of_interest, establishment"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7826419,
+          52.4449456
         ]
       },
       "properties": {
@@ -1596,7 +1766,7 @@
         "rating": 4.1,
         "reviewCount": 7,
         "weight": 2.0794415416798357,
-        "types": "painter"
+        "types": "painter, point_of_interest, establishment"
       }
     },
     {
@@ -1604,8 +1774,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.801887,
-          52.448164
+          10.8018875,
+          52.44816350000001
         ]
       },
       "properties": {
@@ -1613,7 +1783,7 @@
         "rating": 4.1,
         "reviewCount": 138,
         "weight": 4.9344739331306915,
-        "types": "bakery, cafe, restaurant, food, store"
+        "types": "bakery, cafe, restaurant, food, store, point_of_interest, establishment"
       }
     },
     {
@@ -1630,7 +1800,7 @@
         "rating": 4.3,
         "reviewCount": 9,
         "weight": 2.302585092994046,
-        "types": ""
+        "types": "point_of_interest, establishment"
       }
     },
     {
@@ -1638,8 +1808,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.803666,
-          52.454346
+          10.8036664,
+          52.45434589999999
         ]
       },
       "properties": {
@@ -1647,7 +1817,7 @@
         "rating": 3.5,
         "reviewCount": 22,
         "weight": 3.1354942159291497,
-        "types": ""
+        "types": "point_of_interest, establishment"
       }
     },
     {
@@ -1655,16 +1825,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.811459,
-          52.43883
+          10.8114589,
+          52.43882960000001
         ]
       },
       "properties": {
         "name": "Wolfsburger Schützen- und Volksfestplatz",
         "rating": 4.3,
-        "reviewCount": 501,
-        "weight": 6.218600119691729,
-        "types": ""
+        "reviewCount": 502,
+        "weight": 6.220590170099739,
+        "types": "point_of_interest, establishment"
       }
     },
     {
@@ -1681,7 +1851,7 @@
         "rating": 3.5,
         "reviewCount": 42,
         "weight": 3.7612001156935624,
-        "types": "doctor, health"
+        "types": "doctor, health, point_of_interest, establishment"
       }
     },
     {
@@ -1689,8 +1859,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.770782,
-          52.414255
+          10.7707821,
+          52.4142549
         ]
       },
       "properties": {
@@ -1698,7 +1868,7 @@
         "rating": 4.5,
         "reviewCount": 222,
         "weight": 5.407171771460119,
-        "types": "doctor, health"
+        "types": "doctor, health, point_of_interest, establishment"
       }
     },
     {
@@ -1706,8 +1876,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.76573,
-          52.410083
+          10.7657295,
+          52.4100832
         ]
       },
       "properties": {
@@ -1715,7 +1885,7 @@
         "rating": 4.6,
         "reviewCount": 17,
         "weight": 2.8903717578961645,
-        "types": "home_goods_store, store"
+        "types": "home_goods_store, store, point_of_interest, establishment"
       }
     },
     {
@@ -1723,8 +1893,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.753907,
-          52.393289
+          10.7539069,
+          52.3932888
         ]
       },
       "properties": {
@@ -1732,7 +1902,7 @@
         "rating": 3.9,
         "reviewCount": 511,
         "weight": 6.238324625039508,
-        "types": "supermarket, grocery_or_supermarket, store, food"
+        "types": "supermarket, grocery_or_supermarket, food, point_of_interest, store, establishment"
       }
     },
     {
@@ -1740,8 +1910,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.770778,
-          52.420772
+          10.7707781,
+          52.4207725
         ]
       },
       "properties": {
@@ -1749,7 +1919,24 @@
         "rating": 3.4,
         "reviewCount": 20,
         "weight": 3.044522437723423,
-        "types": "hospital, health"
+        "types": "hospital, point_of_interest, health, establishment"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7806752,
+          52.42284850000001
+        ]
+      },
+      "properties": {
+        "name": "Permanent Make up Alice Jorczyk",
+        "rating": 0,
+        "reviewCount": 0,
+        "weight": 0,
+        "types": "beauty_salon, point_of_interest, establishment"
       }
     }
   ]
