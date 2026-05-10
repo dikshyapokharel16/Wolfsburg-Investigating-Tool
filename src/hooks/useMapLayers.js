@@ -9,6 +9,7 @@ import PUBLIC_SPACES_GEOJSON from '../data/publicSpaces.json'
 import GOOGLE_PLACES_GEOJSON from '../data/googlePlaces.json'
 import DWELL_GEOJSON   from '../data/dwellInfrastructure.json'
 import CLOSURES_DATA   from '../data/closures.json'
+import VACANT_GEOJSON  from '../data/vacantPlaces.json'
 
 const POPULATION_LOOKUP = {
   ...Object.fromEntries(
@@ -162,11 +163,81 @@ const CHOROPLETH_CONFIG = [
   { id: 'choropleth-rent',    param: 'rentPerSqm', key: 'rentNorm',    color: '#14b8a6' },
 ]
 
+// World polygon with Wolfsburg city boundary cut out — used to mask aerial imagery
+const AERIAL_MASK_GEOJSON = (() => {
+  try {
+    const allFeatures = []
+    for (const fc of Object.values(districtBoundaries)) {
+      if (!fc?.features) continue
+      for (const f of fc.features) {
+        allFeatures.push({ type: 'Feature', geometry: f.geometry, properties: {} })
+      }
+    }
+    if (!allFeatures.length) return null
+
+    let merged = allFeatures[0]
+    for (let i = 1; i < allFeatures.length; i++) {
+      const r = union({ type: 'FeatureCollection', features: [merged, allFeatures[i]] })
+      if (r) merged = r
+    }
+
+    const cityGeom = merged.geometry
+    const worldRing = [[-180,-90],[180,-90],[180,90],[-180,90],[-180,-90]]
+    const holeRings = cityGeom.type === 'Polygon'
+      ? [cityGeom.coordinates[0]]
+      : cityGeom.coordinates.map(p => p[0])
+
+    return {
+      type: 'FeatureCollection',
+      features: [{ type: 'Feature', geometry: { type: 'Polygon', coordinates: [worldRing, ...holeRings] }, properties: {} }],
+    }
+  } catch { return null }
+})()
+
+function registerIcon(map, id, drawFn, size = 24) {
+  if (map.hasImage(id)) return
+  const canvas = document.createElement('canvas')
+  canvas.width = size; canvas.height = size
+  const ctx = canvas.getContext('2d')
+  drawFn(ctx, size)
+  const img = ctx.getImageData(0, 0, size, size)
+  map.addImage(id, { width: size, height: size, data: img.data })
+}
+
+function registerXIcon(map, id, color) {
+  registerIcon(map, id, (ctx, s) => {
+    const p = 5
+    ctx.strokeStyle = color
+    ctx.lineWidth = 3.5
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(p, p);     ctx.lineTo(s - p, s - p)
+    ctx.moveTo(s - p, p); ctx.lineTo(p, s - p)
+    ctx.stroke()
+  }, 22)
+}
+
+function registerDiamondIcon(map, id, fillColor) {
+  registerIcon(map, id, (ctx, s) => {
+    const m = s / 2
+    ctx.beginPath()
+    ctx.moveTo(m, 2); ctx.lineTo(s - 2, m)
+    ctx.lineTo(m, s - 2); ctx.lineTo(2, m)
+    ctx.closePath()
+    ctx.fillStyle = fillColor
+    ctx.fill()
+    ctx.strokeStyle = 'rgba(255,255,255,0.9)'
+    ctx.lineWidth = 2
+    ctx.stroke()
+  }, 22)
+}
+
 export function useMapLayers(map) {
   const { activeLayers, amenityData, setSelectedDistrict, choroplethLayers, closureYear } = useMapStore()
   const googlePopup   = useRef(null)
   const dwellPopup    = useRef(null)
   const closurePopup  = useRef(null)
+  const vacantPopup   = useRef(null)
   const psPopup       = useRef(null)
   const freqPopup     = useRef(null)
 
@@ -285,7 +356,6 @@ export function useMapLayers(map) {
     for (const { id, param, key, color } of CHOROPLETH_CONFIG) {
       const visible = activeLayers.districts && choroplethLayers[param]
       if (!map.getLayer(id)) {
-        // Insert below the border lines so outlines stay on top
         const beforeId = map.getLayer('district-subs-line') ? 'district-subs-line' : undefined
         map.addLayer({
           id,
@@ -293,11 +363,7 @@ export function useMapLayers(map) {
           source: 'districts',
           paint: {
             'fill-color': color,
-            'fill-opacity': [
-              'interpolate', ['linear'], ['get', key],
-              0, 0.0,
-              1, 0.55,
-            ],
+            'fill-opacity': ['interpolate', ['linear'], ['get', key], 0, 0.0, 1, 0.55],
           },
           layout: { visibility: visible ? 'visible' : 'none' },
         }, beforeId)
@@ -306,6 +372,53 @@ export function useMapLayers(map) {
       }
     }
   }, [map, choroplethLayers, activeLayers.districts])
+
+  // ── Aerial Imagery (Esri World Imagery, masked to Wolfsburg boundary) ─────
+  useEffect(() => {
+    if (!map) return
+
+    const RASTER_SRC = 'aerial-imagery'
+    const RASTER_LYR = 'aerial-raster'
+    const MASK_SRC   = 'aerial-mask'
+    const MASK_LYR   = 'aerial-mask-fill'
+
+    if (activeLayers.aerialView) {
+      if (!map.getSource(RASTER_SRC)) {
+        const anchor = map.getStyle().layers.find(l => l.type === 'line' || l.type === 'symbol')?.id
+
+        map.addSource(RASTER_SRC, {
+          type: 'raster',
+          tiles: ['https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+          tileSize: 256,
+          maxzoom: 20,
+          attribution: '© Esri, Earthstar Geographics',
+        })
+
+        map.addLayer({
+          id: RASTER_LYR,
+          type: 'raster',
+          source: RASTER_SRC,
+          paint: { 'raster-opacity': 1, 'raster-fade-duration': 300 },
+        }, anchor)
+
+        if (AERIAL_MASK_GEOJSON) {
+          map.addSource(MASK_SRC, { type: 'geojson', data: AERIAL_MASK_GEOJSON })
+          map.addLayer({
+            id: MASK_LYR,
+            type: 'fill',
+            source: MASK_SRC,
+            paint: { 'fill-color': '#f5f4f2', 'fill-opacity': 1 },
+          }, anchor)
+        }
+      } else {
+        map.setLayoutProperty(RASTER_LYR, 'visibility', 'visible')
+        if (map.getLayer(MASK_LYR)) map.setLayoutProperty(MASK_LYR, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(RASTER_LYR)) map.setLayoutProperty(RASTER_LYR, 'visibility', 'none')
+      if (map.getLayer(MASK_LYR))   map.setLayoutProperty(MASK_LYR,   'visibility', 'none')
+    }
+  }, [map, activeLayers.aerialView])
 
   // ── Amenities ─────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -428,31 +541,46 @@ export function useMapLayers(map) {
   useEffect(() => {
     if (!map) return
 
-    const SRC = 'public-spaces-freq'
-    const LYR = 'freq-circles'
+    const SRC  = 'public-spaces-freq'
+    const HEAT = 'freq-heat'
+    const DOT  = 'freq-dots'
 
     if (activeLayers.frequencyAnalysis) {
       if (!map.getSource(SRC)) {
         map.addSource(SRC, { type: 'geojson', data: PUBLIC_SPACES_GEOJSON })
 
         map.addLayer({
-          id: LYR,
-          type: 'circle',
+          id: HEAT,
+          type: 'heatmap',
           source: SRC,
           paint: {
-            'circle-radius': [
-              'interpolate', ['linear'], ['zoom'],
-              10, ['max', 4, ['*', 0.8, ['sqrt', ['get', 'areaHa']]]],
-              14, ['max', 6, ['*', 3.5, ['sqrt', ['get', 'areaHa']]]],
+            'heatmap-weight': ['interpolate', ['linear'], ['get', 'frequencyScore'], 0, 0, 100, 1],
+            'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 10, 0.8, 15, 2],
+            'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 10, 25, 15, 45],
+            'heatmap-opacity': ['interpolate', ['linear'], ['zoom'], 12, 0.85, 14, 0.4],
+            'heatmap-color': [
+              'interpolate', ['linear'], ['heatmap-density'],
+              0,    'rgba(254,249,195,0)',
+              0.25, '#fef9c3',
+              0.5,  '#fbbf24',
+              0.75, '#f97316',
+              1.0,  '#dc2626',
             ],
+          },
+        })
+
+        map.addLayer({
+          id: DOT,
+          type: 'circle',
+          source: SRC,
+          minzoom: 13,
+          paint: {
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 13, 5, 16, 10],
             'circle-color': [
               'interpolate', ['linear'], ['get', 'frequencyScore'],
-              0,  '#fef9c3',
-              25, '#fbbf24',
-              50, '#f97316',
-              75, '#dc2626',
+              0, '#fef9c3', 25, '#fbbf24', 50, '#f97316', 75, '#dc2626',
             ],
-            'circle-opacity': 0.85,
+            'circle-opacity': 0.9,
             'circle-stroke-width': 2,
             'circle-stroke-color': 'rgba(255,255,255,0.9)',
           },
@@ -461,7 +589,7 @@ export function useMapLayers(map) {
         const popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: '260px' })
         freqPopup.current = popup
 
-        map.on('click', LYR, (e) => {
+        map.on('click', DOT, (e) => {
           const p = e.features[0].properties
           const tierColors = { 'very-high': '#ef4444', high: '#f97316', medium: '#f59e0b', low: '#22c55e', 'very-low': '#3b82f6' }
           const tierColor  = tierColors[p.frequencyTier] ?? '#6b7280'
@@ -486,17 +614,19 @@ export function useMapLayers(map) {
             .addTo(map)
         })
 
-        map.on('mouseenter', LYR, () => { map.getCanvas().style.cursor = 'pointer' })
-        map.on('mouseleave', LYR, () => { map.getCanvas().style.cursor = '' })
+        map.on('mouseenter', DOT, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', DOT, () => { map.getCanvas().style.cursor = '' })
         map.on('click', (e) => {
-          if (!map.queryRenderedFeatures(e.point, { layers: [LYR] }).length && freqPopup.current?.isOpen())
+          if (!map.queryRenderedFeatures(e.point, { layers: [DOT] }).length && freqPopup.current?.isOpen())
             freqPopup.current.remove()
         })
       } else {
-        map.setLayoutProperty(LYR, 'visibility', 'visible')
+        map.setLayoutProperty(HEAT, 'visibility', 'visible')
+        map.setLayoutProperty(DOT,  'visibility', 'visible')
       }
     } else {
-      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+      if (map.getLayer(HEAT)) map.setLayoutProperty(HEAT, 'visibility', 'none')
+      if (map.getLayer(DOT))  map.setLayoutProperty(DOT,  'visibility', 'none')
       if (freqPopup.current) freqPopup.current.remove()
     }
   }, [map, activeLayers.frequencyAnalysis])
@@ -692,26 +822,18 @@ export function useMapLayers(map) {
       if (!map.getSource(SRC)) {
         map.addSource(SRC, { type: 'geojson', data: CLOSURES_DATA.closures })
 
+        registerXIcon(map, 'x-closure', '#64748b')
+
         map.addLayer({
           id: LYR,
-          type: 'circle',
+          type: 'symbol',
           source: SRC,
           filter: ['<=', ['get', 'year'], closureYear],
-          paint: {
-            'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 4, 15, 9],
-            'circle-color': [
-              'match', ['get', 'year'],
-              2019, '#94a3b8',
-              2020, '#64748b',
-              2021, '#ef4444',
-              2022, '#f97316',
-              2023, '#eab308',
-              2024, '#22c55e',
-              '#94a3b8',
-            ],
-            'circle-opacity': 0.9,
-            'circle-stroke-width': 1.5,
-            'circle-stroke-color': 'rgba(255,255,255,0.85)',
+          layout: {
+            'icon-image': 'x-closure',
+            'icon-size': ['interpolate', ['linear'], ['zoom'], 10, 0.6, 15, 1.3],
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true,
           },
         })
 
@@ -756,4 +878,69 @@ export function useMapLayers(map) {
     if (!map || !map.getLayer('closures-dots')) return
     map.setFilter('closures-dots', ['<=', ['get', 'year'], closureYear])
   }, [map, closureYear])
+
+  // ── Vacant Places (OSM shop=vacant / disused:shop) ────────────────────────
+  useEffect(() => {
+    if (!map) return
+
+    const SRC = 'vacant-places'
+    const LYR = 'vacant-dots'
+
+    if (activeLayers.vacantPlaces) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: VACANT_GEOJSON })
+
+        registerDiamondIcon(map, 'diamond-vacant', '#f97316')
+
+        map.addLayer({
+          id: LYR,
+          type: 'symbol',
+          source: SRC,
+          layout: {
+            'icon-image': 'diamond-vacant',
+            'icon-size': ['interpolate', ['linear'], ['zoom'], 10, 0.7, 15, 1.4],
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true,
+          },
+        })
+
+        const popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: '240px' })
+        vacantPopup.current = popup
+
+        map.on('click', LYR, (e) => {
+          const p = e.features[0].properties
+          const former = p.formerType ? `Former: ${p.formerType}` : 'Former use: unknown'
+          const checked = p.checkDate ? `Verified: ${p.checkDate}` : ''
+          popup
+            .setLngLat(e.lngLat)
+            .setHTML(
+              `<div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:8px;height:8px;border-radius:50%;background:#f97316;flex-shrink:0"></div>
+                  <span style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600">Vacant Storefront</span>
+                </div>
+                ${p.name ? `<div style="font-size:14px;font-weight:700;color:#111827;margin-bottom:4px">${p.name}</div>` : ''}
+                ${p.address ? `<div style="font-size:11px;color:#6b7280;margin-bottom:3px">${p.address}</div>` : ''}
+                <div style="font-size:11px;color:#9ca3af;margin-bottom:3px">${former}</div>
+                ${checked ? `<div style="font-size:10px;color:#9ca3af">${checked}</div>` : ''}
+                <div style="font-size:10px;color:#9ca3af;border-top:1px solid #f3f4f6;margin-top:5px;padding-top:4px">Source: OpenStreetMap</div>
+              </div>`
+            )
+            .addTo(map)
+        })
+
+        map.on('mouseenter', LYR, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', LYR, () => { map.getCanvas().style.cursor = '' })
+        map.on('click', (e) => {
+          if (!map.queryRenderedFeatures(e.point, { layers: [LYR] }).length && vacantPopup.current?.isOpen())
+            vacantPopup.current.remove()
+        })
+      } else {
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+      if (vacantPopup.current) vacantPopup.current.remove()
+    }
+  }, [map, activeLayers.vacantPlaces])
 }

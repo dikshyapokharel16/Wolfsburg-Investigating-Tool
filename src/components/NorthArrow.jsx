@@ -14,7 +14,7 @@ export default function NorthArrow({ map }) {
     <button
       onClick={() => map?.easeTo({ bearing: 0, duration: 300 })}
       title="Reset to north"
-      className="absolute top-[54px] right-3 z-20 w-9 h-9 rounded-full bg-[#16213e]/95 border border-white/10 hover:border-white/30 shadow-lg flex items-center justify-center transition-colors"
+      className="absolute top-[130px] right-3 z-20 w-9 h-9 rounded-full bg-[#16213e]/95 border border-white/10 hover:border-white/30 shadow-lg flex items-center justify-center transition-colors"
     >
       <svg
         width="22"
@@ -25,11 +25,9 @@ export default function NorthArrow({ map }) {
           transition: 'transform 0.1s linear',
         }}
       >
-        {/* North — red */}
-        <path d="M11 2 L13 11 L11 10 L9 11 Z" fill="#ef4444" />
-        {/* South — muted */}
-        <path d="M11 20 L13 11 L11 12 L9 11 Z" fill="#475569" />
-        <circle cx="11" cy="11" r="1.5" fill="white" opacity="0.75" />
+        <path d="M11 2 L13 11 L11 10 L9 11 Z" fill="white" />
+        <path d="M11 20 L13 11 L11 12 L9 11 Z" fill="#4b5563" />
+        <circle cx="11" cy="11" r="1.5" fill="white" opacity="0.6" />
       </svg>
     </button>
   )
