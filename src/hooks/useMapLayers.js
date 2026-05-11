@@ -1,10 +1,40 @@
 import { useEffect, useRef } from 'react'
 import maplibregl from 'maplibre-gl'
 import { union } from '@turf/union'
+import { area as turfArea } from '@turf/area'
 import { useMapStore } from '../store/mapStore'
 import districtBoundaries from '../data/districtBoundaries.json'
-import { DISTRICT_COLORS, DISTRICT_GROUPS, DISTRICT_TO_GROUP } from '../data/districtConfig.js'
+import { DISTRICT_COLORS, DISTRICT_GROUPS, DISTRICT_TO_GROUP, STANDALONE_POPULATIONS } from '../data/districtConfig.js'
 import PUBLIC_SPACES_GEOJSON from '../data/publicSpaces.json'
+import GOOGLE_PLACES_GEOJSON from '../data/googlePlaces.json'
+import DWELL_GEOJSON   from '../data/dwellInfrastructure.json'
+import CLOSURES_DATA   from '../data/closures.json'
+import VACANT_GEOJSON  from '../data/vacantPlaces.json'
+
+const POPULATION_LOOKUP = {
+  ...Object.fromEntries(
+    Object.entries(DISTRICT_GROUPS).map(([name, { population2020, population2023 }]) => [
+      name, { population2020, population2023 },
+    ])
+  ),
+  ...Object.fromEntries(
+    Object.entries(STANDALONE_POPULATIONS).map(([name, vals]) => [name, vals])
+  ),
+}
+
+// Stats used for choropleth normalisation (density computed later from GeoJSON area)
+const STAT_LOOKUP = {
+  ...Object.fromEntries(
+    Object.entries(DISTRICT_GROUPS).map(([name, { population2023, avgAge, rentPerSqm }]) => [
+      name, { population2023, avgAge, rentPerSqm },
+    ])
+  ),
+  ...Object.fromEntries(
+    Object.entries(STANDALONE_POPULATIONS).map(([name, { population2023, avgAge, rentPerSqm }]) => [
+      name, { population2023, avgAge, rentPerSqm },
+    ])
+  ),
+}
 
 // Returns the bounding-box centre of any Polygon or MultiPolygon geometry
 function bboxCenter(geometry) {
@@ -87,10 +117,43 @@ const { DISTRICT_GEOJSON, DISTRICT_LABELS_GEOJSON, DISTRICT_SUBS_GEOJSON } = (()
     }
   }
 
+  // Compute area (km²) per district from the merged features
+  const AREA_KM2 = {}
+  for (const f of mainFeatures) {
+    const name = f.properties?.name
+    if (!name) continue
+    const sqMeters = turfArea(f)
+    AREA_KM2[name] = (AREA_KM2[name] || 0) + sqMeters / 1_000_000
+  }
+
+  // Compute density and normalise all choropleth params 0→1
+  for (const [name, area] of Object.entries(AREA_KM2)) {
+    if (STAT_LOOKUP[name]) STAT_LOOKUP[name].density = STAT_LOOKUP[name].population2023 / area
+  }
+
+  const makeNorm = (values) => {
+    const valid = values.filter(v => v != null && !isNaN(v))
+    const min = Math.min(...valid), max = Math.max(...valid)
+    return (v) => v == null ? 0 : max === min ? 0.5 : (v - min) / (max - min)
+  }
+  const normDensity = makeNorm(Object.values(STAT_LOOKUP).map(s => s.density))
+  const normAge     = makeNorm(Object.values(STAT_LOOKUP).map(s => s.avgAge))
+  const normRent    = makeNorm(Object.values(STAT_LOOKUP).map(s => s.rentPerSqm))
+
+  for (const f of mainFeatures) {
+    const s = STAT_LOOKUP[f.properties?.name]
+    if (s) {
+      f.properties.densityNorm = normDensity(s.density)
+      f.properties.avgAgeNorm  = normAge(s.avgAge)
+      f.properties.rentNorm    = normRent(s.rentPerSqm)
+    }
+  }
+
   return {
     DISTRICT_GEOJSON:        { type: 'FeatureCollection', features: mainFeatures },
     DISTRICT_LABELS_GEOJSON: { type: 'FeatureCollection', features: labelFeatures },
     DISTRICT_SUBS_GEOJSON:   { type: 'FeatureCollection', features: subFeatures },
+    AREA_KM2,
   }
 })()
 
@@ -108,11 +171,95 @@ function raiseTopLayers(map) {
   }
 }
 
+const CHOROPLETH_CONFIG = [
+  { id: 'choropleth-density', param: 'density',    key: 'densityNorm', color: '#818cf8' },
+  { id: 'choropleth-avgAge',  param: 'avgAge',     key: 'avgAgeNorm',  color: '#f59e0b' },
+  { id: 'choropleth-rent',    param: 'rentPerSqm', key: 'rentNorm',    color: '#14b8a6' },
+]
+
+const AERIAL_MASK_GEOJSON = (() => {
+  try {
+    const allFeatures = []
+    for (const fc of Object.values(districtBoundaries)) {
+      if (!fc?.features) continue
+      for (const f of fc.features) {
+        allFeatures.push({ type: 'Feature', geometry: f.geometry, properties: {} })
+      }
+    }
+    if (!allFeatures.length) return null
+
+    let merged = allFeatures[0]
+    for (let i = 1; i < allFeatures.length; i++) {
+      const r = union({ type: 'FeatureCollection', features: [merged, allFeatures[i]] })
+      if (r) merged = r
+    }
+
+    const cityGeom = merged.geometry
+    const worldRing = [[-180,-90],[180,-90],[180,90],[-180,90],[-180,-90]]
+    const holeRings = cityGeom.type === 'Polygon'
+      ? [cityGeom.coordinates[0]]
+      : cityGeom.coordinates.map(p => p[0])
+
+    return {
+      type: 'FeatureCollection',
+      features: [{ type: 'Feature', geometry: { type: 'Polygon', coordinates: [worldRing, ...holeRings] }, properties: {} }],
+    }
+  } catch { return null }
+})()
+
+function registerIcon(map, id, drawFn, size = 24) {
+  if (map.hasImage(id)) return
+  const canvas = document.createElement('canvas')
+  canvas.width = size; canvas.height = size
+  const ctx = canvas.getContext('2d')
+  drawFn(ctx, size)
+  const img = ctx.getImageData(0, 0, size, size)
+  map.addImage(id, { width: size, height: size, data: img.data })
+}
+
+function registerXIcon(map, id, color) {
+  registerIcon(map, id, (ctx, s) => {
+    const p = 5
+    ctx.strokeStyle = color
+    ctx.lineWidth = 3.5
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(p, p);     ctx.lineTo(s - p, s - p)
+    ctx.moveTo(s - p, p); ctx.lineTo(p, s - p)
+    ctx.stroke()
+  }, 22)
+}
+
+function registerDiamondIcon(map, id, fillColor) {
+  registerIcon(map, id, (ctx, s) => {
+    const m = s / 2
+    ctx.beginPath()
+    ctx.moveTo(m, 2); ctx.lineTo(s - 2, m)
+    ctx.lineTo(m, s - 2); ctx.lineTo(2, m)
+    ctx.closePath()
+    ctx.fillStyle = fillColor
+    ctx.fill()
+    ctx.strokeStyle = 'rgba(255,255,255,0.9)'
+    ctx.lineWidth = 2
+    ctx.stroke()
+  }, 22)
+}
+
 export function useMapLayers(map) {
-  const { activeLayers, amenityData, pedestrianData, cyclingData, cycleParkingData, busStopsData, spaceFrequencyData, cyclingSpaceFrequencyData } = useMapStore()
+  const {
+    activeLayers, amenityData,
+    pedestrianData, cyclingData, cycleParkingData, busStopsData,
+    spaceFrequencyData, cyclingSpaceFrequencyData,
+    choroplethLayers, closureYear,
+  } = useMapStore()
   const psPopup      = useRef(null)
   const cpPopup      = useRef(null)
   const bsPopup      = useRef(null)
+  const googlePopup  = useRef(null)
+  const dwellPopup   = useRef(null)
+  const closurePopup = useRef(null)
+  const vacantPopup  = useRef(null)
+  const freqPopup    = useRef(null)
 
   // ── District boundaries ──────────────────────────────────────────────────
   useEffect(() => {
@@ -205,6 +352,7 @@ export function useMapLayers(map) {
             'text-halo-width': 1.5,
           },
         })
+
       } else {
         map.setLayoutProperty(FILL,      'visibility', 'visible')
         map.setLayoutProperty(LINE,      'visibility', 'visible')
@@ -220,6 +368,77 @@ export function useMapLayers(map) {
       if (map.getLayer(LABEL))     map.setLayoutProperty(LABEL,     'visibility', 'none')
     }
   }, [map, activeLayers.districts])
+
+  // ── Choropleth overlays (one fill layer per param, stackable) ────────────
+  useEffect(() => {
+    if (!map || !map.getSource('districts')) return
+
+    for (const { id, param, key, color } of CHOROPLETH_CONFIG) {
+      const visible = activeLayers.districts && choroplethLayers[param]
+      if (!map.getLayer(id)) {
+        const beforeId = map.getLayer('district-subs-line') ? 'district-subs-line' : undefined
+        map.addLayer({
+          id,
+          type: 'fill',
+          source: 'districts',
+          paint: {
+            'fill-color': color,
+            'fill-opacity': ['interpolate', ['linear'], ['get', key], 0, 0.0, 1, 0.55],
+          },
+          layout: { visibility: visible ? 'visible' : 'none' },
+        }, beforeId)
+      } else {
+        map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none')
+      }
+    }
+  }, [map, choroplethLayers, activeLayers.districts])
+
+  // ── Aerial Imagery (Esri World Imagery, masked to Wolfsburg boundary) ─────
+  useEffect(() => {
+    if (!map) return
+
+    const RASTER_SRC = 'aerial-imagery'
+    const RASTER_LYR = 'aerial-raster'
+    const MASK_SRC   = 'aerial-mask'
+    const MASK_LYR   = 'aerial-mask-fill'
+
+    if (activeLayers.aerialView) {
+      if (!map.getSource(RASTER_SRC)) {
+        const anchor = map.getStyle().layers.find(l => l.type === 'line' || l.type === 'symbol')?.id
+
+        map.addSource(RASTER_SRC, {
+          type: 'raster',
+          tiles: ['https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+          tileSize: 256,
+          maxzoom: 20,
+          attribution: '© Esri, Earthstar Geographics',
+        })
+
+        map.addLayer({
+          id: RASTER_LYR,
+          type: 'raster',
+          source: RASTER_SRC,
+          paint: { 'raster-opacity': 1, 'raster-fade-duration': 300 },
+        }, anchor)
+
+        if (AERIAL_MASK_GEOJSON) {
+          map.addSource(MASK_SRC, { type: 'geojson', data: AERIAL_MASK_GEOJSON })
+          map.addLayer({
+            id: MASK_LYR,
+            type: 'fill',
+            source: MASK_SRC,
+            paint: { 'fill-color': '#f5f4f2', 'fill-opacity': 1 },
+          }, anchor)
+        }
+      } else {
+        map.setLayoutProperty(RASTER_LYR, 'visibility', 'visible')
+        if (map.getLayer(MASK_LYR)) map.setLayoutProperty(MASK_LYR, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(RASTER_LYR)) map.setLayoutProperty(RASTER_LYR, 'visibility', 'none')
+      if (map.getLayer(MASK_LYR))   map.setLayoutProperty(MASK_LYR,   'visibility', 'none')
+    }
+  }, [map, activeLayers.aerialView])
 
   // ── Amenities ─────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -862,6 +1081,10 @@ export function useMapLayers(map) {
 
         map.on('mouseenter', LYR, () => { map.getCanvas().style.cursor = 'pointer' })
         map.on('mouseleave', LYR, () => { map.getCanvas().style.cursor = '' })
+        map.on('click', (e) => {
+          if (!map.queryRenderedFeatures(e.point, { layers: [LYR] }).length && psPopup.current?.isOpen())
+            psPopup.current.remove()
+        })
       } else {
         map.setLayoutProperty(LYR, 'visibility', 'visible')
       }
@@ -870,4 +1093,411 @@ export function useMapLayers(map) {
       if (psPopup.current) psPopup.current.remove()
     }
   }, [map, activeLayers.publicSpaces])
+
+  // ── Neighbourhood Hotspots (frequency analysis) ───────────────────────────
+  useEffect(() => {
+    if (!map) return
+
+    const SRC  = 'public-spaces-freq'
+    const HEAT = 'freq-heat'
+    const DOT  = 'freq-dots'
+
+    if (activeLayers.frequencyAnalysis) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: PUBLIC_SPACES_GEOJSON })
+
+        map.addLayer({
+          id: HEAT,
+          type: 'heatmap',
+          source: SRC,
+          paint: {
+            'heatmap-weight': ['interpolate', ['linear'], ['get', 'frequencyScore'], 0, 0, 100, 1],
+            'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 10, 0.8, 15, 2],
+            'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 10, 25, 15, 45],
+            'heatmap-opacity': ['interpolate', ['linear'], ['zoom'], 12, 0.85, 14, 0.4],
+            'heatmap-color': [
+              'interpolate', ['linear'], ['heatmap-density'],
+              0,    'rgba(254,249,195,0)',
+              0.25, '#fef9c3',
+              0.5,  '#fbbf24',
+              0.75, '#f97316',
+              1.0,  '#dc2626',
+            ],
+          },
+        })
+
+        map.addLayer({
+          id: DOT,
+          type: 'circle',
+          source: SRC,
+          minzoom: 13,
+          paint: {
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 13, 5, 16, 10],
+            'circle-color': [
+              'interpolate', ['linear'], ['get', 'frequencyScore'],
+              0, '#fef9c3', 25, '#fbbf24', 50, '#f97316', 75, '#dc2626',
+            ],
+            'circle-opacity': 0.9,
+            'circle-stroke-width': 2,
+            'circle-stroke-color': 'rgba(255,255,255,0.9)',
+          },
+        })
+
+        const popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: '260px' })
+        freqPopup.current = popup
+
+        map.on('click', DOT, (e) => {
+          const p = e.features[0].properties
+          const tierColors = { 'very-high': '#ef4444', high: '#f97316', medium: '#f59e0b', low: '#22c55e', 'very-low': '#3b82f6' }
+          const tierColor  = tierColors[p.frequencyTier] ?? '#6b7280'
+          const tierLabel  = (p.frequencyTier ?? '').replace('-', ' ').replace(/\b\w/g, c => c.toUpperCase())
+          popup
+            .setLngLat(e.lngLat)
+            .setHTML(
+              `<div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:8px;height:8px;border-radius:50%;background:${tierColor};flex-shrink:0"></div>
+                  <span style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600">${p.typology}</span>
+                </div>
+                <div style="font-size:14px;font-weight:700;color:#111827;margin-bottom:4px;line-height:1.3">${p.name}</div>
+                <div style="font-size:11px;color:#6b7280;margin-bottom:6px">${p.district ?? ''}</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                  <span style="font-size:11px;font-weight:700;color:${tierColor}">${tierLabel}</span>
+                  <span style="font-size:11px;color:#9ca3af">${p.frequencyScore}/100</span>
+                </div>
+                <div style="font-size:10px;color:#9ca3af;border-top:1px solid #f3f4f6;padding-top:5px">Source: OpenStreetMap</div>
+              </div>`
+            )
+            .addTo(map)
+        })
+
+        map.on('mouseenter', DOT, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', DOT, () => { map.getCanvas().style.cursor = '' })
+        map.on('click', (e) => {
+          if (!map.queryRenderedFeatures(e.point, { layers: [DOT] }).length && freqPopup.current?.isOpen())
+            freqPopup.current.remove()
+        })
+      } else {
+        map.setLayoutProperty(HEAT, 'visibility', 'visible')
+        map.setLayoutProperty(DOT,  'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(HEAT)) map.setLayoutProperty(HEAT, 'visibility', 'none')
+      if (map.getLayer(DOT))  map.setLayoutProperty(DOT,  'visibility', 'none')
+      if (freqPopup.current) freqPopup.current.remove()
+    }
+  }, [map, activeLayers.frequencyAnalysis])
+
+  // ── Google Activity Heatmap ───────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+
+    const SRC  = 'google-activity'
+    const HEAT = 'google-activity-heat'
+    const DOT  = 'google-activity-dots'
+
+    if (activeLayers.googleActivity) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: GOOGLE_PLACES_GEOJSON })
+
+        map.addLayer({
+          id: HEAT,
+          type: 'heatmap',
+          source: SRC,
+          paint: {
+            'heatmap-weight': ['interpolate', ['linear'], ['get', 'weight'], 0, 0, 8, 1],
+            'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 10, 0.6, 15, 1.5],
+            'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 10, 20, 15, 50],
+            'heatmap-opacity': ['interpolate', ['linear'], ['zoom'], 12, 0.85, 15, 0.4],
+            'heatmap-color': [
+              'interpolate', ['linear'], ['heatmap-density'],
+              0,    'rgba(191,219,254,0)',
+              0.2,  '#bfdbfe',
+              0.5,  '#818cf8',
+              0.8,  '#4338ca',
+              1.0,  '#312e81',
+            ],
+          },
+        })
+
+        map.addLayer({
+          id: DOT,
+          type: 'circle',
+          source: SRC,
+          minzoom: 13,
+          paint: {
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 13, 3, 16, 7],
+            'circle-color': '#6366f1',
+            'circle-opacity': 0.85,
+            'circle-stroke-width': 1.5,
+            'circle-stroke-color': 'rgba(255,255,255,0.9)',
+          },
+        })
+
+        const popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: '240px' })
+        googlePopup.current = popup
+
+        map.on('click', DOT, (e) => {
+          const p = e.features[0].properties
+          popup
+            .setLngLat(e.lngLat)
+            .setHTML(
+              `<div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="font-size:14px;font-weight:700;color:#111827;margin-bottom:4px">${p.name}</div>
+                <div style="font-size:11px;color:#6b7280;margin-bottom:5px">${p.types || ''}</div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:13px;font-weight:700;color:#f97316">★ ${p.rating || '—'}</span>
+                  <span style="font-size:11px;color:#9ca3af">${(p.reviewCount || 0).toLocaleString()} reviews</span>
+                </div>
+              </div>`
+            )
+            .addTo(map)
+        })
+
+        map.on('mouseenter', DOT, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', DOT, () => { map.getCanvas().style.cursor = '' })
+        map.on('click', (e) => {
+          if (!map.queryRenderedFeatures(e.point, { layers: [DOT] }).length && googlePopup.current?.isOpen())
+            googlePopup.current.remove()
+        })
+      } else {
+        map.setLayoutProperty(HEAT, 'visibility', 'visible')
+        map.setLayoutProperty(DOT,  'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(HEAT)) map.setLayoutProperty(HEAT, 'visibility', 'none')
+      if (map.getLayer(DOT))  map.setLayoutProperty(DOT,  'visibility', 'none')
+      if (googlePopup.current) googlePopup.current.remove()
+    }
+  }, [map, activeLayers.googleActivity])
+
+  // ── Dwell Infrastructure ──────────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+
+    const SRC  = 'dwell-infra'
+    const HEAT = 'dwell-heat'
+    const DOT  = 'dwell-dots'
+
+    if (activeLayers.dwellInfrastructure) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: DWELL_GEOJSON })
+
+        map.addLayer({
+          id: HEAT,
+          type: 'heatmap',
+          source: SRC,
+          maxzoom: 15,
+          paint: {
+            'heatmap-weight': ['interpolate', ['linear'], ['get', 'weight'], 1, 0.2, 5, 1],
+            'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 10, 0.4, 15, 1.2],
+            'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 10, 12, 15, 30],
+            'heatmap-opacity': ['interpolate', ['linear'], ['zoom'], 12, 0.8, 15, 0],
+            'heatmap-color': [
+              'interpolate', ['linear'], ['heatmap-density'],
+              0,   'rgba(167,243,208,0)',
+              0.2, '#a7f3d0',
+              0.5, '#10b981',
+              0.8, '#065f46',
+              1.0, '#022c22',
+            ],
+          },
+        })
+
+        map.addLayer({
+          id: DOT,
+          type: 'circle',
+          source: SRC,
+          minzoom: 13,
+          paint: {
+            'circle-radius': ['interpolate', ['linear'], ['zoom'],
+              13, ['case', ['==', ['get', 'type'], 'outdoor_seating'], 5, 3],
+              16, ['case', ['==', ['get', 'type'], 'outdoor_seating'], 9, 6],
+            ],
+            'circle-color': [
+              'match', ['get', 'type'],
+              'outdoor_seating', '#065f46',
+              'shelter',         '#059669',
+              'toilets',         '#059669',
+              'picnic_table',    '#6ee7b7',
+              '#a7f3d0',
+            ],
+            'circle-opacity': 0.9,
+            'circle-stroke-width': 1,
+            'circle-stroke-color': 'rgba(255,255,255,0.8)',
+          },
+        })
+
+        const popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: '220px' })
+        dwellPopup.current = popup
+
+        map.on('click', DOT, (e) => {
+          const p = e.features[0].properties
+          const stars = '●'.repeat(p.weight) + '○'.repeat(5 - p.weight)
+          const dotColor = { outdoor_seating:'#065f46', shelter:'#059669', toilets:'#059669', picnic_table:'#6ee7b7' }[p.type] ?? '#a7f3d0'
+          popup
+            .setLngLat(e.lngLat)
+            .setHTML(
+              `<div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:8px;height:8px;border-radius:50%;background:${dotColor};flex-shrink:0"></div>
+                  <span style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600">${p.label}</span>
+                </div>
+                ${p.name ? `<div style="font-size:13px;font-weight:600;color:#111827;margin-bottom:4px">${p.name}</div>` : ''}
+                <div style="font-size:11px;color:#f59e0b;letter-spacing:0.05em">${stars}</div>
+                <div style="font-size:10px;color:#9ca3af;margin-top:3px">Dwell weight: ${p.weight}/5</div>
+              </div>`
+            )
+            .addTo(map)
+        })
+
+        map.on('mouseenter', DOT, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', DOT, () => { map.getCanvas().style.cursor = '' })
+        map.on('click', (e) => {
+          if (!map.queryRenderedFeatures(e.point, { layers: [DOT] }).length && dwellPopup.current?.isOpen())
+            dwellPopup.current.remove()
+        })
+      } else {
+        map.setLayoutProperty(HEAT, 'visibility', 'visible')
+        map.setLayoutProperty(DOT,  'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(HEAT)) map.setLayoutProperty(HEAT, 'visibility', 'none')
+      if (map.getLayer(DOT))  map.setLayoutProperty(DOT,  'visibility', 'none')
+      if (dwellPopup.current) dwellPopup.current.remove()
+    }
+  }, [map, activeLayers.dwellInfrastructure])
+
+  // ── Shop & Café Closures ──────────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+
+    const SRC = 'closures'
+    const LYR = 'closures-dots'
+
+    if (activeLayers.closures) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: CLOSURES_DATA.closures })
+
+        registerXIcon(map, 'x-closure', '#64748b')
+
+        map.addLayer({
+          id: LYR,
+          type: 'symbol',
+          source: SRC,
+          filter: ['<=', ['get', 'year'], closureYear],
+          layout: {
+            'icon-image': 'x-closure',
+            'icon-size': ['interpolate', ['linear'], ['zoom'], 10, 0.6, 15, 1.3],
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true,
+          },
+        })
+
+        const popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: '240px' })
+        closurePopup.current = popup
+
+        map.on('click', LYR, (e) => {
+          const p = e.features[0].properties
+          popup
+            .setLngLat(e.lngLat)
+            .setHTML(
+              `<div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:8px;height:8px;border-radius:50%;background:#475569;flex-shrink:0"></div>
+                  <span style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600">Closed · ${p.venueType}</span>
+                </div>
+                <div style="font-size:14px;font-weight:700;color:#111827;margin-bottom:4px">${p.name || 'Unnamed venue'}</div>
+                <div style="font-size:11px;color:#6b7280;margin-bottom:3px">Closed: ${p.year ?? 'unknown'}</div>
+                <div style="font-size:10px;color:#9ca3af">Source: OpenStreetMap history</div>
+              </div>`
+            )
+            .addTo(map)
+        })
+
+        map.on('mouseenter', LYR, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', LYR, () => { map.getCanvas().style.cursor = '' })
+        map.on('click', (e) => {
+          if (!map.queryRenderedFeatures(e.point, { layers: [LYR] }).length && closurePopup.current?.isOpen())
+            closurePopup.current.remove()
+        })
+      } else {
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+      if (closurePopup.current) closurePopup.current.remove()
+    }
+  }, [map, activeLayers.closures])
+
+  // Update closure filter when slider year changes
+  useEffect(() => {
+    if (!map || !map.getLayer('closures-dots')) return
+    map.setFilter('closures-dots', ['<=', ['get', 'year'], closureYear])
+  }, [map, closureYear])
+
+  // ── Vacant Places (OSM shop=vacant / disused:shop) ────────────────────────
+  useEffect(() => {
+    if (!map) return
+
+    const SRC = 'vacant-places'
+    const LYR = 'vacant-dots'
+
+    if (activeLayers.vacantPlaces) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: VACANT_GEOJSON })
+
+        registerDiamondIcon(map, 'diamond-vacant', '#f97316')
+
+        map.addLayer({
+          id: LYR,
+          type: 'symbol',
+          source: SRC,
+          layout: {
+            'icon-image': 'diamond-vacant',
+            'icon-size': ['interpolate', ['linear'], ['zoom'], 10, 0.7, 15, 1.4],
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true,
+          },
+        })
+
+        const popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: '240px' })
+        vacantPopup.current = popup
+
+        map.on('click', LYR, (e) => {
+          const p = e.features[0].properties
+          const former = p.formerType ? `Former: ${p.formerType}` : 'Former use: unknown'
+          const checked = p.checkDate ? `Verified: ${p.checkDate}` : ''
+          popup
+            .setLngLat(e.lngLat)
+            .setHTML(
+              `<div style="font-family:system-ui,sans-serif;padding:2px 0">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:8px;height:8px;border-radius:50%;background:#f97316;flex-shrink:0"></div>
+                  <span style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600">Vacant Storefront</span>
+                </div>
+                ${p.name ? `<div style="font-size:14px;font-weight:700;color:#111827;margin-bottom:4px">${p.name}</div>` : ''}
+                ${p.address ? `<div style="font-size:11px;color:#6b7280;margin-bottom:3px">${p.address}</div>` : ''}
+                <div style="font-size:11px;color:#9ca3af;margin-bottom:3px">${former}</div>
+                ${checked ? `<div style="font-size:10px;color:#9ca3af">${checked}</div>` : ''}
+                <div style="font-size:10px;color:#9ca3af;border-top:1px solid #f3f4f6;margin-top:5px;padding-top:4px">Source: OpenStreetMap</div>
+              </div>`
+            )
+            .addTo(map)
+        })
+
+        map.on('mouseenter', LYR, () => { map.getCanvas().style.cursor = 'pointer' })
+        map.on('mouseleave', LYR, () => { map.getCanvas().style.cursor = '' })
+        map.on('click', (e) => {
+          if (!map.queryRenderedFeatures(e.point, { layers: [LYR] }).length && vacantPopup.current?.isOpen())
+            vacantPopup.current.remove()
+        })
+      } else {
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+      if (vacantPopup.current) vacantPopup.current.remove()
+    }
+  }, [map, activeLayers.vacantPlaces])
 }

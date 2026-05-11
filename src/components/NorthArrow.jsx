@@ -25,11 +25,9 @@ export default function NorthArrow({ map }) {
           transition: 'transform 0.1s linear',
         }}
       >
-        {/* North — red */}
-        <path d="M11 2 L13 11 L11 10 L9 11 Z" fill="#ef4444" />
-        {/* South — muted */}
-        <path d="M11 20 L13 11 L11 12 L9 11 Z" fill="#475569" />
-        <circle cx="11" cy="11" r="1.5" fill="white" opacity="0.75" />
+        <path d="M11 2 L13 11 L11 10 L9 11 Z" fill="white" />
+        <path d="M11 20 L13 11 L11 12 L9 11 Z" fill="#4b5563" />
+        <circle cx="11" cy="11" r="1.5" fill="white" opacity="0.6" />
       </svg>
     </button>
   )

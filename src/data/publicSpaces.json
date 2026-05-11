@@ -1,582 +1,2259 @@
 ﻿{
   "type": "FeatureCollection",
   "features": [
-
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7847, 52.4233] },
-      "properties": { "name": "Rathausplatz", "typology": "Civic Plaza", "typologyId": 1, "color": "#f59e0b", "areaHa": 0.5, "area": "0.5 ha", "description": "Main civic square in front of City Hall. Hosts Christmas market, summer festivals, and community events.", "status": "Exists — needs activation" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7152369, 52.4181229] },
-      "properties": { "name": "Gänseliesel-Platz", "typology": "Civic Plaza", "typologyId": 1, "color": "#f59e0b", "areaHa": 0.08, "area": "0.08 ha", "description": "Small civic square in Fallersleben old town.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7895832, 52.4264239] },
-      "properties": { "name": "Sara-Frenkel-Platz", "typology": "Civic Plaza", "typologyId": 1, "color": "#f59e0b", "areaHa": 0.15, "area": "0.15 ha", "description": "Named memorial square near the Hauptbahnhof and Phaeno.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7604587, 52.4205440] },
-      "properties": { "name": "Brandenburger Platz", "typology": "Civic Plaza", "typologyId": 1, "color": "#f59e0b", "areaHa": 0.3, "area": "0.3 ha", "description": "Pedestrian square in the Westhagen residential area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8049012, 52.4347416] },
-      "properties": { "name": "Plaza (Autostadt-Bereich)", "typology": "Civic Plaza", "typologyId": 1, "color": "#f59e0b", "areaHa": 0.2, "area": "0.2 ha", "description": "Named plaza in the Autostadt district.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7177898, 52.4095124] },
-      "properties": { "name": "Schützenplatz Fallersleben", "typology": "Civic Plaza", "typologyId": 1, "color": "#f59e0b", "areaHa": 0.25, "area": "0.25 ha", "description": "Historic Schützenplatz in Fallersleben.", "status": "Exists" }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8022349, 52.4393009] },
-      "properties": { "name": "Schlosspark Wolfsburg", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 6, "area": "6 ha", "description": "Historic park surrounding Wolfsburg Castle (now housing the Stadtmuseum). Walking paths, lawns, and the Barockgarten.", "status": "Exists — good condition" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7176907, 52.4170069] },
-      "properties": { "name": "Schloßpark Fallersleben", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 3, "area": "3 ha", "description": "Park surrounding Schloss Fallersleben, birthplace of Hoffmann von Fallersleben. Historic trees and garden layout.", "status": "Exists — historic character" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7820, 52.4162] },
-      "properties": { "name": "Klieversberg Park", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 25, "area": "25 ha", "description": "Forested hill park south of the city centre. Walking trails through woodland with views over Wolfsburg and the VW plant.", "status": "Exists — natural character" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7916577, 52.4238705] },
-      "properties": { "name": "Otto-Wels-Platz", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 0.3, "area": "0.3 ha", "description": "Village green / small park in the city centre area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8393454, 52.4417575] },
-      "properties": { "name": "Am Ehrenfriedhof", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 0.5, "area": "0.5 ha", "description": "Park area at the memorial cemetery in the northeast.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7290258, 52.3941186] },
-      "properties": { "name": "Gutspark", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 1.5, "area": "1.5 ha", "description": "Estate park in the Wolfsburg-Süd area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8546390, 52.3884259] },
-      "properties": { "name": "Wasserpark Hehlingen", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 2, "area": "2 ha", "description": "Water-themed park in the Hehlingen district.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7652253, 52.4294003] },
-      "properties": { "name": "Park Detmerode", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 0.8, "area": "0.8 ha", "description": "Neighborhood park in the Detmerode residential area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8389879, 52.3448987] },
-      "properties": { "name": "Rodelberg Neindorf", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 1, "area": "1 ha", "description": "Sledging hill park in the Neindorf area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7512171, 52.3989914] },
-      "properties": { "name": "Schäferkamp", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 1.5, "area": "1.5 ha", "description": "Green open space in the southern Wolfsburg area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7093297, 52.4194710] },
-      "properties": { "name": "Schwefelpark", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 1, "area": "1 ha", "description": "Neighborhood park in the Fallersleben / Wessinghausen area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7814279, 52.4470739] },
-      "properties": { "name": "Übungsfläche Allerpark", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 0.5, "area": "0.5 ha", "description": "Lawn exercise and recreation area on the edge of Allerpark.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7751364, 52.3985409] },
-      "properties": { "name": "Arboretum", "typology": "Neighborhood Park", "typologyId": 2, "color": "#22c55e", "areaHa": 2, "area": "2 ha", "description": "Tree collection garden in southern Wolfsburg. Educational and recreational character.", "status": "Exists" }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7665451, 52.4267772] },
-      "properties": { "name": "Glepner", "typology": "Pocket Park", "typologyId": 3, "color": "#86efac", "areaHa": 0.2, "area": "0.2 ha", "description": "Small interblock green space in Detmerode.", "status": "Exists — underequipped" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8029737, 52.4201192] },
-      "properties": { "name": "Generationen-Garten", "typology": "Pocket Park", "typologyId": 3, "color": "#86efac", "areaHa": 0.3, "area": "0.3 ha", "description": "Intergenerational garden space in the Steimker Gärten neighbourhood.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8561468, 52.3439719] },
-      "properties": { "name": "Dorfmitte", "typology": "Pocket Park", "typologyId": 3, "color": "#86efac", "areaHa": 0.15, "area": "0.15 ha", "description": "Village green in the Almke rural district.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8304770, 52.4449615] },
-      "properties": { "name": "Schulgarten", "typology": "Pocket Park", "typologyId": 3, "color": "#86efac", "areaHa": 0.2, "area": "0.2 ha", "description": "School garden space in the northeastern residential area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7774524, 52.3490875] },
-      "properties": { "name": "Bibelgarten", "typology": "Pocket Park", "typologyId": 3, "color": "#86efac", "areaHa": 0.15, "area": "0.15 ha", "description": "Themed Bible garden in the southern Wolfsburg rural area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7983331, 52.4402635] },
-      "properties": { "name": "Barockgarten", "typology": "Pocket Park", "typologyId": 3, "color": "#86efac", "areaHa": 0.4, "area": "0.4 ha", "description": "Formal baroque garden adjacent to Schloss Wolfsburg.", "status": "Exists — historic character" }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7885, 52.4440] },
-      "properties": { "name": "Allerpark", "typology": "Linear Park / Greenway", "typologyId": 4, "color": "#16a34a", "areaHa": 95, "area": "95 ha", "description": "Wolfsburg's primary green infrastructure. Linear park along the Aller River including the Allersee lake, sports fields, cycling trails, and nature zones.", "status": "Exists — well used" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7900, 52.4295] },
-      "properties": { "name": "Mittellandkanal Greenway", "typology": "Linear Park / Greenway", "typologyId": 4, "color": "#16a34a", "areaHa": 8, "area": "~2 km corridor", "description": "Canal-side green corridor along the Mittellandkanal. Walking and cycling path connecting the city east–west. Currently informal and underdesigned.", "status": "Exists — upgrade potential" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7737230, 52.4003709] },
-      "properties": { "name": "Erlengrund", "typology": "Linear Park / Greenway", "typologyId": 4, "color": "#16a34a", "areaHa": 10, "area": "10 ha", "description": "Nature reserve and green corridor in southern Wolfsburg. Alder woodland and wetland habitat.", "status": "Nature reserve — protected" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7291294, 52.4304757] },
-      "properties": { "name": "Südliche Düpenwiesen", "typology": "Linear Park / Greenway", "typologyId": 4, "color": "#16a34a", "areaHa": 15, "area": "15 ha", "description": "Nature reserve meadowland in western Wolfsburg along the Düpenau stream corridor.", "status": "Nature reserve — protected" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8282159, 52.3700448] },
-      "properties": { "name": "Barnstorfer Wald", "typology": "Linear Park / Greenway", "typologyId": 4, "color": "#16a34a", "areaHa": 50, "area": "50 ha", "description": "Large forest nature reserve in southeastern Wolfsburg. Walking and cycling trails through ancient woodland.", "status": "Nature reserve — protected" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8229222, 52.3535267] },
-      "properties": { "name": "Talniederung im Barnstorfer Wald", "typology": "Linear Park / Greenway", "typologyId": 4, "color": "#16a34a", "areaHa": 20, "area": "20 ha", "description": "Valley floor nature reserve within the Barnstorf forest complex.", "status": "Nature reserve — protected" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7108105, 52.3796734] },
-      "properties": { "name": "Hohnstedter Holz", "typology": "Linear Park / Greenway", "typologyId": 4, "color": "#16a34a", "areaHa": 15, "area": "15 ha", "description": "Woodland nature reserve in the western Wolfsburg rural area.", "status": "Nature reserve — protected" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8612608, 52.3452010] },
-      "properties": { "name": "NSG Almker Mergelgruben", "typology": "Linear Park / Greenway", "typologyId": 4, "color": "#16a34a", "areaHa": 10, "area": "10 ha", "description": "Protected nature reserve with former chalk pits near Almke. Rare calcareous grassland habitat.", "status": "Nature reserve — protected" }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7875, 52.4462] },
-      "properties": { "name": "Allersee Promenade", "typology": "Waterfront Promenade", "typologyId": 5, "color": "#06b6d4", "areaHa": 4, "area": "3.5 km circuit", "description": "Continuous promenade and cycle path around the Allersee lake. Wolfsburg's most popular recreational loop — walking, cycling, and water views.", "status": "Exists — strong public asset" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7940, 52.4297] },
-      "properties": { "name": "Mittellandkanal Promenade", "typology": "Waterfront Promenade", "typologyId": 5, "color": "#06b6d4", "areaHa": 1.5, "area": "1.2 km", "description": "Canalside walkway along the Mittellandkanal near the Autostadt. Views of the canal and the iconic VW car towers.", "status": "Exists — informal, underdesigned" }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7474416, 52.4029769] },
-      "properties": { "name": "Spielzone", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Play zone in the southwestern Wolfsburg area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7728663, 52.4254116] },
-      "properties": { "name": "Bolzplatz Westhagen", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Informal ball games area in the Westhagen district.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8605423, 52.3460393] },
-      "properties": { "name": "Bolzplatz Almke", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Ball games area in the Almke district.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7773517, 52.4211379] },
-      "properties": { "name": "Spielplatz an der Goetheschule", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "School-adjacent playground near the Goethe school.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7305680, 52.4146877] },
-      "properties": { "name": "Aktivspielplatz Fallersleben", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.4, "area": "0.4 ha", "description": "Adventure playground in Fallersleben — one of Wolfsburg's larger dedicated play areas.", "status": "Exists — good quality" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7910741, 52.4312296] },
-      "properties": { "name": "Kletterinstallationen", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.2, "area": "0.2 ha", "description": "Climbing installations play area near the Autostadt district.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7925856, 52.4177076] },
-      "properties": { "name": "Spielplastik am Schillerteich", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.2, "area": "0.2 ha", "description": "Play sculpture area by the Schillerteich pond.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7974550, 52.4601268] },
-      "properties": { "name": "Spielplatz KGV Kraunsbusch", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Playground at the Kraunsbusch allotment area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7919671, 52.4313525] },
-      "properties": { "name": "MobiVersum", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.3, "area": "0.3 ha", "description": "Mobility-themed outdoor play installation near the Autostadt.", "status": "Exists — thematic" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7462478, 52.4593280] },
-      "properties": { "name": "Rodelberg Playground", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.3, "area": "0.3 ha", "description": "Play and sledging hill in the northern Wolfsburg area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8297347, 52.4175004] },
-      "properties": { "name": "Spielplatz Von-Ebner-Eschenbach-Ring", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Residential playground in the Steimker Gärten area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8318275, 52.4193781] },
-      "properties": { "name": "Spielplatz Selma-Lagerlöf-Ring", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Residential playground in the Steimker Gärten area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8531944, 52.3944483] },
-      "properties": { "name": "Kinderspielplatz Hehlingen", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Children's playground in the Hehlingen district.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8079747, 52.4329350] },
-      "properties": { "name": "Seilspielplatz Bodenlos", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.3, "area": "0.3 ha", "description": "Rope and adventure playground near Badeland.", "status": "Exists — quality play provision" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7947041, 52.4211864] },
-      "properties": { "name": "Spielplatz Teichgarten", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.2, "area": "0.2 ha", "description": "Playground in the Teichgarten residential area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8220632, 52.4191959] },
-      "properties": { "name": "Spielplatz Nahestraße", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Playground on Nahestraße in Wolfsburg-Ost.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7430093, 52.4042831] },
-      "properties": { "name": "Freizeitpark Westhagen", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.5, "area": "0.5 ha", "description": "Leisure park and play area in Westhagen — one of the larger play provisions in the western districts.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8412904, 52.4207150] },
-      "properties": { "name": "Spielplatz Reislingen", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Playground at the old school site in Reislingen.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8304676, 52.4127812] },
-      "properties": { "name": "Fanny-Lewald-Ring Süd", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.2, "area": "0.2 ha", "description": "Playground in the Steimker Gärten southern sector.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7135381, 52.4012240] },
-      "properties": { "name": "Jugendspielort Kerksiek", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.3, "area": "0.3 ha", "description": "Youth play area in Kerksiek, southwestern Wolfsburg.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8045211, 52.4202882] },
-      "properties": { "name": "Spielplatz Gladiolenweg", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Residential playground on Gladiolenweg in Wolfsburg-Ost.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7565897, 52.4293631] },
-      "properties": { "name": "Spielplatz Stellfelder Straße", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Playground on Stellfelder Straße in the Detmerode area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8030653, 52.4211320] },
-      "properties": { "name": "Kinderspielplatz Dahlienweg 7-9", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Children's playground on Dahlienweg, Wolfsburg-Ost.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8017487, 52.4211794] },
-      "properties": { "name": "Spielplatz Dahlienweg 5", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Playground on Dahlienweg 5, Wolfsburg-Ost.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8011505, 52.4234713] },
-      "properties": { "name": "Spielplatz Kiebitzweg", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Playground on Kiebitzweg, Wolfsburg-Ost.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8221622, 52.4189599] },
-      "properties": { "name": "Kinderspielplatz Lahnstraße II", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Children's playground on Lahnstraße, Wolfsburg-Ost.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8099354, 52.4190925] },
-      "properties": { "name": "Kinderspielplatz Am Krokusplan", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.2, "area": "0.2 ha", "description": "Children's playground at Am Krokusplan, Wolfsburg-Ost.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8075529, 52.4193113] },
-      "properties": { "name": "Mini Spielplatz 1", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.08, "area": "0.08 ha", "description": "Very small toddler play area in Wolfsburg-Ost.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8196410, 52.4132143] },
-      "properties": { "name": "Kita Steimker Gärten Spielplatz", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.2, "area": "0.2 ha", "description": "Kindergarten play area in the Steimker Gärten development.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8114602, 52.4200449] },
-      "properties": { "name": "Spielplatz Am Krokusplan Ost", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.2, "area": "0.2 ha", "description": "Eastern playground at Am Krokusplan, Wolfsburg-Ost.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7946778, 52.4224670] },
-      "properties": { "name": "Spielplatz Teichgarten 5", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Playground in the Teichgarten residential block.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7739803, 52.4192519] },
-      "properties": { "name": "Spielplatz Brahmsring", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.2, "area": "0.2 ha", "description": "Playground on Brahmsring in the western residential area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7988291, 52.4240557] },
-      "properties": { "name": "Bolzplatz Am Zehnten Weg", "typology": "Playground", "typologyId": 6, "color": "#ec4899", "areaHa": 0.15, "area": "0.15 ha", "description": "Ball games area on Am Zehnten Weg.", "status": "Exists" }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7583399, 52.4248223] },
-      "properties": { "name": "KGV Sonnenschein", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1.5, "area": "1.5 ha", "description": "Kleingärtnerverein Sonnenschein — allotment garden complex in Detmerode.", "status": "Exists — active community" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7555118, 52.4255983] },
-      "properties": { "name": "KGV Westersieck", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1, "area": "1 ha", "description": "Kleingärtnerverein Westersieck — allotment complex in Detmerode.", "status": "Exists — active community" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7782588, 52.4240829] },
-      "properties": { "name": "KGV Wellekamp", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1, "area": "1 ha", "description": "Allotment gardens in the western city area.", "status": "Exists — active community" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7420064, 52.4109389] },
-      "properties": { "name": "KGV Am Laagberg", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 2, "area": "2 ha", "description": "Kleingärtnerverein Am Laagberg — large allotment complex in southwestern Wolfsburg.", "status": "Exists — active community" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7408982, 52.3917532] },
-      "properties": { "name": "KGV Detmerode", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1.5, "area": "1.5 ha", "description": "Kleingärtnerverein Detmerode allotment gardens.", "status": "Exists — active community" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8236775, 52.4543175] },
-      "properties": { "name": "Zum Fuhrenkamp I", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1.2, "area": "1.2 ha", "description": "Allotment garden complex in northeastern Wolfsburg.", "status": "Exists — active community" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8241632, 52.4515525] },
-      "properties": { "name": "Zum Fuhrenkamp II", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1, "area": "1 ha", "description": "Second allotment complex at Fuhrenkamp in northeastern Wolfsburg.", "status": "Exists — active community" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8491053, 52.4614808] },
-      "properties": { "name": "KGV Morgenfelde Wendschott", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 2, "area": "2 ha", "description": "Kleingärtnerverein Am Morgenfelde Wendschott — allotment complex in Wendschott.", "status": "Exists — active community" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7961467, 52.4608779] },
-      "properties": { "name": "KGV Kraunsbusch", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 2, "area": "2 ha", "description": "Large allotment garden complex in the Kraunsbusch area, north Wolfsburg.", "status": "Exists — active community" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7343707, 52.4035247] },
-      "properties": { "name": "Gärten der Nationen", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1, "area": "1 ha", "description": "Gardens of Nations — multicultural community garden in southwestern Wolfsburg.", "status": "Exists — intercultural asset" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8293838, 52.3384676] },
-      "properties": { "name": "Kleingarten Neindorf", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1, "area": "1 ha", "description": "Allotment gardens in the Neindorf village.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7533596, 52.3631671] },
-      "properties": { "name": "KGV Hattorf", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1.5, "area": "1.5 ha", "description": "Kleingärtnerverein Hattorf allotment gardens.", "status": "Exists — active community" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8781788, 52.4298374] },
-      "properties": { "name": "KGV Behrendorfer Wiesen", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1, "area": "1 ha", "description": "Allotment gardens in Behrendorf.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8752454, 52.4302325] },
-      "properties": { "name": "KGV An der Schreiberheide", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1, "area": "1 ha", "description": "Allotment complex at Schreiberheide in eastern Wolfsburg.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7059472, 52.4073543] },
-      "properties": { "name": "KGV Neuland I", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1.5, "area": "1.5 ha", "description": "Kleingartenverein Neuland — first plot in the Fallersleben area.", "status": "Exists — active community" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7066538, 52.4093606] },
-      "properties": { "name": "KGV Neuland II", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1, "area": "1 ha", "description": "Kleingartenverein Neuland — second plot in the Fallersleben area.", "status": "Exists — active community" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8447052, 52.4281640] },
-      "properties": { "name": "KGV Moorbreite", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1.5, "area": "1.5 ha", "description": "Kleingartenverein Moorbreite in eastern Wolfsburg.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8157187, 52.4234582] },
-      "properties": { "name": "KGV Am Schäferbusch", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1.5, "area": "1.5 ha", "description": "Allotment gardens at Schäferbusch, Wolfsburg-Ost.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8212045, 52.4243764] },
-      "properties": { "name": "KGV Schillerteich", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1.5, "area": "1.5 ha", "description": "Kleingärtnerverein Schillerteich allotment gardens.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8173480, 52.4246450] },
-      "properties": { "name": "KGV Ernteglück", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 1.2, "area": "1.2 ha", "description": "Kleingärtnerverein Ernteglück allotment gardens.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7594027, 52.4746521] },
-      "properties": { "name": "Imkerei (Allotment)", "typology": "Community Garden", "typologyId": 7, "color": "#84cc16", "areaHa": 0.5, "area": "0.5 ha", "description": "Beekeeping allotment in northern Wolfsburg.", "status": "Exists" }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7886134, 52.4242335] },
-      "properties": { "name": "Porschestraße (Fußgängerzone)", "typology": "Streetscape / Green Street", "typologyId": 8, "color": "#f97316", "areaHa": 1.4, "area": "700 m", "description": "Wolfsburg's main pedestrian shopping street — fully pedestrianised Fußgängerzone. Lacks trees, seating, and greenery. Major upgrade potential.", "status": "Exists — needs greening" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7857097, 52.4189978] },
-      "properties": { "name": "Hollerplatz", "typology": "Streetscape / Green Street", "typologyId": 8, "color": "#f97316", "areaHa": 0.2, "area": "0.2 ha", "description": "Pedestrianised urban space in the Südstadt area.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7869477, 52.4233420] },
-      "properties": { "name": "Kaufhofpassage", "typology": "Streetscape / Green Street", "typologyId": 8, "color": "#f97316", "areaHa": 0.3, "area": "0.3 ha", "description": "Pedestrian passage through the city centre retail block.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7883911, 52.4229513] },
-      "properties": { "name": "Maximilian-Kolbe-Weg", "typology": "Streetscape / Green Street", "typologyId": 8, "color": "#f97316", "areaHa": 0.3, "area": "0.3 ha", "description": "Named pedestrian way in the city centre.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8110540, 52.4211878] },
-      "properties": { "name": "Quartierspromenade Steimker Gärten", "typology": "Streetscape / Green Street", "typologyId": 8, "color": "#f97316", "areaHa": 0.5, "area": "0.5 ha", "description": "Residential promenade in the new Steimker Gärten development — one of Wolfsburg's better-designed pedestrian streets.", "status": "Exists — good quality" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8023547, 52.4478276] },
-      "properties": { "name": "Hansaplatz", "typology": "Streetscape / Green Street", "typologyId": 8, "color": "#f97316", "areaHa": 0.3, "area": "0.3 ha", "description": "Pedestrian area in the Hansaplatz neighbourhood, northeastern Wolfsburg.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7401592, 52.4035179] },
-      "properties": { "name": "Marktplatz Fallersleben", "typology": "Streetscape / Green Street", "typologyId": 8, "color": "#f97316", "areaHa": 0.2, "area": "0.2 ha", "description": "Historic market place in Fallersleben old town with the Springbrunnen fountain.", "status": "Exists — historic character" }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7862, 52.4478] },
-      "properties": { "name": "Allersee Freibad & Beach", "typology": "Urban Beach / Seasonal Space", "typologyId": 9, "color": "#eab308", "areaHa": 1.5, "area": "1.5 ha", "description": "Summer outdoor swimming area and sandy beach on the Allersee. Wolfsburg's primary urban beach, highly popular June–September.", "status": "Exists — seasonal, well-used" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7957677, 52.4133827] },
-      "properties": { "name": "VW-Bad", "typology": "Urban Beach / Seasonal Space", "typologyId": 9, "color": "#eab308", "areaHa": 1, "area": "1 ha", "description": "VW employee and public outdoor swimming facility.", "status": "Exists — operational" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8139047, 52.4359774] },
-      "properties": { "name": "Badeland Wolfsburg", "typology": "Urban Beach / Seasonal Space", "typologyId": 9, "color": "#eab308", "areaHa": 2, "area": "2 ha", "description": "Major indoor/outdoor water park on the Allersee. Year-round aquatic leisure destination.", "status": "Exists — major attraction" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8620434, 52.3487271] },
-      "properties": { "name": "Freibad Almke", "typology": "Urban Beach / Seasonal Space", "typologyId": 9, "color": "#eab308", "areaHa": 1, "area": "1 ha", "description": "Outdoor swimming pool in the Almke district — community Freibad serving the southern area.", "status": "Exists — seasonal" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8172624, 52.4341941] },
-      "properties": { "name": "Schwimminsel Allersee", "typology": "Urban Beach / Seasonal Space", "typologyId": 9, "color": "#eab308", "areaHa": 0.5, "area": "0.5 ha", "description": "Swimming island in the Allersee lake near Badeland.", "status": "Exists — seasonal" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8031410, 52.4348139] },
-      "properties": { "name": "Künstliche Insel (Allersee)", "typology": "Urban Beach / Seasonal Space", "typologyId": 9, "color": "#eab308", "areaHa": 0.3, "area": "0.3 ha", "description": "Artificial island in the Allersee — recreational node within the lake.", "status": "Exists" }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7904294, 52.4288550] },
-      "properties": { "name": "phaeno Science Centre", "typology": "Civic / Cultural Forecourt", "typologyId": 10, "color": "#8b5cf6", "areaHa": 0.4, "area": "0.4 ha", "description": "Zaha Hadid's phaeno (2005) — raised on concrete cones creating a covered public undercroft. One of Wolfsburg's most architecturally significant public spaces.", "status": "Exists — landmark" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7998186, 52.4319297] },
-      "properties": { "name": "Autostadt", "typology": "Civic / Cultural Forecourt", "typologyId": 10, "color": "#8b5cf6", "areaHa": 5, "area": "~25 ha (entry required)", "description": "Volkswagen's Autostadt — brand theme park and delivery centre. Major cultural attraction with pavilions, water features, and the iconic glass car towers.", "status": "Exists — semi-private, paid entry" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7907864, 52.4318044] },
-      "properties": { "name": "ZeitHaus (Autostadt)", "typology": "Civic / Cultural Forecourt", "typologyId": 10, "color": "#8b5cf6", "areaHa": 0.3, "area": "0.3 ha", "description": "Classic car museum within the Autostadt complex.", "status": "Exists — within Autostadt" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7805668, 52.4158396] },
-      "properties": { "name": "Scharoun-Theater Wolfsburg", "typology": "Civic / Cultural Forecourt", "typologyId": 10, "color": "#8b5cf6", "areaHa": 0.3, "area": "0.3 ha", "description": "Hans Scharoun's Wolfsburg Theatre (1973) — a key building in the Kulturmeile. The forecourt links theatre and city.", "status": "Exists — cultural anchor" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7875, 52.4243] },
-      "properties": { "name": "Kunstmuseum Wolfsburg", "typology": "Civic / Cultural Forecourt", "typologyId": 10, "color": "#8b5cf6", "areaHa": 0.2, "area": "0.2 ha", "description": "Contemporary art museum forecourt on the Porschestraße / Kulturmeile. Public art in the external space activates the street edge.", "status": "Exists — cultural anchor" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8085669, 52.4278189] },
-      "properties": { "name": "AutoMuseum Volkswagen", "typology": "Civic / Cultural Forecourt", "typologyId": 10, "color": "#8b5cf6", "areaHa": 0.3, "area": "0.3 ha", "description": "Volkswagen automobile museum with public forecourt.", "status": "Exists" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7984654, 52.4394001] },
-      "properties": { "name": "Stadtmuseum Schloss Wolfsburg", "typology": "Civic / Cultural Forecourt", "typologyId": 10, "color": "#8b5cf6", "areaHa": 0.3, "area": "0.3 ha", "description": "City museum housed in the historic Wolfsburg Castle. Castle courtyard and forecourt as public space.", "status": "Exists — historic landmark" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7163006, 52.4171681] },
-      "properties": { "name": "Hoffmann-von-Fallersleben-Museum", "typology": "Civic / Cultural Forecourt", "typologyId": 10, "color": "#8b5cf6", "areaHa": 0.2, "area": "0.2 ha", "description": "Museum dedicated to the poet August Heinrich Hoffmann von Fallersleben, author of the German national anthem. In the Schloss Fallersleben.", "status": "Exists — historic significance" }
-    },
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.8023881, 52.4407598] },
-      "properties": { "name": "Landwirtschaftsmuseum Wolfsburg", "typology": "Civic / Cultural Forecourt", "typologyId": 10, "color": "#8b5cf6", "areaHa": 0.3, "area": "0.3 ha", "description": "Agricultural museum near Schloss Wolfsburg with outdoor exhibits.", "status": "Exists" }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7899495, 52.4270584] },
-      "properties": { "name": "Willy-Brandt-Platz / Hauptbahnhof", "typology": "Urban Plaza / Transit Plaza", "typologyId": 11, "color": "#3b82f6", "areaHa": 0.7, "area": "0.7 ha", "description": "Main arrival gateway of Wolfsburg linking the Hauptbahnhof, phaeno, and Autostadt. High pedestrian throughput but dominated by vehicle traffic. Significantly underperforms its potential.", "status": "Exists — major upgrade potential" }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [10.7998186, 52.4319297] },
-      "properties": { "name": "Autostadt Glastürme (Viewing Decks)", "typology": "Rooftop / Elevated Public Space", "typologyId": 12, "color": "#e11d48", "areaHa": 0.3, "area": "Semi-public", "description": "The iconic cylindrical glass car delivery towers of the Autostadt include elevated viewing platforms. Requires Autostadt entry. The only elevated public viewpoint in Wolfsburg — this typology is absent in the free public realm.", "status": "Gap — no fully public elevated space" }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.861258,
+          52.345272
+        ]
+      },
+      "properties": {
+        "name": "NSG Almker Mergelgruben",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.11,
+        "area": "1110 m²",
+        "description": "Pocket Park in Almke.",
+        "status": "Exists",
+        "district": "Almke",
+        "frequencyScore": 38,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.861929,
+          52.344967
+        ]
+      },
+      "properties": {
+        "name": "Rodelberg",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.05,
+        "area": "510 m²",
+        "description": "Pocket Park in Almke.",
+        "status": "Exists",
+        "district": "Almke",
+        "frequencyScore": 37,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.860542,
+          52.346039
+        ]
+      },
+      "properties": {
+        "name": "Bolzplatz",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Playground in Almke.",
+        "status": "Exists",
+        "district": "Almke",
+        "frequencyScore": 34,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.813501,
+          52.436004
+        ]
+      },
+      "properties": {
+        "name": "Badeland Wolfsburg",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.1,
+        "area": "990 m²",
+        "description": "Civic / Cultural Forecourt in Alt-Wolfsburg. 3 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Alt-Wolfsburg",
+        "frequencyScore": 68,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.814061,
+          52.43743
+        ]
+      },
+      "properties": {
+        "name": "EisArena Wolfsburg",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.07,
+        "area": "660 m²",
+        "description": "Civic / Cultural Forecourt in Alt-Wolfsburg. 2 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Alt-Wolfsburg",
+        "frequencyScore": 61,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.805168,
+          52.434616
+        ]
+      },
+      "properties": {
+        "name": "Plaza",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.1,
+        "area": "1020 m²",
+        "description": "Civic / Cultural Forecourt in Alt-Wolfsburg.",
+        "status": "Exists",
+        "district": "Alt-Wolfsburg",
+        "frequencyScore": 56,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.803719,
+          52.432649
+        ]
+      },
+      "properties": {
+        "name": "Volkswagen Arena",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.41,
+        "area": "4050 m²",
+        "description": "Civic / Cultural Forecourt in Alt-Wolfsburg. 1 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Alt-Wolfsburg",
+        "frequencyScore": 55,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.80078,
+          52.439617
+        ]
+      },
+      "properties": {
+        "name": "Schlosspark",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.24,
+        "area": "2400 m²",
+        "description": "Pocket Park in Alt-Wolfsburg. 2 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Alt-Wolfsburg",
+        "frequencyScore": 38,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.818409,
+          52.435526
+        ]
+      },
+      "properties": {
+        "name": "Allerpark",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Pocket Park in Alt-Wolfsburg.",
+        "status": "Exists",
+        "district": "Alt-Wolfsburg",
+        "frequencyScore": 33,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.798335,
+          52.440244
+        ]
+      },
+      "properties": {
+        "name": "Barockgarten",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Pocket Park in Alt-Wolfsburg. 2 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Alt-Wolfsburg",
+        "frequencyScore": 33,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.80799,
+          52.432887
+        ]
+      },
+      "properties": {
+        "name": "Seilspielplatz Bodenlos",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Alt-Wolfsburg. 2 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Alt-Wolfsburg",
+        "frequencyScore": 33,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.823709,
+          52.353616
+        ]
+      },
+      "properties": {
+        "name": "Talniederung im Barnstorfer Wald",
+        "typology": "Linear Park / Greenway",
+        "typologyId": 4,
+        "color": "#16a34a",
+        "areaHa": 0.33,
+        "area": "3330 m²",
+        "description": "Linear Park / Greenway in Barnstorf.",
+        "status": "Exists",
+        "district": "Barnstorf",
+        "frequencyScore": 16,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.754132,
+          52.393936
+        ]
+      },
+      "properties": {
+        "name": "Detmeroder Msrkt",
+        "typology": "Urban Plaza / Transit Plaza",
+        "typologyId": 11,
+        "color": "#3b82f6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Urban Plaza / Transit Plaza in Detmerode. 5 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Detmerode",
+        "frequencyScore": 68,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.713616,
+          52.401124
+        ]
+      },
+      "properties": {
+        "name": "Jugendspielort Kerksiek",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "510 m²",
+        "description": "Playground in Ehmen.",
+        "status": "Exists",
+        "district": "Ehmen",
+        "frequencyScore": 28,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.70983,
+          52.38003
+        ]
+      },
+      "properties": {
+        "name": "Hohnstedter Holz",
+        "typology": "Linear Park / Greenway",
+        "typologyId": 4,
+        "color": "#16a34a",
+        "areaHa": 0.61,
+        "area": "6060 m²",
+        "description": "Linear Park / Greenway in Ehmen.",
+        "status": "Exists",
+        "district": "Ehmen",
+        "frequencyScore": 17,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.715237,
+          52.418123
+        ]
+      },
+      "properties": {
+        "name": "Gänseliesel-Platz",
+        "typology": "Civic Plaza",
+        "typologyId": 1,
+        "color": "#f59e0b",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Civic Plaza in Fallersleben. 11 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Fallersleben",
+        "frequencyScore": 81,
+        "frequencyTier": "very-high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.716578,
+          52.418113
+        ]
+      },
+      "properties": {
+        "name": "Marktplatz",
+        "typology": "Urban Plaza / Transit Plaza",
+        "typologyId": 11,
+        "color": "#3b82f6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Urban Plaza / Transit Plaza in Fallersleben. 10 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Fallersleben",
+        "frequencyScore": 76,
+        "frequencyTier": "very-high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.717179,
+          52.416679
+        ]
+      },
+      "properties": {
+        "name": "Altes Brauhaus zu Fallersleben",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Civic / Cultural Forecourt in Fallersleben. 5 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Fallersleben",
+        "frequencyScore": 68,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.71715,
+          52.416745
+        ]
+      },
+      "properties": {
+        "name": "Altes Brauhaus zu Fallersleben",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Civic / Cultural Forecourt in Fallersleben. 5 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Fallersleben",
+        "frequencyScore": 68,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.717698,
+          52.409627
+        ]
+      },
+      "properties": {
+        "name": "Schützenplatz Fallersleben",
+        "typology": "Civic Plaza",
+        "typologyId": 1,
+        "color": "#f59e0b",
+        "areaHa": 0.06,
+        "area": "630 m²",
+        "description": "Civic Plaza in Fallersleben. 3 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Fallersleben",
+        "frequencyScore": 61,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.648218,
+          52.444477
+        ]
+      },
+      "properties": {
+        "name": "1000jährige Eiche",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Civic / Cultural Forecourt in Fallersleben.",
+        "status": "Exists",
+        "district": "Fallersleben",
+        "frequencyScore": 41,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.70998,
+          52.424266
+        ]
+      },
+      "properties": {
+        "name": "Asylbewerberheim",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Fallersleben.",
+        "status": "Exists",
+        "district": "Fallersleben",
+        "frequencyScore": 38,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.709412,
+          52.419293
+        ]
+      },
+      "properties": {
+        "name": "Schwefelpark",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.08,
+        "area": "840 m²",
+        "description": "Pocket Park in Fallersleben.",
+        "status": "Exists",
+        "district": "Fallersleben",
+        "frequencyScore": 38,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.730797,
+          52.414816
+        ]
+      },
+      "properties": {
+        "name": "Aktivspielplatz Fallersleben",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "540 m²",
+        "description": "Playground in Fallersleben.",
+        "status": "Exists",
+        "district": "Fallersleben",
+        "frequencyScore": 28,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.730542,
+          52.430953
+        ]
+      },
+      "properties": {
+        "name": "Südliche Düpenwiesen",
+        "typology": "Linear Park / Greenway",
+        "typologyId": 4,
+        "color": "#16a34a",
+        "areaHa": 0.05,
+        "area": "540 m²",
+        "description": "Linear Park / Greenway in Fallersleben.",
+        "status": "Exists",
+        "district": "Fallersleben",
+        "frequencyScore": 19,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.854956,
+          52.38842
+        ]
+      },
+      "properties": {
+        "name": "Wasserpark Hehlingen",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Pocket Park in Hehlingen.",
+        "status": "Exists",
+        "district": "Hehlingen",
+        "frequencyScore": 37,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.853161,
+          52.394416
+        ]
+      },
+      "properties": {
+        "name": "Kinderspielplatz",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Hehlingen.",
+        "status": "Exists",
+        "district": "Hehlingen",
+        "frequencyScore": 28,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.777414,
+          52.34909
+        ]
+      },
+      "properties": {
+        "name": "Bibelgarten",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Pocket Park in Heiligendorf.",
+        "status": "Exists",
+        "district": "Heiligendorf",
+        "frequencyScore": 33,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.825522,
+          52.36964
+        ]
+      },
+      "properties": {
+        "name": "Barnstorfer Wald",
+        "typology": "Linear Park / Greenway",
+        "typologyId": 4,
+        "color": "#16a34a",
+        "areaHa": 0.29,
+        "area": "2910 m²",
+        "description": "Linear Park / Greenway in Heiligendorf.",
+        "status": "Exists",
+        "district": "Heiligendorf",
+        "frequencyScore": 16,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.811351,
+          52.42126
+        ]
+      },
+      "properties": {
+        "name": "Quartierspromenade",
+        "typology": "Civic Plaza",
+        "typologyId": 1,
+        "color": "#f59e0b",
+        "areaHa": 0.21,
+        "area": "2070 m²",
+        "description": "Civic Plaza in Hellwinkel.",
+        "status": "Exists",
+        "district": "Hellwinkel",
+        "frequencyScore": 54,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.802906,
+          52.420041
+        ]
+      },
+      "properties": {
+        "name": "Generationen-Garten",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Pocket Park in Hellwinkel. 5 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Hellwinkel",
+        "frequencyScore": 46,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.804523,
+          52.420322
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz Gladiolenweg",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Hellwinkel. 5 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Hellwinkel",
+        "frequencyScore": 46,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.801756,
+          52.421203
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz Dahlienweg 5",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Hellwinkel. 5 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Hellwinkel",
+        "frequencyScore": 46,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.801249,
+          52.423484
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz Kiebitzweg",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Hellwinkel. 5 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Hellwinkel",
+        "frequencyScore": 46,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.803063,
+          52.421151
+        ]
+      },
+      "properties": {
+        "name": "Kinderspielplatz bei Dahlienweg 7-9",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Hellwinkel. 4 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Hellwinkel",
+        "frequencyScore": 43,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.807561,
+          52.419317
+        ]
+      },
+      "properties": {
+        "name": "Mini Spielplatz 1",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Hellwinkel. 4 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Hellwinkel",
+        "frequencyScore": 38,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.798797,
+          52.424085
+        ]
+      },
+      "properties": {
+        "name": "Bolzplatz Am Zehnten Weg",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Hellwinkel. 2 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Hellwinkel",
+        "frequencyScore": 38,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.809948,
+          52.419107
+        ]
+      },
+      "properties": {
+        "name": "Kinderspielplatz Am Krokusplan",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Hellwinkel. 2 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Hellwinkel",
+        "frequencyScore": 33,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.811462,
+          52.420026
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz Am Krokusplan Ost",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Hellwinkel.",
+        "status": "Exists",
+        "district": "Hellwinkel",
+        "frequencyScore": 28,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.772866,
+          52.425412
+        ]
+      },
+      "properties": {
+        "name": "Bolzplatz",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Playground in Hohenstein. 7 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Hohenstein",
+        "frequencyScore": 51,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.784953,
+          52.448697
+        ]
+      },
+      "properties": {
+        "name": "Bockwindmühle \"Schradersche Mühle\"",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Civic / Cultural Forecourt in Kreuzheide.",
+        "status": "Exists",
+        "district": "Kreuzheide",
+        "frequencyScore": 55,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.797389,
+          52.460148
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz KGV Kraunsbusch",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Kreuzheide. 1 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Kreuzheide",
+        "frequencyScore": 41,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.796363,
+          52.412165
+        ]
+      },
+      "properties": {
+        "name": "Drei Steine",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Civic / Cultural Forecourt in Köhlerberg. 1 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Köhlerberg",
+        "frequencyScore": 53,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.729314,
+          52.393972
+        ]
+      },
+      "properties": {
+        "name": "Gutspark",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.07,
+        "area": "720 m²",
+        "description": "Pocket Park in Mörse. 2 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Mörse",
+        "frequencyScore": 43,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.856135,
+          52.415541
+        ]
+      },
+      "properties": {
+        "name": "Burg Neuhaus",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.07,
+        "area": "660 m²",
+        "description": "Civic / Cultural Forecourt in Neuhaus. 2 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Neuhaus",
+        "frequencyScore": 66,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.782661,
+          52.405954
+        ]
+      },
+      "properties": {
+        "name": "Rabenbergstraße",
+        "typology": "Civic Plaza",
+        "typologyId": 1,
+        "color": "#f59e0b",
+        "areaHa": 0.05,
+        "area": "540 m²",
+        "description": "Civic Plaza in Rabenberg. 3 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Rabenberg",
+        "frequencyScore": 66,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.775151,
+          52.398354
+        ]
+      },
+      "properties": {
+        "name": "Arboretum",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Pocket Park in Rabenberg.",
+        "status": "Exists",
+        "district": "Rabenberg",
+        "frequencyScore": 23,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.773763,
+          52.400411
+        ]
+      },
+      "properties": {
+        "name": "Erlengrund",
+        "typology": "Linear Park / Greenway",
+        "typologyId": 4,
+        "color": "#16a34a",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Linear Park / Greenway in Rabenberg.",
+        "status": "Exists",
+        "district": "Rabenberg",
+        "frequencyScore": 19,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.831917,
+          52.419403
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz Selma-Lagerlöf-Ring",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Reislingen.",
+        "status": "Exists",
+        "district": "Reislingen",
+        "frequencyScore": 38,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.841318,
+          52.420752
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz an der alten Schule Reislingen",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Reislingen.",
+        "status": "Exists",
+        "district": "Reislingen",
+        "frequencyScore": 38,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.831246,
+          52.415546
+        ]
+      },
+      "properties": {
+        "name": "33301 Von-Droste-Hülshoff-Straße 18",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Playground in Reislingen.",
+        "status": "Exists",
+        "district": "Reislingen",
+        "frequencyScore": 34,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.834904,
+          52.413041
+        ]
+      },
+      "properties": {
+        "name": "5549 Ellenrieder Straße",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Playground in Reislingen.",
+        "status": "Exists",
+        "district": "Reislingen",
+        "frequencyScore": 34,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.817196,
+          52.42522
+        ]
+      },
+      "properties": {
+        "name": "KGV Ernteglück e.V.",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Pocket Park in Reislingen.",
+        "status": "Exists",
+        "district": "Reislingen",
+        "frequencyScore": 34,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.815679,
+          52.422513
+        ]
+      },
+      "properties": {
+        "name": "KGV Am Schäferbusch e.V.",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Pocket Park in Reislingen.",
+        "status": "Exists",
+        "district": "Reislingen",
+        "frequencyScore": 34,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.829505,
+          52.417516
+        ]
+      },
+      "properties": {
+        "name": "5542 Von-Ebner-Eschenbach-Ring",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.08,
+        "area": "840 m²",
+        "description": "Playground in Reislingen.",
+        "status": "Exists",
+        "district": "Reislingen",
+        "frequencyScore": 34,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.820276,
+          52.424588
+        ]
+      },
+      "properties": {
+        "name": "KGV Schillerteich e.V.",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Pocket Park in Reislingen.",
+        "status": "Exists",
+        "district": "Reislingen",
+        "frequencyScore": 29,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.830373,
+          52.412785
+        ]
+      },
+      "properties": {
+        "name": "Fanny-Lewald-Ring Süd",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Reislingen.",
+        "status": "Exists",
+        "district": "Reislingen",
+        "frequencyScore": 28,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.822059,
+          52.419167
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz Nahestraße",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Reislingen.",
+        "status": "Exists",
+        "district": "Reislingen",
+        "frequencyScore": 23,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.82212,
+          52.419606
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz Nahestraße I",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Reislingen.",
+        "status": "Exists",
+        "district": "Reislingen",
+        "frequencyScore": 23,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.822152,
+          52.418954
+        ]
+      },
+      "properties": {
+        "name": "Kinderspieplatz Lahnstraße II",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Reislingen.",
+        "status": "Exists",
+        "district": "Reislingen",
+        "frequencyScore": 23,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.756548,
+          52.429437
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz Stellfelder Straße",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Sandkamp. 1 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Sandkamp",
+        "frequencyScore": 31,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.791623,
+          52.423801
+        ]
+      },
+      "properties": {
+        "name": "Otto-Wels-Platz",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.14,
+        "area": "1410 m²",
+        "description": "Pocket Park in Schillerteich. 28 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Schillerteich",
+        "frequencyScore": 68,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.79464,
+          52.421241
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz Teichgarten",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Schillerteich. 1 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Schillerteich",
+        "frequencyScore": 36,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.794709,
+          52.422476
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz Teichgarten 5",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Schillerteich. 1 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Schillerteich",
+        "frequencyScore": 36,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.792557,
+          52.417723
+        ]
+      },
+      "properties": {
+        "name": "Spielplastik am Schillerteich",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Schillerteich.",
+        "status": "Exists",
+        "district": "Schillerteich",
+        "frequencyScore": 33,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.78974,
+          52.426401
+        ]
+      },
+      "properties": {
+        "name": "Zwangsarbeiter-Denkmal",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Civic / Cultural Forecourt in Stadtmitte. 31 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 91,
+        "frequencyTier": "very-high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.788589,
+          52.424261
+        ]
+      },
+      "properties": {
+        "name": "Porschestraße",
+        "typology": "Civic Plaza",
+        "typologyId": 1,
+        "color": "#f59e0b",
+        "areaHa": 0.12,
+        "area": "1200 m²",
+        "description": "Civic Plaza in Stadtmitte. 44 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 89,
+        "frequencyTier": "very-high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.789489,
+          52.426404
+        ]
+      },
+      "properties": {
+        "name": "Sara-Frenkel-Platz",
+        "typology": "Civic Plaza",
+        "typologyId": 1,
+        "color": "#f59e0b",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Civic Plaza in Stadtmitte. 33 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 88,
+        "frequencyTier": "very-high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.78702,
+          52.423347
+        ]
+      },
+      "properties": {
+        "name": "Kaufhofpassage",
+        "typology": "Civic Plaza",
+        "typologyId": 1,
+        "color": "#f59e0b",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Civic Plaza in Stadtmitte. 38 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 88,
+        "frequencyTier": "very-high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.786253,
+          52.425661
+        ]
+      },
+      "properties": {
+        "name": "Brezelfenster-Denkmal",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Civic / Cultural Forecourt in Stadtmitte. 24 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 86,
+        "frequencyTier": "very-high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.786341,
+          52.420778
+        ]
+      },
+      "properties": {
+        "name": "Markplatz Rathausplatz",
+        "typology": "Urban Plaza / Transit Plaza",
+        "typologyId": 11,
+        "color": "#3b82f6",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Urban Plaza / Transit Plaza in Stadtmitte. 14 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 85,
+        "frequencyTier": "very-high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.787268,
+          52.422254
+        ]
+      },
+      "properties": {
+        "name": "Porschestraße",
+        "typology": "Civic Plaza",
+        "typologyId": 1,
+        "color": "#f59e0b",
+        "areaHa": 0.19,
+        "area": "1860 m²",
+        "description": "Civic Plaza in Stadtmitte. 33 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 84,
+        "frequencyTier": "very-high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.788399,
+          52.422971
+        ]
+      },
+      "properties": {
+        "name": "Maximilian-Kolbe-Weg",
+        "typology": "Civic Plaza",
+        "typologyId": 1,
+        "color": "#f59e0b",
+        "areaHa": 0.05,
+        "area": "540 m²",
+        "description": "Civic Plaza in Stadtmitte. 36 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 83,
+        "frequencyTier": "very-high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.786221,
+          52.420381
+        ]
+      },
+      "properties": {
+        "name": "Marktplatz vor dem Rathaus",
+        "typology": "Urban Plaza / Transit Plaza",
+        "typologyId": 11,
+        "color": "#3b82f6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Urban Plaza / Transit Plaza in Stadtmitte. 12 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 81,
+        "frequencyTier": "very-high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7859,
+          52.418941
+        ]
+      },
+      "properties": {
+        "name": "Hollerplatz",
+        "typology": "Civic Plaza",
+        "typologyId": 1,
+        "color": "#f59e0b",
+        "areaHa": 0.05,
+        "area": "510 m²",
+        "description": "Civic Plaza in Stadtmitte. 11 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 81,
+        "frequencyTier": "very-high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.785596,
+          52.420035
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz 1",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Playground in Stadtmitte. 14 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 64,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.781642,
+          52.416976
+        ]
+      },
+      "properties": {
+        "name": "Planetarium Wolfsburg",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Civic / Cultural Forecourt in Stadtmitte. 3 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 63,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.781632,
+          52.417086
+        ]
+      },
+      "properties": {
+        "name": "Planetarium",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.08,
+        "area": "840 m²",
+        "description": "Civic / Cultural Forecourt in Stadtmitte. 3 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 63,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.778389,
+          52.420374
+        ]
+      },
+      "properties": {
+        "name": "Scheffelhof 3",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Playground in Stadtmitte.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 39,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.773956,
+          52.419265
+        ]
+      },
+      "properties": {
+        "name": "Spielplatz Brahmsring",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Stadtmitte. 1 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Stadtmitte",
+        "frequencyScore": 36,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.819678,
+          52.413228
+        ]
+      },
+      "properties": {
+        "name": "Kita Steimker Gärten",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Steimker Gärten. 2 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Steimker Gärten",
+        "frequencyScore": 43,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.80224,
+          52.447921
+        ]
+      },
+      "properties": {
+        "name": "Hansaplatz",
+        "typology": "Civic Plaza",
+        "typologyId": 1,
+        "color": "#f59e0b",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Civic Plaza in Tiergartenbreite. 5 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Tiergartenbreite",
+        "frequencyScore": 66,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.793487,
+          52.431024
+        ]
+      },
+      "properties": {
+        "name": "Maritime PanoramaTour",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Civic / Cultural Forecourt in Volkswagenwerk. 6 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Volkswagenwerk",
+        "frequencyScore": 66,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.793132,
+          52.430995
+        ]
+      },
+      "properties": {
+        "name": "WerkTour",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Civic / Cultural Forecourt in Volkswagenwerk. 6 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Volkswagenwerk",
+        "frequencyScore": 66,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.795018,
+          52.433845
+        ]
+      },
+      "properties": {
+        "name": "Turmfahrt in der Autostadt",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Civic / Cultural Forecourt in Volkswagenwerk. 2 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Volkswagenwerk",
+        "frequencyScore": 66,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.794063,
+          52.433073
+        ]
+      },
+      "properties": {
+        "name": "Hüpfburgen",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Volkswagenwerk. 8 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Volkswagenwerk",
+        "frequencyScore": 53,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.794917,
+          52.433158
+        ]
+      },
+      "properties": {
+        "name": "Hüpfburgen",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Volkswagenwerk. 7 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Volkswagenwerk",
+        "frequencyScore": 51,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.792094,
+          52.431465
+        ]
+      },
+      "properties": {
+        "name": "MobiVersum",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.11,
+        "area": "1110 m²",
+        "description": "Playground in Volkswagenwerk. 8 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Volkswagenwerk",
+        "frequencyScore": 49,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.791124,
+          52.431179
+        ]
+      },
+      "properties": {
+        "name": "Kletterinstallationen",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Playground in Volkswagenwerk. 8 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Volkswagenwerk",
+        "frequencyScore": 48,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.764893,
+          52.429371
+        ]
+      },
+      "properties": {
+        "name": "Park",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Pocket Park in Volkswagenwerk. 1 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Volkswagenwerk",
+        "frequencyScore": 40,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.84257,
+          52.435291
+        ]
+      },
+      "properties": {
+        "name": "SSV Vorsfelde",
+        "typology": "Civic / Cultural Forecourt",
+        "typologyId": 10,
+        "color": "#8b5cf6",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Civic / Cultural Forecourt in Vorsfelde.",
+        "status": "Exists",
+        "district": "Vorsfelde",
+        "frequencyScore": 50,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.839483,
+          52.441751
+        ]
+      },
+      "properties": {
+        "name": "Am Ehrenfriedhof",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Pocket Park in Vorsfelde. 4 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Vorsfelde",
+        "frequencyScore": 47,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.830456,
+          52.444973
+        ]
+      },
+      "properties": {
+        "name": "Schulgarten",
+        "typology": "Pocket Park",
+        "typologyId": 3,
+        "color": "#86efac",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Pocket Park in Vorsfelde.",
+        "status": "Exists",
+        "district": "Vorsfelde",
+        "frequencyScore": 28,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.746259,
+          52.459358
+        ]
+      },
+      "properties": {
+        "name": "Rodelberg",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.05,
+        "area": "540 m²",
+        "description": "Playground in Warmenau.",
+        "status": "Exists",
+        "district": "Warmenau",
+        "frequencyScore": 28,
+        "frequencyTier": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.743042,
+          52.404286
+        ]
+      },
+      "properties": {
+        "name": "Freizeitpark Westhagen",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.07,
+        "area": "690 m²",
+        "description": "Playground in Westhagen. 3 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Westhagen",
+        "frequencyScore": 46,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.747442,
+          52.402977
+        ]
+      },
+      "properties": {
+        "name": "Spielzone",
+        "typology": "Playground",
+        "typologyId": 6,
+        "color": "#ec4899",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Playground in Westhagen.",
+        "status": "Exists",
+        "district": "Westhagen",
+        "frequencyScore": 34,
+        "frequencyTier": "medium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.760479,
+          52.420556
+        ]
+      },
+      "properties": {
+        "name": "Brandenburger Platz",
+        "typology": "Civic Plaza",
+        "typologyId": 1,
+        "color": "#f59e0b",
+        "areaHa": 0.05,
+        "area": "500 m²",
+        "description": "Civic Plaza in Wohltberg. 4 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Wohltberg",
+        "frequencyScore": 68,
+        "frequencyTier": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.760276,
+          52.420503
+        ]
+      },
+      "properties": {
+        "name": "Brandenburger Platz",
+        "typology": "Urban Plaza / Transit Plaza",
+        "typologyId": 11,
+        "color": "#3b82f6",
+        "areaHa": 0.1,
+        "area": "1000 m²",
+        "description": "Urban Plaza / Transit Plaza in Wohltberg. 4 commercial amenities within 250 m.",
+        "status": "Exists",
+        "district": "Wohltberg",
+        "frequencyScore": 66,
+        "frequencyTier": "high"
+      }
     }
   ]
 }

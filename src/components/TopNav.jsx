@@ -2,10 +2,30 @@ import { useState } from 'react'
 import { useMapStore } from '../store/mapStore'
 import { useMovement } from '../hooks/useMovement'
 import { connectStrava } from '../hooks/useStravaAuth'
+import CLOSURES_DATA from '../data/closures.json'
+import { DISTRICT_GROUPS, STANDALONE_POPULATIONS } from '../data/districtConfig'
+import VACANT_DATA from '../data/vacantPlaces.json'
+
+const VACANT_COUNT = VACANT_DATA.features.length
+
+const POPULATION_BARS = [
+  ...Object.entries(DISTRICT_GROUPS).map(([name, { population2023, color }]) => ({ name, population: population2023, color })),
+  ...Object.entries(STANDALONE_POPULATIONS).map(([name, { population2023 }]) => ({ name, population: population2023, color: '#64748b' })),
+].sort((a, b) => b.population - a.population)
+
+const MAX_POP = Math.max(...POPULATION_BARS.map(d => d.population))
+
+const FREQ_TIERS = [
+  { label: 'V.High',  color: '#dc2626' },
+  { label: 'High',    color: '#f97316' },
+  { label: 'Medium',  color: '#fbbf24' },
+  { label: 'Low',     color: '#fde68a' },
+  { label: 'Lowest',  color: '#fef9c3' },
+]
 
 const BUTTONS = [
   { id: 'movement',  label: 'Movement'  },
-  { id: 'functions', label: 'Functions' },
+  { id: 'functions', label: 'Places'    },
   { id: 'social',    label: 'Social'    },
 ]
 
@@ -208,6 +228,48 @@ const INFO_SECTIONS = {
   },
 }
 
+const OVERLAY_OPTIONS = [
+  { id: 'density',    label: 'Population Density', color: '#818cf8' },
+  { id: 'avgAge',     label: 'Avg Age',            color: '#f59e0b' },
+  { id: 'rentPerSqm', label: 'Avg Rent',           color: '#14b8a6' },
+]
+
+const LAYER_COLORS = {
+  frequencyAnalysis:   '#ef4444',
+  googleActivity:      '#6366f1',
+  dwellInfrastructure: '#059669',
+}
+
+const LAYER_INFO = {
+  frequencyAnalysis: {
+    title: 'Neighbourhood Hotspots',
+    rows: [
+      { label: 'Source', value: 'OpenStreetMap via Overpass API' },
+      { label: 'Features', value: 'Parks, plazas, playgrounds, gardens, pedestrian areas, marketplaces' },
+      { label: 'Scoring', value: 'Base score by typology (14–40) + area score (√ha × 4) + commercial spillover within 250 m + transit proximity to bus stops' },
+      { label: 'Scale', value: '0–100 · top 15 spaces per district selected' },
+    ],
+  },
+  googleActivity: {
+    title: 'Venue Popularity',
+    rows: [
+      { label: 'Source', value: 'Google Places API — Nearby Search' },
+      { label: 'Coverage', value: '103 venues across 5 overlapping search areas covering Wolfsburg' },
+      { label: 'Weighting', value: 'log(review count + 1) — logarithmic scale normalises the wide spread between popular and lesser-known venues' },
+      { label: 'Represents', value: 'How well-known a place is, not a direct count of visits' },
+    ],
+  },
+  dwellInfrastructure: {
+    title: 'Dwell Infrastructure',
+    rows: [
+      { label: 'Source', value: 'OpenStreetMap via Overpass API' },
+      { label: 'Features', value: '1,258 elements — benches (1,093), outdoor seating (58), picnic tables (49), public toilets (44), shelters (14)' },
+      { label: 'Weights', value: 'Outdoor seating 5 · Shelters 3 · Toilets 3 · Picnic tables 2 · Benches 1' },
+      { label: 'Methodology', value: "Based on Jan Gehl's comfort criteria — infrastructure that enables and invites people to stay" },
+    ],
+  },
+}
+
 function Tag({ label }) {
   return (
     <span className="inline-block px-1.5 py-0.5 rounded text-[9px] font-mono bg-white/8 text-white/50 border border-white/10">
@@ -216,13 +278,78 @@ function Tag({ label }) {
   )
 }
 
-export default function TopNav() {
-  const [openPanel, setOpenPanel]   = useState(null)
-  const [infoOpen, setInfoOpen]     = useState(false)
-  const [closureYear, setClosureYear] = useState(2022)
+function InfoPanel({ id }) {
+  const info = LAYER_INFO[id]
+  if (!info) return null
+  return (
+    <div className="mt-2 mx-1 p-3 rounded-lg bg-white/5 border border-white/8">
+      <p className="text-[9px] font-semibold text-white/40 uppercase tracking-widest mb-2">{info.title} — Methodology</p>
+      <div className="space-y-1.5">
+        {info.rows.map(({ label, value }) => (
+          <div key={label}>
+            <span className="text-[9px] font-semibold text-white/40 uppercase tracking-wide">{label} </span>
+            <span className="text-[9px] text-white/60 leading-relaxed">{value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
+function InfoButton({ id, openInfo, setOpenInfo }) {
+  return (
+    <button
+      onClick={(e) => { e.stopPropagation(); setOpenInfo(prev => prev === id ? null : id) }}
+      className={`ml-1 w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold flex-shrink-0 transition-colors ${
+        openInfo === id ? 'bg-white/20 text-white' : 'bg-white/8 text-white/30 hover:bg-white/15 hover:text-white/60'
+      }`}
+      title="Methodology"
+    >
+      i
+    </button>
+  )
+}
+
+function LayerRow({ layerId, title, subtitle, openInfo, setOpenInfo, isActive, onToggle, children }) {
+  const color = LAYER_COLORS[layerId]
+  return (
+    <div className="mb-4">
+      <div className="flex items-center gap-1">
+        <button
+          onClick={onToggle}
+          className="flex-1 flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all"
+          style={isActive
+            ? { backgroundColor: `${color}1a`, color: 'white' }
+            : { color: 'rgba(255,255,255,0.5)' }
+          }
+        >
+          <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: isActive ? color : '#374151' }} />
+          <div className="flex-1 min-w-0">
+            <div className="text-sm font-medium leading-none">{title}</div>
+            <div className="text-[10px] text-white/30 mt-1">{subtitle}</div>
+          </div>
+          <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${isActive ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+            <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${isActive ? 'left-[14px]' : 'left-0.5'}`} />
+          </div>
+        </button>
+        <InfoButton id={layerId} openInfo={openInfo} setOpenInfo={setOpenInfo} />
+      </div>
+
+      {openInfo === layerId && <InfoPanel id={layerId} />}
+      {children}
+    </div>
+  )
+}
+
+export default function TopNav() {
+  const [openPanel, setOpenPanel] = useState(null)
+  const [infoOpen, setInfoOpen]   = useState(false)
+  const [openInfo, setOpenInfo]   = useState(null)
   const {
     activeLayers, toggleLayer,
+    choroplethLayers, toggleChoropleth,
+    monochromeMode, toggleMonochrome,
+    closureYear, setClosureYear,
     pedestrianData, cyclingData, cycleParkingData, busStopsData,
     isLoadingPedestrian, isLoadingCycling, isLoadingCycleParking, isLoadingBusStops,
     stravaToken, stravaError,
@@ -245,7 +372,7 @@ export default function TopNav() {
       if (id === 'spaceFrequency'         && !spaceFrequencyData)        fetchSpaceFrequency()
       if (id === 'cyclingSpaceFrequency'  && !cyclingSpaceFrequencyData) fetchCyclingSpaceFrequency()
       if (id === 'combinedHeatmap') {
-        if (!spaceFrequencyData)       fetchSpaceFrequency()
+        if (!spaceFrequencyData)        fetchSpaceFrequency()
         if (!cyclingSpaceFrequencyData) fetchCyclingSpaceFrequency()
       }
     }
@@ -254,6 +381,7 @@ export default function TopNav() {
   function handleClick(id) {
     setOpenPanel(prev => (prev === id ? null : id))
     if (id !== 'movement') setInfoOpen(false)
+    setOpenInfo(null)
   }
 
   return (
@@ -274,12 +402,13 @@ export default function TopNav() {
               {btn.label}
             </button>
           ))}
+
         </div>
       </div>
 
       {/* ── Left floating panel ── */}
       {openPanel && (
-        <div className="absolute top-20 left-4 z-20 w-72 pointer-events-auto
+        <div className="absolute top-20 left-4 z-20 w-76 pointer-events-auto
           bg-[#16213e]/90 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl
           animate-fade-in">
 
@@ -367,7 +496,7 @@ export default function TopNav() {
                 })}
               </div>
 
-              {/* Bus Stops — separate toggle below networks */}
+              {/* Bus Stops */}
               <div className="mt-2 pt-2 border-t border-white/5">
                 <button
                   onClick={() => handleMovementToggle('busStops')}
@@ -416,7 +545,7 @@ export default function TopNav() {
                 )}
               </div>
 
-              {/* Frequency ── */}
+              {/* Frequency */}
               <div className="mt-4 pt-4 border-t border-white/8">
                 <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-3">Frequency</p>
 
@@ -437,49 +566,46 @@ export default function TopNav() {
                   </div>
                 ) : (
                   <div className="space-y-1.5">
-                      {/* Divider */}
-                      <div className="pt-1 pb-0.5">
-                        <p className="text-[9px] font-semibold text-white/20 uppercase tracking-widest px-1">Heatmap</p>
-                      </div>
-
-                      {/* Running Heatmap */}
-                      <div>
-                        <button
-                          onClick={() => toggleLayer('stravaHeatmapRun')}
-                          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
-                            activeLayers.stravaHeatmapRun ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/70'
-                          }`}
-                        >
-                          <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: activeLayers.stravaHeatmapRun ? '#fc4c02' : '#374151' }} />
-                          <div className="flex-1 min-w-0">
-                            <div className="text-sm font-medium leading-none">Running Heatmap</div>
-                            <div className="text-[10px] text-white/30 mt-1">Strava global tile overlay</div>
-                          </div>
-                          <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.stravaHeatmapRun ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
-                            <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.stravaHeatmapRun ? 'left-[14px]' : 'left-0.5'}`} />
-                          </div>
-                        </button>
-                      </div>
-
-                      {/* Cycling Heatmap */}
-                      <div>
-                        <button
-                          onClick={() => toggleLayer('stravaHeatmapRide')}
-                          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
-                            activeLayers.stravaHeatmapRide ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/70'
-                          }`}
-                        >
-                          <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: activeLayers.stravaHeatmapRide ? '#fc4c02' : '#374151' }} />
-                          <div className="flex-1 min-w-0">
-                            <div className="text-sm font-medium leading-none">Cycling Heatmap</div>
-                            <div className="text-[10px] text-white/30 mt-1">Strava global tile overlay</div>
-                          </div>
-                          <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.stravaHeatmapRide ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
-                            <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.stravaHeatmapRide ? 'left-[14px]' : 'left-0.5'}`} />
-                          </div>
-                        </button>
-                      </div>
+                    <div className="pt-1 pb-0.5">
+                      <p className="text-[9px] font-semibold text-white/20 uppercase tracking-widest px-1">Heatmap</p>
                     </div>
+
+                    <div>
+                      <button
+                        onClick={() => toggleLayer('stravaHeatmapRun')}
+                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
+                          activeLayers.stravaHeatmapRun ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+                        }`}
+                      >
+                        <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: activeLayers.stravaHeatmapRun ? '#fc4c02' : '#374151' }} />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium leading-none">Running Heatmap</div>
+                          <div className="text-[10px] text-white/30 mt-1">Strava global tile overlay</div>
+                        </div>
+                        <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.stravaHeatmapRun ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+                          <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.stravaHeatmapRun ? 'left-[14px]' : 'left-0.5'}`} />
+                        </div>
+                      </button>
+                    </div>
+
+                    <div>
+                      <button
+                        onClick={() => toggleLayer('stravaHeatmapRide')}
+                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
+                          activeLayers.stravaHeatmapRide ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+                        }`}
+                      >
+                        <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: activeLayers.stravaHeatmapRide ? '#fc4c02' : '#374151' }} />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium leading-none">Cycling Heatmap</div>
+                          <div className="text-[10px] text-white/30 mt-1">Strava global tile overlay</div>
+                        </div>
+                        <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.stravaHeatmapRide ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+                          <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.stravaHeatmapRide ? 'left-[14px]' : 'left-0.5'}`} />
+                        </div>
+                      </button>
+                    </div>
+                  </div>
                 )}
 
                 {/* Space Syntax — always visible */}
@@ -561,7 +687,7 @@ export default function TopNav() {
                   )}
                 </div>
 
-                {/* Combined heatmap — divider */}
+                {/* Combined heatmap */}
                 <div className="pt-3 mt-1 border-t border-white/5">
                   <button
                     onClick={() => handleMovementToggle('combinedHeatmap')}
@@ -603,43 +729,227 @@ export default function TopNav() {
 
           {openPanel === 'functions' && (
             <div className="p-5">
-              <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-4">
-                Functions
-              </p>
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-medium text-white/70">Shop &amp; Café Closures</span>
-                  <span className="text-xs font-bold text-white">{closureYear}</span>
-                </div>
-                <input
-                  type="range" min={2019} max={2024} step={1} value={closureYear}
-                  onChange={(e) => setClosureYear(Number(e.target.value))}
-                  className="w-full h-1.5 rounded-full accent-white cursor-pointer"
-                />
-                <div className="flex justify-between mt-1">
-                  <span className="text-[9px] text-white/25">2019</span>
-                  <span className="text-[9px] text-white/25">2024</span>
-                </div>
-                <p className="text-[9px] text-white/25 mt-2 leading-relaxed">
-                  Drag to explore closures over time · data coming soon
-                </p>
+              <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-4">Places</p>
+
+              <LayerRow
+                layerId="frequencyAnalysis"
+                title="Neighbourhood Hotspots"
+                subtitle="Activity frequency · OSM-derived"
+                openInfo={openInfo}
+                setOpenInfo={setOpenInfo}
+                isActive={activeLayers.frequencyAnalysis}
+                onToggle={() => toggleLayer('frequencyAnalysis')}
+              >
+                {activeLayers.frequencyAnalysis && openInfo !== 'frequencyAnalysis' && (
+                  <div className="mt-2 px-1">
+                    <div className="flex items-center justify-between mb-1.5">
+                      {FREQ_TIERS.map((t) => (
+                        <div key={t.label} className="flex flex-col items-center gap-1">
+                          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: t.color }} />
+                          <span className="text-[8px] text-white/30 leading-none">{t.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="h-1 rounded-full" style={{
+                      background: 'linear-gradient(to right, #fef9c3, #fbbf24, #f97316, #dc2626)'
+                    }} />
+                  </div>
+                )}
+              </LayerRow>
+
+              <LayerRow
+                layerId="googleActivity"
+                title="Venue Popularity"
+                subtitle="Google review density · 103 venues"
+                openInfo={openInfo}
+                setOpenInfo={setOpenInfo}
+                isActive={activeLayers.googleActivity}
+                onToggle={() => toggleLayer('googleActivity')}
+              >
+                {activeLayers.googleActivity && openInfo !== 'googleActivity' && (
+                  <div className="mt-2 px-1">
+                    <div className="h-1 rounded-full" style={{
+                      background: 'linear-gradient(to right, #bfdbfe, #6366f1, #312e81)'
+                    }} />
+                    <div className="flex justify-between mt-1">
+                      <span className="text-[8px] text-white/30">Low</span>
+                      <span className="text-[8px] text-white/30">High</span>
+                    </div>
+                  </div>
+                )}
+              </LayerRow>
+
+              <LayerRow
+                layerId="dwellInfrastructure"
+                title="Dwell Infrastructure"
+                subtitle="Benches · seating · shelters · toilets"
+                openInfo={openInfo}
+                setOpenInfo={setOpenInfo}
+                isActive={activeLayers.dwellInfrastructure}
+                onToggle={() => toggleLayer('dwellInfrastructure')}
+              >
+                {activeLayers.dwellInfrastructure && openInfo !== 'dwellInfrastructure' && (
+                  <div className="mt-2 px-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {[['#065f46','Outdoor Seating'],['#059669','Shelter'],['#059669','Toilet'],['#6ee7b7','Picnic Table'],['#a7f3d0','Bench']].map(([c,l]) => (
+                        <div key={l} className="flex items-center gap-1">
+                          <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: c }} />
+                          <span className="text-[8px] text-white/30">{l}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </LayerRow>
+
+              {/* Vacant Storefronts */}
+              <div className="pt-4 border-t border-white/8 mb-4">
+                <button
+                  onClick={() => toggleLayer('vacantPlaces')}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all"
+                  style={activeLayers.vacantPlaces
+                    ? { backgroundColor: 'rgba(249,115,22,0.15)', color: 'white' }
+                    : { color: 'rgba(255,255,255,0.5)' }
+                  }
+                >
+                  <div className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: activeLayers.vacantPlaces ? '#f97316' : '#374151' }} />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium leading-none">Vacant Storefronts</div>
+                    <div className="text-[10px] text-white/30 mt-1">OSM shop=vacant · {VACANT_COUNT} locations</div>
+                  </div>
+                  <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.vacantPlaces ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+                    <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.vacantPlaces ? 'left-[14px]' : 'left-0.5'}`} />
+                  </div>
+                </button>
+                {activeLayers.vacantPlaces && (
+                  <p className="text-[9px] text-white/20 mt-2 px-1 leading-relaxed">
+                    Currently empty storefronts tagged in OSM · click a dot for details
+                  </p>
+                )}
               </div>
-              <div className="mt-4 pt-3 border-t border-white/8">
-                <p className="text-[9px] text-white/20 italic">More function layers coming soon</p>
+
+              {/* Shop & Café Closures */}
+              <div className="pt-4 border-t border-white/8">
+                <div className="flex items-center gap-1 mb-3">
+                  <button
+                    onClick={() => toggleLayer('closures')}
+                    className="flex-1 flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all"
+                    style={activeLayers.closures
+                      ? { backgroundColor: 'rgba(71,85,105,0.25)', color: 'white' }
+                      : { color: 'rgba(255,255,255,0.5)' }
+                    }
+                  >
+                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: activeLayers.closures ? '#94a3b8' : '#374151' }} />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-medium leading-none">Shop &amp; Café Closures</div>
+                      <div className="text-[10px] text-white/30 mt-1">OSM history · 661 events · 2019–2024</div>
+                    </div>
+                    <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.closures ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+                      <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.closures ? 'left-[14px]' : 'left-0.5'}`} />
+                    </div>
+                  </button>
+                </div>
+
+                {activeLayers.closures && (() => {
+                  const allFeatures = CLOSURES_DATA.closures.features
+                  const thisYear   = allFeatures.filter(f => f.properties.year === closureYear).length
+                  const cumulative = allFeatures.filter(f => f.properties.year <= closureYear).length
+                  return (
+                    <div>
+                      <div className="flex items-center justify-between mb-2 px-1">
+                        <span className="text-[10px] text-white/40">Showing up to</span>
+                        <span className="text-xs font-bold text-white">{closureYear}</span>
+                      </div>
+                      <input
+                        type="range" min={2019} max={2024} step={1}
+                        value={closureYear}
+                        onChange={(e) => setClosureYear(Number(e.target.value))}
+                        className="w-full h-1.5 rounded-full accent-white cursor-pointer mb-1"
+                      />
+                      <div className="flex justify-between mb-3">
+                        <span className="text-[9px] text-white/25">2019</span>
+                        <span className="text-[9px] text-white/25">2024</span>
+                      </div>
+
+                      <div className="flex gap-2 mb-2">
+                        <div className="flex-1 bg-white/5 rounded-lg px-3 py-2 text-center">
+                          <div className="text-[9px] text-white/30 uppercase tracking-wide mb-1">Closed in {closureYear}</div>
+                          <div className="text-sm font-bold text-white">{thisYear}</div>
+                          <div className="text-[9px] text-white/25 mt-0.5">venues</div>
+                        </div>
+                        <div className="flex-1 bg-white/5 rounded-lg px-3 py-2 text-center">
+                          <div className="text-[9px] text-white/30 uppercase tracking-wide mb-1">Total 2019–{closureYear}</div>
+                          <div className="text-sm font-bold text-white">{cumulative}</div>
+                          <div className="text-[9px] text-white/25 mt-0.5">cumulative</div>
+                        </div>
+                      </div>
+                      <p className="text-[9px] text-white/20 mt-2 leading-relaxed px-1">
+                        Each ✕ = a venue removed from OSM · drag slider to reveal by year
+                      </p>
+                    </div>
+                  )
+                })()}
               </div>
             </div>
           )}
 
           {openPanel === 'social' && (
             <div className="p-5">
-              <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-3">
-                Social
+              <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-1">
+                Population by District
               </p>
-              <p className="text-xs text-white/40 leading-relaxed">
-                Public spaces, social infrastructure &amp; community data — coming soon
-              </p>
+              <p className="text-[9px] text-white/20 mb-3">Source: Stadt Wolfsburg · 2023</p>
+              <div className="space-y-2 max-h-80 overflow-y-auto pr-1">
+                {POPULATION_BARS.map(({ name, population, color }) => (
+                  <div key={name}>
+                    <div className="flex justify-between items-baseline mb-0.5">
+                      <span className="text-[9px] text-white/50 truncate pr-2">{name}</span>
+                      <span className="text-[9px] text-white/40 flex-shrink-0">{population.toLocaleString()}</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                      <div className="h-full rounded-full" style={{ width: `${(population / MAX_POP) * 100}%`, backgroundColor: color, opacity: 0.8 }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[9px] text-white/20 mt-3 italic">Click a district on the map for details</p>
+
               <div className="mt-4 pt-3 border-t border-white/8">
-                <p className="text-[9px] text-white/20 italic">Connect your data source to activate</p>
+                <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-2">Map Overlay</p>
+                <div className="space-y-1">
+                  {OVERLAY_OPTIONS.map(({ id, label, color }) => {
+                    const active = choroplethLayers[id]
+                    return (
+                      <button
+                        key={id}
+                        onClick={() => toggleChoropleth(id)}
+                        className={`w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg text-xs transition-all ${
+                          active ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70 hover:bg-white/5'
+                        }`}
+                      >
+                        <div
+                          className="w-2 h-2 rounded-full flex-shrink-0"
+                          style={{ backgroundColor: active ? color : '#374151' }}
+                        />
+                        {label}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div className="mt-3 pt-3 border-t border-white/8">
+                <button
+                  onClick={toggleMonochrome}
+                  className={`w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg text-xs transition-all ${
+                    monochromeMode ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70 hover:bg-white/5'
+                  }`}
+                >
+                  <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: monochromeMode ? '#e5e7eb' : '#374151' }} />
+                  Monochrome
+                </button>
               </div>
             </div>
           )}
@@ -652,7 +962,6 @@ export default function TopNav() {
           bg-[#16213e]/95 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl
           animate-fade-in flex flex-col">
 
-          {/* Header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 flex-shrink-0">
             <div>
               <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-0.5">Data Sources</p>
@@ -664,7 +973,6 @@ export default function TopNav() {
             >×</button>
           </div>
 
-          {/* Body */}
           <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
             {activeNetworks.length === 0 ? (
               <p className="text-xs text-white/30 leading-relaxed mt-4">
@@ -696,7 +1004,6 @@ export default function TopNav() {
             )}
           </div>
 
-          {/* Footer */}
           <div className="px-6 py-4 border-t border-white/10 flex-shrink-0">
             <p className="text-[9px] text-white/20 leading-relaxed">
               © OpenStreetMap contributors — data is as complete as local mappers have surveyed.

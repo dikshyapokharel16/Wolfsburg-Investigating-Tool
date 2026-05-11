@@ -16,7 +16,14 @@ export const useMapStore = create((set) => ({
     spaceFrequency: false,
     cyclingSpaceFrequency: false,
     combinedHeatmap: false,
+    frequencyAnalysis: false,
+    googleActivity: false,
+    dwellInfrastructure: false,
+    closures: false,
+    vacantPlaces: false,
+    aerialView: false,
   },
+  closureYear: 2021,
   selectedDistrict: null,
   selectedCategory: 'all',
   amenityData: [],
@@ -35,6 +42,12 @@ export const useMapStore = create((set) => ({
   isLoadingSpaceFrequency: false,
   cyclingSpaceFrequencyData: null,
   isLoadingCyclingSpaceFrequency: false,
+  choroplethLayers: {
+    density: false,
+    avgAge: false,
+    rentPerSqm: false,
+  },
+  monochromeMode: false,
 
   toggleLayer: (layer) =>
     set((state) => ({
@@ -43,6 +56,19 @@ export const useMapStore = create((set) => ({
         [layer]: !state.activeLayers[layer],
       },
     })),
+
+  toggleChoropleth: (param) =>
+    set((state) => ({
+      choroplethLayers: {
+        ...state.choroplethLayers,
+        [param]: !state.choroplethLayers[param],
+      },
+    })),
+
+  toggleMonochrome: () =>
+    set((state) => ({ monochromeMode: !state.monochromeMode })),
+
+  setClosureYear: (year) => set({ closureYear: year }),
 
   setSelectedDistrict: (district) => set({ selectedDistrict: district }),
   setSelectedCategory: (category) => set({ selectedCategory: category }),
