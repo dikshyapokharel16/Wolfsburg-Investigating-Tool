@@ -94,11 +94,25 @@ const { DISTRICT_GEOJSON, DISTRICT_LABELS_GEOJSON, DISTRICT_SUBS_GEOJSON } = (()
   }
 })()
 
+
+function raiseTopLayers(map) {
+  for (const lyr of ['strava-heatmap-run-layer', 'strava-heatmap-ride-layer']) {
+    if (map.getLayer(lyr) && map.getLayoutProperty(lyr, 'visibility') !== 'none') {
+      map.moveLayer(lyr)
+    }
+  }
+  for (const lyr of ['space-frequency-lines', 'cycling-space-frequency-lines']) {
+    if (map.getLayer(lyr) && map.getLayoutProperty(lyr, 'visibility') !== 'none') {
+      map.moveLayer(lyr)
+    }
+  }
+}
+
 export function useMapLayers(map) {
-  const { activeLayers, amenityData, pedestrianData, cyclingData, cycleParkingData, busStopsData } = useMapStore()
-  const psPopup = useRef(null)
-  const cpPopup = useRef(null)
-  const bsPopup = useRef(null)
+  const { activeLayers, amenityData, pedestrianData, cyclingData, cycleParkingData, busStopsData, spaceFrequencyData, cyclingSpaceFrequencyData } = useMapStore()
+  const psPopup      = useRef(null)
+  const cpPopup      = useRef(null)
+  const bsPopup      = useRef(null)
 
   // ── District boundaries ──────────────────────────────────────────────────
   useEffect(() => {
@@ -286,7 +300,7 @@ export function useMapLayers(map) {
           filter: ['==', ['get', 'dedicated'], 1],
           layout: { 'line-cap': 'round', 'line-join': 'round' },
           paint: {
-            'line-color': '#1e3040',
+            'line-color': '#1e3a8a',
             'line-width': ['interpolate', ['linear'], ['zoom'], 12, 1.2, 16, 2.8],
             'line-opacity': 0.9,
           },
@@ -296,6 +310,7 @@ export function useMapLayers(map) {
         map.setLayoutProperty(LYR_SHR, 'visibility', 'visible')
         map.setLayoutProperty(LYR_DED, 'visibility', 'visible')
       }
+      raiseTopLayers(map)
     } else {
       if (map.getLayer(LYR_SHR)) map.setLayoutProperty(LYR_SHR, 'visibility', 'none')
       if (map.getLayer(LYR_DED)) map.setLayoutProperty(LYR_DED, 'visibility', 'none')
@@ -343,6 +358,7 @@ export function useMapLayers(map) {
         map.setLayoutProperty(LYR_SHR, 'visibility', 'visible')
         map.setLayoutProperty(LYR_DED, 'visibility', 'visible')
       }
+      raiseTopLayers(map)
     } else {
       if (map.getLayer(LYR_SHR)) map.setLayoutProperty(LYR_SHR, 'visibility', 'none')
       if (map.getLayer(LYR_DED)) map.setLayoutProperty(LYR_DED, 'visibility', 'none')
@@ -421,8 +437,8 @@ export function useMapLayers(map) {
           type: 'circle',
           source: SRC,
           paint: {
-            'circle-radius': ['interpolate', ['linear'], ['zoom'], 12, 4, 16, 9],
-            'circle-color': '#d4924a',
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 12, 2.5, 16, 6],
+            'circle-color': '#8b5cf6',
             'circle-opacity': 0.85,
             'circle-stroke-width': 1.5,
             'circle-stroke-color': 'rgba(255,255,255,0.9)',
@@ -467,6 +483,328 @@ export function useMapLayers(map) {
       if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
     }
   }, [map, activeLayers.busStops, busStopsData])
+
+  // ── Bus Stop Catchment Density (heatmap) ─────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+    const SRC = 'bus-stop-catchment'
+    const LYR = 'bus-stop-catchment-heatmap'
+
+    if (activeLayers.busStopCatchment && busStopsData?.features?.length) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: busStopsData })
+        map.addLayer({
+          id: LYR,
+          type: 'heatmap',
+          source: SRC,
+          paint: {
+            // Radius approximates 400m catchment at each zoom level
+            'heatmap-radius': [
+              'interpolate', ['linear'], ['zoom'],
+              10, 15,
+              12, 40,
+              14, 150,
+            ],
+            'heatmap-intensity': [
+              'interpolate', ['linear'], ['zoom'],
+              10, 0.5,
+              14, 1,
+            ],
+            'heatmap-color': [
+              'interpolate', ['linear'], ['heatmap-density'],
+              0,   'rgba(0,0,0,0)',
+              0.2, '#e9d5ff',
+              0.4, '#c4b5fd',
+              0.6, '#8b5cf6',
+              0.8, '#6d28d9',
+              1.0, '#2e1065',
+            ],
+            'heatmap-opacity': 0.85,
+          },
+        })
+      } else {
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+    }
+  }, [map, activeLayers.busStopCatchment, busStopsData])
+
+  // ── Strava Running Heatmap (raster tiles) ────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+    const SRC = 'strava-heatmap-run'
+    const LYR = 'strava-heatmap-run-layer'
+
+    if (activeLayers.stravaHeatmapRun) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, {
+          type: 'raster',
+          tiles: [
+            '/strava-heatmap-a/tiles/run/hot/{z}/{x}/{y}@2x.png',
+            '/strava-heatmap-b/tiles/run/hot/{z}/{x}/{y}@2x.png',
+            '/strava-heatmap-c/tiles/run/hot/{z}/{x}/{y}.png',
+          ],
+          tileSize: 256,
+          minzoom: 0,
+          maxzoom: 15,
+          attribution: '© Strava',
+        })
+        map.addLayer({
+          id: LYR,
+          type: 'raster',
+          source: SRC,
+          paint: {
+            'raster-opacity': 0.5,
+            'raster-saturation': 0.2,
+            'raster-contrast': 0.15,
+            'raster-brightness-max': 0.9,
+          },
+        })
+      } else {
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+        map.moveLayer(LYR)
+      }
+      raiseTopLayers(map)
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+    }
+  }, [map, activeLayers.stravaHeatmapRun, activeLayers.pedestrianNetwork, activeLayers.cyclingNetwork, activeLayers.cycleParking, activeLayers.busStops, activeLayers.stravaRunning, activeLayers.stravaCycling])
+
+  // ── Strava Cycling Heatmap (raster tiles) ────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+    const SRC = 'strava-heatmap-ride'
+    const LYR = 'strava-heatmap-ride-layer'
+
+    if (activeLayers.stravaHeatmapRide) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, {
+          type: 'raster',
+          tiles: [
+            '/strava-heatmap-a/tiles/ride/hot/{z}/{x}/{y}@2x.png',
+            '/strava-heatmap-b/tiles/ride/hot/{z}/{x}/{y}@2x.png',
+            '/strava-heatmap-c/tiles/ride/hot/{z}/{x}/{y}.png',
+          ],
+          tileSize: 256,
+          minzoom: 0,
+          maxzoom: 15,
+          attribution: '© Strava',
+        })
+        map.addLayer({
+          id: LYR,
+          type: 'raster',
+          source: SRC,
+          paint: {
+            'raster-opacity': 0.5,
+            'raster-saturation': 0.2,
+            'raster-contrast': 0.15,
+            'raster-brightness-max': 0.9,
+          },
+        })
+      } else {
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+        map.moveLayer(LYR)
+      }
+      raiseTopLayers(map)
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+    }
+  }, [map, activeLayers.stravaHeatmapRide, activeLayers.pedestrianNetwork, activeLayers.cyclingNetwork, activeLayers.cycleParking, activeLayers.busStops, activeLayers.stravaRunning, activeLayers.stravaCycling])
+
+  // ── Space Syntax Frequency ───────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+    const SRC = 'space-frequency'
+    const LYR = 'space-frequency-lines'
+
+    if (activeLayers.spaceFrequency && spaceFrequencyData?.features?.length) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: spaceFrequencyData })
+        map.addLayer({
+          id: LYR,
+          type: 'line',
+          source: SRC,
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: {
+            'line-width': [
+              'interpolate', ['linear'], ['zoom'],
+              11, ['interpolate', ['linear'], ['get', 'percentile'], 0, 1, 100, 4],
+              16, ['interpolate', ['linear'], ['get', 'percentile'], 0, 2, 100, 8],
+            ],
+            'line-color': ['step', ['get', 'percentile'],
+              '#3b82f6',       // < 50  → blue
+              50, '#0d9488',   // 50–64 → teal
+              65, '#16a34a',   // 65–79 → green
+              80, '#f59e0b',   // 80–89 → orange-yellow
+              90, '#ea580c',   // 90–96 → orange-red
+              97, '#dc2626',   // 97–98 → red
+              99, '#7f1d1d',   // ≥ 99  → dark red
+            ],
+            'line-opacity': 0.7,
+          },
+        })
+        map.moveLayer(LYR)
+      } else {
+        map.getSource(SRC).setData(spaceFrequencyData)
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+        map.moveLayer(LYR)
+      }
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+    }
+  }, [map, activeLayers.spaceFrequency, spaceFrequencyData])
+
+  // ── Cycling Space Syntax Frequency ───────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+    const SRC = 'cycling-space-frequency'
+    const LYR = 'cycling-space-frequency-lines'
+
+    if (activeLayers.cyclingSpaceFrequency && cyclingSpaceFrequencyData?.features?.length) {
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data: cyclingSpaceFrequencyData })
+        map.addLayer({
+          id: LYR,
+          type: 'line',
+          source: SRC,
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: {
+            'line-width': [
+              'interpolate', ['linear'], ['zoom'],
+              11, ['interpolate', ['linear'], ['get', 'percentile'], 0, 1, 100, 4],
+              16, ['interpolate', ['linear'], ['get', 'percentile'], 0, 2, 100, 8],
+            ],
+            'line-color': ['step', ['get', 'percentile'],
+              '#3b82f6',
+              50, '#0d9488',
+              65, '#16a34a',
+              80, '#f59e0b',
+              90, '#ea580c',
+              97, '#dc2626',
+              99, '#7f1d1d',
+            ],
+            'line-opacity': 0.7,
+          },
+        })
+        map.moveLayer(LYR)
+      } else {
+        map.getSource(SRC).setData(cyclingSpaceFrequencyData)
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+        map.moveLayer(LYR)
+      }
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+    }
+  }, [map, activeLayers.cyclingSpaceFrequency, cyclingSpaceFrequencyData])
+
+  // ── Combined Movement Heatmap ─────────────────────────────────────────────
+  useEffect(() => {
+    if (!map) return
+    const SRC = 'combined-heatmap'
+    const LYR = 'combined-heatmap-layer'
+
+    if (activeLayers.combinedHeatmap && (spaceFrequencyData || cyclingSpaceFrequencyData)) {
+      // Build cycling midpoint lookup for spatial matching
+      const THRESH2 = 0.000002 // ~100m in degree-space at 52°N
+      const cycMids = []
+      const cycUsed = new Set()
+      if (cyclingSpaceFrequencyData) {
+        for (const f of cyclingSpaceFrequencyData.features) {
+          const c = f.geometry.coordinates
+          cycMids.push({
+            lon: (c[0][0] + c[c.length - 1][0]) / 2,
+            lat: (c[0][1] + c[c.length - 1][1]) / 2,
+            weight: f.properties.percentile / 100,
+          })
+        }
+      }
+
+      const points = []
+
+      // Pedestrian points — match to nearest cycling counterpart and average
+      if (spaceFrequencyData) {
+        for (const f of spaceFrequencyData.features) {
+          const c = f.geometry.coordinates
+          const mLon = (c[0][0] + c[c.length - 1][0]) / 2
+          const mLat = (c[0][1] + c[c.length - 1][1]) / 2
+          const pedW = f.properties.percentile / 100
+
+          let bestD2 = THRESH2, bestIdx = -1
+          for (let i = 0; i < cycMids.length; i++) {
+            if (cycUsed.has(i)) continue
+            const dx = mLon - cycMids[i].lon
+            const dy = mLat - cycMids[i].lat
+            const d2 = dx * dx + dy * dy
+            if (d2 < bestD2) { bestD2 = d2; bestIdx = i }
+          }
+
+          const weight = bestIdx >= 0
+            ? (pedW + cycMids[bestIdx].weight) / 2
+            : pedW
+          if (bestIdx >= 0) cycUsed.add(bestIdx)
+
+          points.push({
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: [mLon, mLat] },
+            properties: { weight },
+          })
+        }
+      }
+
+      // Unmatched cycling points — add as-is
+      for (let i = 0; i < cycMids.length; i++) {
+        if (cycUsed.has(i)) continue
+        points.push({
+          type: 'Feature',
+          geometry: { type: 'Point', coordinates: [cycMids[i].lon, cycMids[i].lat] },
+          properties: { weight: cycMids[i].weight },
+        })
+      }
+      const data = { type: 'FeatureCollection', features: points }
+
+      if (!map.getSource(SRC)) {
+        map.addSource(SRC, { type: 'geojson', data })
+        map.addLayer({
+          id: LYR,
+          type: 'heatmap',
+          source: SRC,
+          paint: {
+            'heatmap-weight': ['get', 'weight'],
+            'heatmap-radius': [
+              'interpolate', ['linear'], ['zoom'],
+              10, 7,
+              12, 12,
+              14, 17,
+              16, 25,
+            ],
+            'heatmap-intensity': [
+              'interpolate', ['linear'], ['zoom'],
+              10, 0.5,
+              12, 1.0,
+              14, 1.5,
+              16, 2.5,
+            ],
+            'heatmap-color': [
+              'interpolate', ['linear'], ['heatmap-density'],
+              0,   'rgba(255,255,255,0)',
+              0.1, '#fff0e8',
+              0.3, '#ffb899',
+              0.5, '#ff7744',
+              0.7, '#ee3311',
+              1.0, '#aa1100',
+            ],
+            'heatmap-opacity': 0.85,
+          },
+        })
+      } else {
+        map.getSource(SRC).setData(data)
+        map.setLayoutProperty(LYR, 'visibility', 'visible')
+      }
+    } else {
+      if (map.getLayer(LYR)) map.setLayoutProperty(LYR, 'visibility', 'none')
+    }
+  }, [map, activeLayers.combinedHeatmap, spaceFrequencyData, cyclingSpaceFrequencyData])
 
   // ── Public Spaces ─────────────────────────────────────────────────────────
   useEffect(() => {

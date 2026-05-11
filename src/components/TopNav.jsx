@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useMapStore } from '../store/mapStore'
 import { useMovement } from '../hooks/useMovement'
+import { connectStrava } from '../hooks/useStravaAuth'
 
 const BUTTONS = [
   { id: 'movement',  label: 'Movement'  },
@@ -14,7 +15,7 @@ const MOVEMENT_SUBLAYERS = [
     label: 'Pedestrian Network',
     color: '#93b5c6',
     legend: [
-      { color: '#1e3040', label: 'Dedicated pathways' },
+      { color: '#1e40af', label: 'Dedicated pathways' },
       { color: '#8aa5b5', label: 'Shared streets' },
     ],
   },
@@ -35,7 +36,7 @@ const INFO_SECTIONS = {
     groups: [
       {
         label: 'Dedicated pathways',
-        color: '#1e3040',
+        color: '#1e3a8a',
         tags: ['highway=footway', 'highway=path', 'highway=pedestrian', 'highway=steps', 'foot=designated'],
       },
       {
@@ -75,8 +76,133 @@ const INFO_SECTIONS = {
     groups: [
       {
         label: 'Stops',
-        color: '#d4924a',
+        color: '#8b5cf6',
         tags: ['highway=bus_stop', 'amenity=bus_stop'],
+      },
+    ],
+  },
+  busStopCatchment: {
+    title: 'Transit Coverage Density',
+    groups: [
+      {
+        label: 'Method',
+        color: '#8b5cf6',
+        tags: ['heatmap kernel per stop', 'radius ≈ 400m catchment', 'density sums where stops cluster'],
+      },
+      {
+        label: 'Scale',
+        color: '#8b5cf6',
+        tags: ['light purple = sparse coverage', 'dark purple = dense overlap'],
+      },
+    ],
+  },
+  stravaHeatmapRun: {
+    title: 'Running Heatmap',
+    groups: [
+      {
+        label: 'Data source',
+        color: '#f97316',
+        tags: ['Strava Global Heatmap', 'activity_type=run', 'raster tiles'],
+      },
+      {
+        label: 'Rendering',
+        color: '#f97316',
+        tags: ['aggregated all-time GPS tracks', 'tile zoom 0–15', 'requires Strava login'],
+      },
+    ],
+  },
+  stravaHeatmapRide: {
+    title: 'Cycling Heatmap',
+    groups: [
+      {
+        label: 'Data source',
+        color: '#f97316',
+        tags: ['Strava Global Heatmap', 'activity_type=ride', 'raster tiles'],
+      },
+      {
+        label: 'Rendering',
+        color: '#f97316',
+        tags: ['aggregated all-time GPS tracks', 'tile zoom 0–15', 'requires Strava login'],
+      },
+    ],
+  },
+  spaceFrequency: {
+    title: 'Pedestrian Frequency',
+    groups: [
+      {
+        label: 'Method',
+        color: '#3b82f6',
+        tags: ['Betweenness Centrality', 'Space Syntax approach', 'Rhino 8 + Grasshopper'],
+      },
+      {
+        label: 'Network',
+        color: '#3b82f6',
+        tags: ['11 668 segments', 'max. 150m segment length', 'pedestrian paths + shared streets', 'full city of Wolfsburg'],
+      },
+      {
+        label: 'Origins & Destinations',
+        color: '#3b82f6',
+        tags: ['1 824 internal ODs from building footprints', '~55% external ODs at city entries', '40m² per origin · factor 0.6 · avg. 2 storeys', 'key attractors: Hbf · ZOB · VW factory gates'],
+      },
+      {
+        label: 'Movement Model',
+        color: '#3b82f6',
+        tags: ['angular influence 1.0 · metric 0.4', 'decay function · 700m radius · max 1 200m', 'density weighting'],
+      },
+      {
+        label: 'Scoring',
+        color: '#3b82f6',
+        tags: ['percentile rank 0–100', 'blended with Strava running when logged in'],
+      },
+    ],
+  },
+  cyclingSpaceFrequency: {
+    title: 'Cycling Frequency',
+    groups: [
+      {
+        label: 'Method',
+        color: '#3b82f6',
+        tags: ['Betweenness Centrality', 'Movement Frequency Simulation', 'Space Syntax approach', 'Rhino 8 + Grasshopper'],
+      },
+      {
+        label: 'Network',
+        color: '#3b82f6',
+        tags: ['pedestrian network as proxy', 'max. 200m segment length', 'field & forest paths excluded', 'full city of Wolfsburg'],
+      },
+      {
+        label: 'Origins & Destinations',
+        color: '#3b82f6',
+        tags: ['67 875 internal ODs from building footprints', '~45% external ODs at city entries', '40m² per origin · factor 0.6 · avg. 2.5 storeys', '1 968 total trips per day'],
+      },
+      {
+        label: 'Movement Model',
+        color: '#3b82f6',
+        tags: ['metric influence 0.8 · angular 0.4', 'decay function · 2 500m radius · max 4 000m'],
+      },
+      {
+        label: 'Note',
+        color: '#3b82f6',
+        tags: ['No dedicated bicycle mode available — pedestrian parameters adapted to approximate cycling behaviour, prioritising metric distance over angular turns'],
+      },
+      {
+        label: 'Scoring',
+        color: '#3b82f6',
+        tags: ['percentile rank 0–100', 'blended with Strava cycling when logged in'],
+      },
+    ],
+  },
+  combinedHeatmap: {
+    title: 'Combined Movement Heatmap',
+    groups: [
+      {
+        label: 'Method',
+        color: '#f97316',
+        tags: ['segment midpoints from both simulations', 'weighted by percentile score', 'kernel density heatmap'],
+      },
+      {
+        label: 'Sources',
+        color: '#f97316',
+        tags: ['pedestrian frequency (Space Syntax)', 'cycling frequency (Space Syntax)'],
       },
     ],
   },
@@ -95,19 +221,33 @@ export default function TopNav() {
   const [infoOpen, setInfoOpen]     = useState(false)
   const [closureYear, setClosureYear] = useState(2022)
 
-  const { activeLayers, toggleLayer, pedestrianData, cyclingData, cycleParkingData, busStopsData, isLoadingPedestrian, isLoadingCycling, isLoadingCycleParking, isLoadingBusStops } = useMapStore()
-  const { fetchPedestrian, fetchCycling, fetchCycleParking, fetchBusStops } = useMovement()
+  const {
+    activeLayers, toggleLayer,
+    pedestrianData, cyclingData, cycleParkingData, busStopsData,
+    isLoadingPedestrian, isLoadingCycling, isLoadingCycleParking, isLoadingBusStops,
+    stravaToken, stravaError,
+    spaceFrequencyData, isLoadingSpaceFrequency,
+    cyclingSpaceFrequencyData, isLoadingCyclingSpaceFrequency,
+  } = useMapStore()
+  const { fetchPedestrian, fetchCycling, fetchCycleParking, fetchBusStops, fetchSpaceFrequency, fetchCyclingSpaceFrequency } = useMovement()
 
-  const activeNetworks = ['pedestrianNetwork', 'cyclingNetwork', 'cycleParking', 'busStops'].filter(id => activeLayers[id])
+  const activeNetworks = ['pedestrianNetwork', 'cyclingNetwork', 'cycleParking', 'busStops', 'busStopCatchment', 'stravaHeatmapRun', 'stravaHeatmapRide', 'spaceFrequency', 'cyclingSpaceFrequency', 'combinedHeatmap'].filter(id => activeLayers[id])
 
   function handleMovementToggle(id) {
     const wasOff = !activeLayers[id]
     toggleLayer(id)
     if (wasOff) {
-      if (id === 'pedestrianNetwork' && !pedestrianData)   fetchPedestrian()
-      if (id === 'cyclingNetwork'    && !cyclingData)      fetchCycling()
-      if (id === 'cycleParking'      && !cycleParkingData) fetchCycleParking()
-      if (id === 'busStops'          && !busStopsData)     fetchBusStops()
+      if (id === 'pedestrianNetwork' && !pedestrianData)     fetchPedestrian()
+      if (id === 'cyclingNetwork'    && !cyclingData)        fetchCycling()
+      if (id === 'cycleParking'      && !cycleParkingData)   fetchCycleParking()
+      if (id === 'busStops'          && !busStopsData)       fetchBusStops()
+      if (id === 'busStopCatchment'  && !busStopsData)       fetchBusStops()
+      if (id === 'spaceFrequency'         && !spaceFrequencyData)        fetchSpaceFrequency()
+      if (id === 'cyclingSpaceFrequency'  && !cyclingSpaceFrequencyData) fetchCyclingSpaceFrequency()
+      if (id === 'combinedHeatmap') {
+        if (!spaceFrequencyData)       fetchSpaceFrequency()
+        if (!cyclingSpaceFrequencyData) fetchCyclingSpaceFrequency()
+      }
     }
   }
 
@@ -236,7 +376,7 @@ export default function TopNav() {
                     activeLayers.busStops ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/70'
                   }`}
                 >
-                  <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: activeLayers.busStops ? '#d4924a' : '#374151' }} />
+                  <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: activeLayers.busStops ? '#8b5cf6' : '#374151' }} />
                   <span className="flex-1 text-sm font-medium">Bus Stops</span>
                   {isLoadingBusStops ? (
                     <svg className="animate-spin w-3 h-3 text-white/40 flex-shrink-0" viewBox="0 0 24 24" fill="none">
@@ -249,6 +389,214 @@ export default function TopNav() {
                     </div>
                   )}
                 </button>
+                {activeLayers.busStops && (
+                  <div className="mt-1 pt-2 border-t border-white/5">
+                    <button
+                      onClick={() => handleMovementToggle('busStopCatchment')}
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-all ${
+                        activeLayers.busStopCatchment ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+                      }`}
+                    >
+                      <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: activeLayers.busStopCatchment ? '#8b5cf6' : '#374151' }} />
+                      <span className="flex-1 text-xs font-medium">Coverage Density</span>
+                      <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.busStopCatchment ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+                        <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.busStopCatchment ? 'left-[14px]' : 'left-0.5'}`} />
+                      </div>
+                    </button>
+                    {activeLayers.busStopCatchment && (
+                      <div className="mt-1.5 mb-1 px-3">
+                        <div className="h-1 rounded-full" style={{ background: 'linear-gradient(to right, #e9d5ff, #c4b5fd, #8b5cf6, #6d28d9, #2e1065)' }} />
+                        <div className="flex justify-between mt-1">
+                          <span className="text-[8px] text-white/30">Low</span>
+                          <span className="text-[8px] text-white/30">High</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Frequency ── */}
+              <div className="mt-4 pt-4 border-t border-white/8">
+                <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-3">Frequency</p>
+
+                {!stravaToken ? (
+                  <div className="px-1">
+                    <p className="text-[11px] text-white/40 leading-relaxed mb-3">
+                      Connect Strava to blend the frequency models with live GPS data.
+                    </p>
+                    <button
+                      onClick={connectStrava}
+                      className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all bg-[#fc4c02]/15 text-[#fc4c02] hover:bg-[#fc4c02]/25"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169" />
+                      </svg>
+                      Connect Strava
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-1.5">
+                      {/* Divider */}
+                      <div className="pt-1 pb-0.5">
+                        <p className="text-[9px] font-semibold text-white/20 uppercase tracking-widest px-1">Heatmap</p>
+                      </div>
+
+                      {/* Running Heatmap */}
+                      <div>
+                        <button
+                          onClick={() => toggleLayer('stravaHeatmapRun')}
+                          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
+                            activeLayers.stravaHeatmapRun ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+                          }`}
+                        >
+                          <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: activeLayers.stravaHeatmapRun ? '#fc4c02' : '#374151' }} />
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-medium leading-none">Running Heatmap</div>
+                            <div className="text-[10px] text-white/30 mt-1">Strava global tile overlay</div>
+                          </div>
+                          <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.stravaHeatmapRun ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+                            <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.stravaHeatmapRun ? 'left-[14px]' : 'left-0.5'}`} />
+                          </div>
+                        </button>
+                      </div>
+
+                      {/* Cycling Heatmap */}
+                      <div>
+                        <button
+                          onClick={() => toggleLayer('stravaHeatmapRide')}
+                          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
+                            activeLayers.stravaHeatmapRide ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+                          }`}
+                        >
+                          <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: activeLayers.stravaHeatmapRide ? '#fc4c02' : '#374151' }} />
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-medium leading-none">Cycling Heatmap</div>
+                            <div className="text-[10px] text-white/30 mt-1">Strava global tile overlay</div>
+                          </div>
+                          <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.stravaHeatmapRide ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+                            <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.stravaHeatmapRide ? 'left-[14px]' : 'left-0.5'}`} />
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                )}
+
+                {/* Space Syntax — always visible */}
+                <div className="pt-1 pb-0.5 mt-1">
+                  <p className="text-[9px] font-semibold text-white/20 uppercase tracking-widest px-1">Space Syntax</p>
+                </div>
+                {stravaToken && stravaError === 'rate_limited' && (
+                  <p className="text-[10px] text-amber-400/80 leading-relaxed mb-2 px-1">
+                    Strava rate limit reached — wait 15 min and toggle again.
+                  </p>
+                )}
+                <div>
+                  <button
+                    onClick={() => handleMovementToggle('spaceFrequency')}
+                    disabled={isLoadingSpaceFrequency}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
+                      activeLayers.spaceFrequency ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+                    }`}
+                  >
+                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: activeLayers.spaceFrequency ? '#3b82f6' : '#374151' }} />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-medium leading-none">Pedestrian Frequency</div>
+                      <div className="text-[10px] text-white/30 mt-1">Space syntax · Strava running</div>
+                    </div>
+                    {isLoadingSpaceFrequency ? (
+                      <svg className="animate-spin w-3 h-3 text-white/40 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                      </svg>
+                    ) : (
+                      <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.spaceFrequency ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+                        <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.spaceFrequency ? 'left-[14px]' : 'left-0.5'}`} />
+                      </div>
+                    )}
+                  </button>
+                  {activeLayers.spaceFrequency && (
+                    <div className="mt-1.5 mb-1 px-3">
+                      <div className="h-1 rounded-full" style={{ background: 'linear-gradient(to right, #3b82f6, #0d9488, #16a34a, #f59e0b, #ea580c, #dc2626, #7f1d1d)' }} />
+                      <div className="flex justify-between mt-1">
+                        <span className="text-[8px] text-white/30">Low</span>
+                        <span className="text-[8px] text-white/30">High</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <button
+                    onClick={() => handleMovementToggle('cyclingSpaceFrequency')}
+                    disabled={isLoadingCyclingSpaceFrequency}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
+                      activeLayers.cyclingSpaceFrequency ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+                    }`}
+                  >
+                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: activeLayers.cyclingSpaceFrequency ? '#3b82f6' : '#374151' }} />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-medium leading-none">Cycling Frequency</div>
+                      <div className="text-[10px] text-white/30 mt-1">Space syntax · Strava cycling</div>
+                    </div>
+                    {isLoadingCyclingSpaceFrequency ? (
+                      <svg className="animate-spin w-3 h-3 text-white/40 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                      </svg>
+                    ) : (
+                      <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.cyclingSpaceFrequency ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+                        <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.cyclingSpaceFrequency ? 'left-[14px]' : 'left-0.5'}`} />
+                      </div>
+                    )}
+                  </button>
+                  {activeLayers.cyclingSpaceFrequency && (
+                    <div className="mt-1.5 mb-1 px-3">
+                      <div className="h-1 rounded-full" style={{ background: 'linear-gradient(to right, #3b82f6, #0d9488, #16a34a, #f59e0b, #ea580c, #dc2626, #7f1d1d)' }} />
+                      <div className="flex justify-between mt-1">
+                        <span className="text-[8px] text-white/30">Low</span>
+                        <span className="text-[8px] text-white/30">High</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Combined heatmap — divider */}
+                <div className="pt-3 mt-1 border-t border-white/5">
+                  <button
+                    onClick={() => handleMovementToggle('combinedHeatmap')}
+                    disabled={isLoadingSpaceFrequency || isLoadingCyclingSpaceFrequency}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
+                      activeLayers.combinedHeatmap ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+                    }`}
+                  >
+                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: activeLayers.combinedHeatmap ? '#f97316' : '#374151' }} />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-medium leading-none">Combined Movement</div>
+                      <div className="text-[10px] text-white/30 mt-1">Pedestrian + cycling heatmap</div>
+                    </div>
+                    {(isLoadingSpaceFrequency || isLoadingCyclingSpaceFrequency) ? (
+                      <svg className="animate-spin w-3 h-3 text-white/40 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                      </svg>
+                    ) : (
+                      <div className={`w-7 h-3.5 rounded-full flex-shrink-0 transition-colors relative ${activeLayers.combinedHeatmap ? 'bg-[#818cf8]' : 'bg-white/10'}`}>
+                        <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-white shadow transition-all ${activeLayers.combinedHeatmap ? 'left-[14px]' : 'left-0.5'}`} />
+                      </div>
+                    )}
+                  </button>
+                  {activeLayers.combinedHeatmap && (
+                    <div className="mt-1.5 mb-1 px-3">
+                      <div className="h-1 rounded-full" style={{ background: 'linear-gradient(to right, #fff0e8, #ffb899, #ff7744, #ee3311, #aa1100)' }} />
+                      <div className="flex justify-between mt-1">
+                        <span className="text-[8px] text-white/30">Low</span>
+                        <span className="text-[8px] text-white/30">High</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
               </div>
             </div>
           )}

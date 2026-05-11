@@ -9,7 +9,13 @@ export const useMapStore = create((set) => ({
     cyclingNetwork: false,
     cycleParking: false,
     busStops: false,
+    busStopCatchment: false,
     publicSpaces: false,
+    stravaHeatmapRun: false,
+    stravaHeatmapRide: false,
+    spaceFrequency: false,
+    cyclingSpaceFrequency: false,
+    combinedHeatmap: false,
   },
   selectedDistrict: null,
   selectedCategory: 'all',
@@ -23,6 +29,12 @@ export const useMapStore = create((set) => ({
   isLoadingCycling: false,
   isLoadingCycleParking: false,
   isLoadingBusStops: false,
+  stravaToken: null,
+  stravaError: null,
+  spaceFrequencyData: null,
+  isLoadingSpaceFrequency: false,
+  cyclingSpaceFrequencyData: null,
+  isLoadingCyclingSpaceFrequency: false,
 
   toggleLayer: (layer) =>
     set((state) => ({
@@ -44,4 +56,10 @@ export const useMapStore = create((set) => ({
   setLoadingCycling: (val) => set({ isLoadingCycling: val }),
   setLoadingCycleParking: (val) => set({ isLoadingCycleParking: val }),
   setLoadingBusStops: (val) => set({ isLoadingBusStops: val }),
+  setStravaToken: (token) => set({ stravaToken: token }),
+  setStravaError: (msg) => set({ stravaError: msg }),
+  setSpaceFrequencyData: (data) => set({ spaceFrequencyData: data }),
+  setLoadingSpaceFrequency: (val) => set({ isLoadingSpaceFrequency: val }),
+  setCyclingSpaceFrequencyData: (data) => set({ cyclingSpaceFrequencyData: data }),
+  setLoadingCyclingSpaceFrequency: (val) => set({ isLoadingCyclingSpaceFrequency: val }),
 }))

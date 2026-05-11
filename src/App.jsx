@@ -5,13 +5,16 @@ import NeighbourhoodsButton from './components/NeighbourhoodsButton'
 import NorthArrow from './components/NorthArrow'
 import StoriesPanel from './components/StoriesPanel'
 import { useMapLayers } from './hooks/useMapLayers'
+import { useStravaCallback } from './hooks/useStravaAuth'
 
 function MapController({ map }) {
   useMapLayers(map)
   return null
 }
 
+
 export default function App() {
+  useStravaCallback()
   const [map, setMap] = useState(null)
   const [storiesOpen, setStoriesOpen] = useState(false)
 
@@ -21,6 +24,7 @@ export default function App() {
       <TopNav />
       <NeighbourhoodsButton />
       {map && <NorthArrow map={map} />}
+
       <button
         onClick={() => setStoriesOpen(true)}
         className="absolute bottom-14 right-3 z-30 px-4 py-2 rounded-full text-sm font-semibold shadow-lg bg-[#16213e] text-white border border-[#818cf8]/40 hover:border-[#818cf8] transition-all duration-200"
