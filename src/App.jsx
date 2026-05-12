@@ -5,6 +5,7 @@ import NeighbourhoodsButton from './components/NeighbourhoodsButton'
 import NorthArrow from './components/NorthArrow'
 import StoriesPanel from './components/StoriesPanel'
 import { useMapLayers } from './hooks/useMapLayers'
+import { useStravaCallback } from './hooks/useStravaAuth'
 import { useMapStore } from './store/mapStore'
 import { DISTRICT_GROUPS, STANDALONE_POPULATIONS } from './data/districtConfig'
 import { area as turfArea } from '@turf/area'
@@ -80,6 +81,7 @@ function DistrictPanel() {
 }
 
 export default function App() {
+  useStravaCallback()
   const [map, setMap] = useState(null)
   const [storiesOpen, setStoriesOpen] = useState(false)
   const { activeLayers, toggleLayer, setSelectedDistrict } = useMapStore()
@@ -114,7 +116,6 @@ export default function App() {
             : 'bg-[#16213e]/95 border-white/10 hover:border-white/30 text-white/60 hover:text-white'
         }`}
       >
-        {/* Map / fold icon */}
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
           <path d="M2 4.5 L6 3 L11 5.5 L15 4V13.5 L11 15 L6 12.5 L2 14V4.5Z"
             stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" fill="none"/>

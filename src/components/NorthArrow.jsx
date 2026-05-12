@@ -14,7 +14,7 @@ export default function NorthArrow({ map }) {
     <button
       onClick={() => map?.easeTo({ bearing: 0, duration: 300 })}
       title="Reset to north"
-      className="absolute top-[130px] right-3 z-20 w-9 h-9 rounded-full bg-[#16213e]/95 border border-white/10 hover:border-white/30 shadow-lg flex items-center justify-center transition-colors"
+      className="absolute top-[72px] right-14 z-20 w-9 h-9 rounded-full bg-[#16213e]/95 border border-white/10 hover:border-white/30 shadow-lg flex items-center justify-center transition-colors"
     >
       <svg
         width="22"
